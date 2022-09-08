@@ -16,8 +16,9 @@
     "prisma:dev:deploy": "prisma migrate deploy",
     "db:dev:rm": "docker compose -f tools/scripts/docker-compose.yml rm dev-db -sfv",
     "db:dev:up": "docker compose -f tools/scripts/docker-compose.yml up dev-db -d",
-    "db:dev": "pnpm run db:dev:rm && pnpm run db:dev:up && sleep 1 && npx prisma generate && pnpm run prisma:dev:deploy",
-    "prepare": "husky install"
+    "db:dev": "npx pnpm run db:dev:rm && npx pnpm run db:dev:up && sleep 1 && npx prisma generate && npx pnpm run prisma:dev:deploy",
+    "prepare": "husky install",
+    "nest": "npx nx run api:serve"
   },
   "private": true,
   "dependencies": {
@@ -80,6 +81,7 @@
     "@types/passport-jwt": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
+    "autoprefixer": "^10.4.8",
     "cypress": "^10.2.0",
     "dotenv-cli": "^6.0.0",
     "eslint": "~8.15.0",
@@ -90,9 +92,11 @@
     "jest-environment-jsdom": "28.1.1",
     "jest-preset-angular": "12.2.2",
     "nx": "14.6.4",
+    "postcss": "^8.4.16",
     "prettier": "^2.6.2",
     "prisma": "^4.1.1",
     "start-server-and-test": "^1.14.0",
+    "tailwindcss": "^3.1.8",
     "ts-jest": "28.0.8",
     "ts-node": "10.9.1",
     "typescript": "~4.7.2"

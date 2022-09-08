@@ -6,6 +6,12 @@ export interface LoginForm {
   password: AbstractControl<string>;
 }
 
+export interface HomeDataInterface {
+  status: string,
+  data: Record<string, unknown>;
+}
+
+
 export type UserUI = UserEntity;
 export type LoginUI = Login;
 export type ErrorUI = ErrorEntity;

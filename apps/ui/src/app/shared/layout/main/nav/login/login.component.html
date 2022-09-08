@@ -13,7 +13,7 @@
       <input matInput formControlName="password" data-cy="login-password" />
       <mat-error *ngIf="password?.hasError('required')" data-cy="password-required"> Password is required </mat-error>
     </mat-form-field>
-    <div class="btn-group">
+    <div class="btn-group flex">
       <button mat-raised-button type="submit" data-cy="login-submit" color="primary" [disabled]="loading$ | async">
         <mat-icon *ngIf="(loading$ | async) === false">login</mat-icon>
         <mat-spinner [diameter]="24" *ngIf="loading$ | async" class="spinner-icon"></mat-spinner> Login
