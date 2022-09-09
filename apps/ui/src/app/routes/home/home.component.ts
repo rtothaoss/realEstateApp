@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class HomeComponent {
   homeData = {}
   
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private _route: ActivatedRoute, private _router: Router) {}
 
   testButton(){
     const options = {
@@ -30,6 +31,23 @@ export class HomeComponent {
 
   show() {
     console.log(this.homeData);
+  }
+
+  search(){
+    // changes the route without moving from the current view or
+    // triggering a navigation event,
+    this._router.navigate(['/search'], {
+     relativeTo: this._route,
+     queryParams: {
+       city: 'Dallas',
+       state_code: 'TX',
+       limit: '20'
+     },
+     queryParamsHandling: 'merge',
+     // preserve the existing query params in the route
+     skipLocationChange: false
+     // do not trigger navigation
+   });
   }
 
 }
