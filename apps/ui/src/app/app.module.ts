@@ -13,6 +13,8 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { userReducer, msgReducer, AppState, UserEffects } from './state';
 import { environment } from '../environments/environment';
+import { GoogleMapsModule } from '@angular/google-maps';
+
 
 const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer };
 
@@ -37,6 +39,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
+    GoogleMapsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({

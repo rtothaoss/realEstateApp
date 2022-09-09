@@ -4,14 +4,14 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <!-- fix this centering workaround -->
-    <div class="ml-36">
+    <div class="ml-36 invisible sm:visible">
       <button routerLink="home">Real Estate App</button>
     </div>
     <div>
       <button
         mat-button
         *ngIf="!user.id"
-        class="login-btn text-black"
+        class="login-btn text-black invisible sm:visible"
         data-cy="login"
         cdkOverlayOrigin
         #trigger="cdkOverlayOrigin"
