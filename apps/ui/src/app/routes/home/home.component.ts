@@ -38,19 +38,13 @@ export class HomeComponent implements OnInit, AfterViewInit{
 
 
   search(){
-    const cityRegex = /([^, | ^\s]+)/;
-    const stateRegex = /([A-Z]{2})/;
-    const searchString = this.form.value.search;
+    const searchElements = this.form.value.search.split(',')
     
-    const cityResult = searchString.match(cityRegex)
-    const stateResult = searchString.match(stateRegex)
-
-  
     this._router.navigate(['/search'], {
      relativeTo: this._route,
      queryParams: {
-       city: cityResult,
-       state_code: stateResult,
+       city: searchElements[0],
+       state_code: searchElements[1],
        limit: '20'
      },
      skipLocationChange: false
