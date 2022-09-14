@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -55,21 +55,21 @@ export class SearchComponent implements OnInit{
       this.limit = params['limit']
     })
     
-    this.geocoder
-    .geocode({
-      address: `${this.city}, ${this.state}`,
-    })
-    .subscribe(({ results }) => {
-      const lat = results[0].geometry.location.lat();
-      const lng = results[0].geometry.location.lng();
-     this.center = {
-      lat,
-      lng
-     }
+    // this.geocoder
+    // .geocode({
+    //   address: `${this.city}, ${this.state}`,
+    // })
+    // .subscribe(({ results }) => {
+    //   const lat = results[0].geometry.location.lat();
+    //   const lng = results[0].geometry.location.lng();
+    //  this.center = {
+    //   lat,
+    //   lng
+    //  }
   
      
-     this.map.panTo(this.center)
-    });
+    //  this.map.panTo(this.center)
+    // });
 
   }
 
@@ -77,6 +77,8 @@ export class SearchComponent implements OnInit{
   initMap(){
     console.log('this worked')
   }
+
+
   
 
   

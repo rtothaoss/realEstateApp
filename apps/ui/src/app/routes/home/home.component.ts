@@ -42,11 +42,10 @@ export class HomeComponent implements OnInit, AfterViewInit{
     const stateRegex = /([A-Z]{2})/;
     const searchString = this.form.value.search;
     
-
     const cityResult = searchString.match(cityRegex)
     const stateResult = searchString.match(stateRegex)
-    // changes the route without moving from the current view or
-    // triggering a navigation event,
+
+  
     this._router.navigate(['/search'], {
      relativeTo: this._route,
      queryParams: {
@@ -54,24 +53,9 @@ export class HomeComponent implements OnInit, AfterViewInit{
        state_code: stateResult,
        limit: '20'
      },
-     // preserve the existing query params in the route
      skipLocationChange: false
-     // do not trigger navigation
+
    });
-  }
-
-  test() {
-    const cityRegex = /([^, | ^\s]+)/;
-    const stateRegex = /([A-Z]{2})/;
-    const searchString = this.form.value.search;
-    
-
-    const cityResult = searchString.match(cityRegex)
-    const stateResult = searchString.match(stateRegex)
-    console.log(cityResult)
-    console.log(stateResult)
-
-
   }
 
 }
