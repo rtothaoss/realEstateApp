@@ -1,17 +1,28 @@
 <div
   style="background-image: url('https://images.unsplash.com/photo-1625950019503-cae6a7825762?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80')"
   class="h-[86.5vh]">
+  
+  <form
+  [formGroup]="form"
+  (ngSubmit)="search()"
+>
   <div class="text-center pt-40">
     <p class="text-white text-4xl sm:text-5xl">Find Your Next Home Here</p>
   </div>
   <div class="flex justify-center rounded-lg">
     <div class="h-16 w-3/5 sm:w-2/5 bg-white flex justify-between mt-4 rounded-full">
-      <input placeholder="Enter an address or ZIP code" type="text" class="w-full placeholder:text-slate-600 placeholder:text-xl text-xl pl-6 rounded-full">
+      <input 
+      formControlName="search" 
+      #searchBar
+       type="text" placeholder="Enter a city or ZIP code" class="w-full placeholder:text-slate-600 placeholder:text-xl text-xl pl-6 rounded-full outline-none">
       <div class="flex items-center justify-center align-middle pr-2 ml-2">
-        <button (click)="search()" mat-mini-fab class="bg-white text-4xl"><mat-icon>search</mat-icon></button>
+        <button  mat-mini-fab class="bg-white text-4xl"><mat-icon>search</mat-icon></button>
       </div>
-      <div>
-      </div>
+      
+    </div>
+    
+    <div>
     </div>
   </div>
+  </form>
 </div>

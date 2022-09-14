@@ -42,6 +42,7 @@ specifiers:
   '@nrwl/nx-cloud': 14.6.1
   '@nrwl/workspace': 14.6.4
   '@prisma/client': ^4.1.1
+  '@types/google.maps': ^3.50.1
   '@types/jest': 28.1.8
   '@types/node': 18.7.1
   '@types/passport-jwt': ^3.0.6
@@ -134,6 +135,7 @@ devDependencies:
   '@nrwl/nx-cloud': 14.6.1
   '@nrwl/workspace': 14.6.4_ol7jqtdbsvqhzh2nzifyxrejna
   '@prisma/client': 4.1.1_prisma@4.1.1
+  '@types/google.maps': 3.50.1
   '@types/jest': 28.1.8
   '@types/node': 18.7.1
   '@types/passport-jwt': 3.0.6
@@ -591,7 +593,7 @@ packages:
     dependencies:
       '@angular/common': 14.2.0_ulhd65egriw6odwvy6kqq5spge
       '@angular/core': 14.2.0_rxjs@7.5.6+zone.js@0.11.7
-      '@types/google.maps': 3.50.0
+      '@types/google.maps': 3.50.1
       rxjs: 7.5.6
       tslib: 2.4.0
     dev: false
@@ -3597,9 +3599,8 @@ packages:
       '@types/node': 18.7.1
     dev: false
 
-  /@types/google.maps/3.50.0:
-    resolution: {integrity: sha512-8SQJKelTTt2ah7WDNWd2DZgUrqNaZw6sAFiTxmEtFql5Mzx2qfBIUdp5XwC4JbYy/AjJQT5wEBLwtwuOjBTOYg==}
-    dev: false
+  /@types/google.maps/3.50.1:
+    resolution: {integrity: sha512-Wd3+cZwIk2DhDDosYCvXREvBfRAy9eXTf44YOcOKXhzN88AnLOCO+vrKH0N+QiP3SUtf7A6hn3yVJrMdXIqp1g==}
 
   /@types/graceful-fs/4.1.5:
     resolution: {integrity: sha512-anKkLmZZ+xm4p8JWBf4hElkM4XR+EZeA2M9BAkkTldmcyDY4mbdIJnRghDJH3Ov5ooY7/UAoENtmdMSkaAd7Cw==}

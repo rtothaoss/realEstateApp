@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -10,44 +12,66 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit, AfterViewInit{
 
+  @ViewChild('searchBar')
+  public searchElementRef!: ElementRef;
   homeData = {}
-  
+  form!: FormGroup;
 
-  constructor(private http: HttpClient, private _route: ActivatedRoute, private _router: Router) {}
 
-  testButton(){
-    const options = {
-      params: {offset: '0', limit: '42', state_code: 'MI', city: 'Detroit', sort: 'newest'},
-      headers: {
-        'X-RapidAPI-Key': 'cf5fb7698cmsh458bbee859c8181p11d143jsnc5a80b9e6e22',
-        'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com'
-      },
+  constructor(private http: HttpClient, private _route: ActivatedRoute, private _router: Router, private fb: FormBuilder) {}
 
-    }
-    this.http.get('https://us-real-estate.p.rapidapi.com/v2/for-sale', options).subscribe((data) => {this.homeData = data})
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      search: new FormControl('', {})
+    })
+    console.log('init')
   }
 
-  show() {
-    console.log(this.homeData);
+  ngAfterViewInit(): void {
+    // const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
+    // autocomplete.setComponentRestrictions({country: ['us']})
+    // autocomplete.setTypes(['administrative_area_level_2'])
+    console.log('afterViewInit')
   }
+
 
   search(){
+    const cityRegex = /([^, | ^\s]+)/;
+    const stateRegex = /([A-Z]{2})/;
+    const searchString = this.form.value.search;
+    
+
+    const cityResult = searchString.match(cityRegex)
+    const stateResult = searchString.match(stateRegex)
     // changes the route without moving from the current view or
     // triggering a navigation event,
     this._router.navigate(['/search'], {
      relativeTo: this._route,
      queryParams: {
-       city: 'Dallas',
-       state_code: 'TX',
+       city: cityResult,
+       state_code: stateResult,
        limit: '20'
      },
-     queryParamsHandling: 'merge',
      // preserve the existing query params in the route
      skipLocationChange: false
      // do not trigger navigation
    });
+  }
+
+  test() {
+    const cityRegex = /([^, | ^\s]+)/;
+    const stateRegex = /([A-Z]{2})/;
+    const searchString = this.form.value.search;
+    
+
+    const cityResult = searchString.match(cityRegex)
+    const stateResult = searchString.match(stateRegex)
+    console.log(cityResult)
+    console.log(stateResult)
+
+
   }
 
 }

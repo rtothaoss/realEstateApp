@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +14,9 @@ import { SharedModule } from './shared/shared.module';
 import { userReducer, msgReducer, AppState, UserEffects } from './state';
 import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 
 
 const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer };
@@ -38,8 +41,10 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     BrowserAnimationsModule,
     AppRoutingModule,
     SharedModule,
+    ReactiveFormsModule,
     HttpClientModule,
     GoogleMapsModule,
+    HttpClientJsonpModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([UserEffects]),
     StoreDevtoolsModule.instrument({
