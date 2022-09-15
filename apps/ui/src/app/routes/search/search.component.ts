@@ -52,13 +52,13 @@ export class SearchComponent implements OnInit {
     this.getQueryParams();
     this.getCoords();
 
-    this.store.dispatch(SearchActions.searchRequest())
-
+    
     this.homeDataSub$ = this.store.select(selectHomeData)
     .subscribe((homeData) => {
-      this.testString = homeData
-    })
-
+        console.log(homeData)
+      })
+      
+      this.store.dispatch(SearchActions.searchRequest())
   }
 
   getQueryParams() {

@@ -13,8 +13,9 @@ export class SearchEffects {
         this.actions$.pipe(
             ofType(SearchActions.searchRequest),
             mergeMap(() => 
-            this.searchService.realEstateApi().pipe(
-                map((homeData: any) => {
+            // this.searchService.realEstateApi().pipe(
+            this.searchService.testApi().pipe(
+                map((homeData) => {
                     return SearchActions.setHomeData(homeData)
                 }),
                 catchError((err) => {

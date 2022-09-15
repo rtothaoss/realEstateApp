@@ -19,9 +19,8 @@ const initialState: SearchState = {
 export const searchReducer = createReducer(
     initialState,
     on(setHomeData, (state, payload) => {
-    
         console.log(payload)
-        return { ...state, homeData: payload.homeData}
+        return { ...state, homeData: {status: 200, data: {msg: 'hello'}}}
     }),
     on(searchRequestError, (state, payload) => {
         return {...state, msg: payload.error}

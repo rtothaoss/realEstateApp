@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HomeDataInterface } from '@starter/api-interfaces';
+import { environment } from '../../../environments/environment';
+
 
 
 @Injectable({
@@ -13,12 +16,16 @@ export class SearchService {
     const options = {
       params: { offset: '0', limit: '10', state_code: 'MI', city: 'Detroit', sort: 'newest' },
       headers: {
-        'X-RapidAPI-Key': 'cf5fb7698cmsh458bbee859c8181p11d143jsnc5a80b9e6e22',
+        'X-RapidAPI-Key': `${environment.realEstateApiKey}`,
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
       },
     };
     
-    return this.http.get('https://us-real-estate.p.rapidapi.com/v2/for-sale', options)
+    return this.http.get<HomeDataInterface>('https://us-real-estate.p.rapidapi.com/v2/for-sale', options)
+  }
+
+  testApi() {
+    return this.http.get<any>('https://api.coindesk.com/v1/bpi/currentprice.json')
   }
 
 
