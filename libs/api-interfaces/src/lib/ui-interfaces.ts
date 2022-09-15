@@ -1,4 +1,5 @@
 import { AbstractControl } from '@angular/forms';
+import { HttpStatus } from '@nestjs/common';
 import { ErrorEntity, Login, UserEntity } from './api-interfaces';
 
 export interface LoginForm {
@@ -7,7 +8,7 @@ export interface LoginForm {
 }
 
 export interface HomeDataInterface {
-  status: string,
+  status: HttpStatus,
   data: Record<string, unknown>;
 }
 
