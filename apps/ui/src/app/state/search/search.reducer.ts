@@ -4,15 +4,12 @@ import { ErrorUI, HomeDataInterface } from '@starter/api-interfaces';
 import { searchRequest, searchRequestError, setHomeData } from './search.actions'
 
 export interface SearchState {
-    homeData:  HomeDataInterface,
+    homeData:  any,
     msg: Partial<ErrorUI>;
 }
 
 const initialState: SearchState = {
-    homeData: {
-        status: 0,
-        data: {}
-    },
+    homeData: {},
     msg: {},
 }
 
@@ -20,7 +17,7 @@ export const searchReducer = createReducer(
     initialState,
     on(setHomeData, (state, payload) => {
         console.log(payload)
-        return { ...state, homeData: {status: 200, data: {msg: 'hello'}}}
+        return { ...state, homeData:payload}
     }),
     on(searchRequestError, (state, payload) => {
         return {...state, msg: payload.error}

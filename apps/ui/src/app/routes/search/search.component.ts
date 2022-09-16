@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
     
     this.homeDataSub$ = this.store.select(selectHomeData)
     .subscribe((homeData) => {
-        console.log(homeData)
+        this.testString = homeData;
       })
       
       this.store.dispatch(SearchActions.searchRequest())
