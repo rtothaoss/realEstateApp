@@ -21,18 +21,18 @@ export class SearchComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
-  homeData!: Record<string, never>;
+  homes!: [];
   // subscription!: Subscription;
   city = '';
   state = '';
   limit = '';
   testPrice = '$350,000';
-  testString: any;
+  
+ 
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
   options: google.maps.MapOptions = {
-    mapTypeId: 'hybrid',
     zoomControl: true,
     scrollwheel: false,
     disableDoubleClickZoom: true,
@@ -46,6 +46,7 @@ export class SearchComponent implements OnInit {
     //   map(() => true),
     //   catchError(() => of(false))
     // )
+    
   }
 
   ngOnInit() {
@@ -55,7 +56,7 @@ export class SearchComponent implements OnInit {
     
     this.homeDataSub$ = this.store.select(selectHomeData)
     .subscribe((homeData) => {
-        this.testString = homeData;
+        this.homes = homeData['data']['home_search']['results'];
       })
       
       this.store.dispatch(SearchActions.searchRequest())
@@ -70,22 +71,23 @@ export class SearchComponent implements OnInit {
   }
 
   getCoords() {
-    // this.geocoder
-    // .geocode({
-    //   address: `${this.city}, ${this.state}`,
-    // })
-    // .subscribe(({ results }) => {
-    //   const lat = results[0].geometry.location.lat();
-    //   const lng = results[0].geometry.location.lng();
-    //  this.center = {
-    //   lat,
-    //   lng
-    //  }
-    //  this.map.panTo(this.center)
-    // });
+    this.geocoder
+    .geocode({
+      address: `${this.city}, ${this.state}`,
+    })
+    .subscribe(({ results }) => {
+      const lat = results[0].geometry.location.lat();
+      const lng = results[0].geometry.location.lng();
+     this.center = {
+      lat,
+      lng
+     }
+     this.map.panTo(this.center)
+    });
   }
 
-  test() {
-    console.log(this.testString)
+  test(){
+    console.log(this.homes)
   }
+
 }
