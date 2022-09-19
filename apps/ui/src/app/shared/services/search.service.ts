@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HomeDataInterface } from '@starter/api-interfaces';
+// import { HomeDataInterface } from '@starter/api-interfaces';
 import { environment } from '../../../environments/environment';
 
 
@@ -21,7 +21,7 @@ export class SearchService {
       },
     };
     
-    return this.http.get<HomeDataInterface>('https://us-real-estate.p.rapidapi.com/v2/for-sale', options)
+    return this.http.get<any>('https://us-real-estate.p.rapidapi.com/v2/for-sale', options)
   }
 
   testApi() {

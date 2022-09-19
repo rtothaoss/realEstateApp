@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { ErrorUI, UserUI } from '@starter/api-interfaces';
+import { Error, UserUI } from '@starter/api-interfaces';
 import { loginError, loginSuccess, logoutUser, registerError, registerSuccess } from './user.actions';
 
 export interface UserState {
   user: Partial<UserUI>;
-  msg: Partial<ErrorUI>;
+  msg: Partial<Error>;
 }
 
 const initialState: UserState = {

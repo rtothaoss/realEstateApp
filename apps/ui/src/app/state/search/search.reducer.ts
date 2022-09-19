@@ -1,11 +1,11 @@
 import { HttpStatus } from '@nestjs/common';
 import { createReducer, on } from '@ngrx/store';
-import { ErrorUI, HomeDataInterface } from '@starter/api-interfaces';
+import { Error, } from '@starter/api-interfaces';
 import { searchRequest, searchRequestError, setHomeData } from './search.actions'
 
 export interface SearchState {
-    homeData:  HomeDataInterface,
-    msg: Partial<ErrorUI>;
+    homeData:  any,
+    msg: Partial<Error>;
 }
 
 const initialState: SearchState = {
@@ -20,7 +20,7 @@ export const searchReducer = createReducer(
     initialState,
     on(setHomeData, (state, payload) => {
         console.log(payload)
-        return { ...state, homeData: {status: 200, data: {msg: 'hello'}}}
+        return { ...state, homeData: payload }
     }),
     on(searchRequestError, (state, payload) => {
         return {...state, msg: payload.error}

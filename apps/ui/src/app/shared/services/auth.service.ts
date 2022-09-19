@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { LoginUI, UserUI } from '@starter/api-interfaces';
+import { Login, UserUI } from '@starter/api-interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,11 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(data: LoginUI) {
+  login(data: Login) {
     return this.http.post<UserUI>(`${this.baseUrl}/login`, data);
   }
 
-  register(data: LoginUI) {
+  register(data: Login) {
     return this.http.post<UserUI>(`${this.baseUrl}/register`, data);
   }
 }
