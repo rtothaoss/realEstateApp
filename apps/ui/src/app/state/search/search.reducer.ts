@@ -9,10 +9,7 @@ export interface SearchState {
 }
 
 const initialState: SearchState = {
-    homeData: {
-        status: 0,
-        data: {}
-    },
+    homeData: {},
     msg: {},
 }
 

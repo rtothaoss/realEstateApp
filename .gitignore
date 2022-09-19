@@ -40,3 +40,4 @@ Thumbs.db
 
 .angular
 /libs/api-interfaces/src/lib/prisma
+.env
