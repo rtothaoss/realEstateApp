@@ -5,30 +5,28 @@
     </div>
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
-    <div 
-    class="grid grid-cols-2 grid-flow-row auto-rows-min" 
-    >
-    <div *ngFor="let home of homes; let i = index; ">
-      <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2">
-        <img
-          src="{{ home['primary_photo']['href'] }}"
-          class="rounded-t-xl" />
+    <div *ngIf="test$ | async; else loadingBlock">
+    <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
 
-        <div class="ml-4">
-          <mat-card-title class="mt-2">{{
-            home['list_price'] | currency
-          }}</mat-card-title>
-          <mat-card-subtitle class="mt-2 p-0"
-            >{{ home['description']['beds'] }} Beds,
-            {{ home['description']['baths_full'] }} Bath,
-            {{ home['description']['sqft'] }} SqFt</mat-card-subtitle
-          >
-          <mat-card-content>{{
-            home['location']['address']['line']
-          }}</mat-card-content>
+        <div *ngFor="let home of homes; let i = index">
+          <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2">
+            <img src="{{ home.primary_photo.href }}" class="rounded-t-xl" />
+            <div class="ml-4">
+              <mat-card-title class="mt-2">{{ home.list_price | currency }}</mat-card-title>
+              <mat-card-subtitle class="mt-2 p-0"
+                >{{ home.description.beds }} Beds, {{ home.description.baths_full }} Bath,
+
+                {{ home.description.sqft }} SqFt</mat-card-subtitle
+              >
+              <mat-card-content>{{ home.location.address.line }}</mat-card-content>
+            </div>
+          </mat-card>
         </div>
-      </mat-card>
       </div>
     </div>
+
+      <ng-template #loadingBlock class="justify-center">
+        <h1>Loading...</h1>
+      </ng-template>
   </div>
 </div>

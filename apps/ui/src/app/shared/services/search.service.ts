@@ -25,7 +25,11 @@ export class SearchService {
   }
 
   testApi() {
-    return this.http.get<any>('https://api.coindesk.com/v1/bpi/currentprice.json')
+    return this.http.get<any>('https://dog.ceo/api/breed/hound/list')
+  }
+
+  getHoundList() {
+    return this.http.get<any>("https://dog.ceo/api/breed/hound/list")
   }
 
 

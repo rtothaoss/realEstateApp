@@ -15,6 +15,7 @@ export class SearchEffects {
             mergeMap(() => 
             this.searchService.realEstateApi().pipe(
             // this.searchService.testApi().pipe(
+                // this.searchService.getHoundList().pipe(
                 map((homeData: any) => {
                     return SearchActions.setHomeData(homeData)
                 }),

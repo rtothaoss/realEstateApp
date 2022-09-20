@@ -5,11 +5,11 @@ import { SearchRoutingModule } from './search-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { SearchComponent } from './search.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [SearchComponent],
-  imports: [CommonModule, SearchRoutingModule, SharedModule, GoogleMapsModule, HttpClientJsonpModule],
+  imports: [CommonModule, SearchRoutingModule, SharedModule, GoogleMapsModule, HttpClientJsonpModule, HttpClientModule],
   exports: [SearchComponent],
 })
 export class SearchModule {}
