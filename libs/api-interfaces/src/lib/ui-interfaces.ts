@@ -1,7 +1,4 @@
 import { AbstractControl } from '@angular/forms';
-import { HttpStatus } from '@nestjs/common';
-// import { HttpStatus } from '@nestjs/common';
-import { ErrorEntity, Login } from './api-interfaces';
 import { User } from './prisma';
 
 export interface LoginForm {
@@ -15,11 +12,6 @@ export interface Error {
   statusCode: number;
 }
 
-// export interface HomeDataReturn {
-//   data: Record<string, never>;
-//   status: HttpStatus;
-//   type: string
-// }
 
 export interface HomeData {
   branding: [];
@@ -81,10 +73,5 @@ export interface HomeData {
   tax_record: Record<string, never>;
   virtual_tours: null;
 }
-
-// export interface HomeDataInterface {
-//     status: HttpStatus,w
-//     data: Record<string, unknown>
-// }
 
 export type UserUI = User;

@@ -1,16 +1,15 @@
 <div class="relative">
   <div class="md:fixed w-full md:w-7/12 min-h-screen top-18 left-0">
     <div class="grid col-span-2">
-      <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options" ></google-map>
+      <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options"></google-map>
     </div>
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
     <div *ngIf="test$ | async; else loadingBlock">
-    <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
-
+      <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homes; let i = index">
           <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2">
-            <img src="{{ home.primary_photo.href }}" class="rounded-t-xl" />
+            <img src="{{ home?.primary_photo?.href || defaultHouse }}" class="rounded-t-xl" />
             <div class="ml-4">
               <mat-card-title class="mt-2">{{ home.list_price | currency }}</mat-card-title>
               <mat-card-subtitle class="mt-2 p-0"
@@ -25,8 +24,10 @@
       </div>
     </div>
 
-      <ng-template #loadingBlock class="justify-center">
-        <h1>Loading...</h1>
-      </ng-template>
+    <ng-template #loadingBlock>
+      <div class="flex justify-center items-center h-screen" >
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>
