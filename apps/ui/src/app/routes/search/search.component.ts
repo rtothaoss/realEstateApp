@@ -48,8 +48,8 @@ export class SearchComponent implements OnInit {
         this.testSubject.next(true);
       }
     });
-
-    this.store.dispatch(SearchActions.searchRequest());
+    
+    this.store.dispatch(SearchActions.searchRequest({city: this.city, state: this.state}));
   }
 
   getQueryParams() {

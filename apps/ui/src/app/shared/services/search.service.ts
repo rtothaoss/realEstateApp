@@ -11,10 +11,10 @@ import { environment } from '../../../environments/environment';
 export class SearchService {
   constructor(private http: HttpClient,) {}
 
-  realEstateApi() {
+  realEstateApi(city: string, state: string) {
     console.log('we get here')
     const options = {
-      params: { offset: '0', limit: '8', state_code: 'MI', city: 'Detroit', sort: 'newest' },
+      params: { offset: '0', limit: '8', state_code: state, city: city, sort: 'newest' },
       headers: {
         'X-RapidAPI-Key': `${environment.realEstateApiKey}`,
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
