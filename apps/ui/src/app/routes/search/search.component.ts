@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.getQueryParams();
-    this.getCoords();
+    // this.getCoords();
 
     this.homeDataSub$ = this.store.select(selectHomeData).subscribe((homeData) => {
       if (!this.isEmpty(homeData)) {

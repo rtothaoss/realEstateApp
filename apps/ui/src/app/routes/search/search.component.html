@@ -1,7 +1,7 @@
 <div class="relative">
   <div class="md:fixed w-full md:w-7/12 min-h-screen top-18 left-0">
     <div class="grid col-span-2">
-      <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options"></google-map>
+      <!-- <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options"></google-map> -->
     </div>
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
@@ -11,13 +11,13 @@
           <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2">
             <img src="{{ home?.primary_photo?.href || defaultHouse }}" class="rounded-t-xl" />
             <div class="ml-4">
-              <mat-card-title class="mt-2">{{ home.list_price | currency }}</mat-card-title>
+              <mat-card-title class="mt-2">{{ home?.list_price | currency }}</mat-card-title>
               <mat-card-subtitle class="mt-2 p-0"
-                >{{ home.description.beds }} Beds, {{ home.description.baths_full }} Bath,
+                >{{ home?.description?.beds }} Beds, {{ home?.description?.baths_full }} Bath,
 
-                {{ home.description.sqft }} SqFt</mat-card-subtitle
+                {{ home?.description?.sqft }} SqFt</mat-card-subtitle
               >
-              <mat-card-content>{{ home.location.address.line }}</mat-card-content>
+              <mat-card-content>{{ home?.location?.address?.line }}</mat-card-content>
             </div>
           </mat-card>
         </div>
