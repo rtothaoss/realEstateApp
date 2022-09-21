@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { selectHomeData } from '../../state';
 import * as SearchActions from '../../state/search';
 import { HomeData } from '@starter/api-interfaces';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'starter-search',
@@ -23,6 +24,8 @@ export class SearchComponent implements OnInit {
   city = '';
   state = '';
   limit = '';
+  lat!:string;
+  lng!: string;
   defaultHouse = '../../../assets/img/defaulthouse.jpeg';
 
   zoom = 12;
@@ -39,7 +42,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.getQueryParams();
-    // this.getCoords();
 
     this.homeDataSub$ = this.store.select(selectHomeData).subscribe((homeData) => {
       if (!this.isEmpty(homeData)) {
@@ -50,6 +52,9 @@ export class SearchComponent implements OnInit {
     });
     
     this.store.dispatch(SearchActions.searchRequest({city: this.city, state: this.state}));
+
+    this.centerMap();
+
   }
 
   getQueryParams() {
@@ -57,23 +62,38 @@ export class SearchComponent implements OnInit {
       this.city = params['city'];
       this.state = params['state_code'];
       this.limit = params['limit'];
+      this.lat = params['lat'];
+      this.lng = params['lng'];
     });
   }
 
-  getCoords() {
-    this.geocoder
-      .geocode({
-        address: `${this.city}, ${this.state}`,
-      })
-      .subscribe(({ results }) => {
-        const lat = results[0].geometry.location.lat();
-        const lng = results[0].geometry.location.lng();
-        this.center = {
-          lat,
-          lng,
-        };
-        this.map.panTo(this.center);
-      });
+  // getCoords() {
+  //   this.geocoder
+  //     .geocode({
+  //       address: `${this.city}, ${this.state}`,
+  //     })
+  //     .subscribe(({ results }) => {
+  //       const lat = results[0].geometry.location.lat();
+  //       const lng = results[0].geometry.location.lng();
+  //       this.center = {
+  //         lat,
+  //         lng,
+  //       };
+  //       this.map.panTo(this.center);
+  //     });
+  // }
+
+  centerMap() {
+    const lat = parseFloat(this.lat)
+    const lng = parseFloat(this.lng)
+
+    this.center = {
+      lat,
+      lng
+    }
+    console.log(this.center)
+    console.log(typeof this.center.lat)
+    this.map.panTo(this.center)
   }
 
   isEmpty(obj: Record<string, never>) {

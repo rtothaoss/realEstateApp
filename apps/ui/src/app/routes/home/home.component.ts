@@ -40,19 +40,25 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       this.place = autocomplete.getPlace();
+      console.log(this.place.geometry?.location?.lat())
+      console.log(this.place.geometry?.location?.lng())
     });
   }
 
   search() {
     const city = this.place.address_components?.at(0)?.long_name;
     const state = this.place.address_components?.at(2)?.short_name;
+    const lat = this.place.geometry?.location?.lat()
+    const lng = this.place.geometry?.location?.lng()
 
     this._router.navigate(['/search'], {
       relativeTo: this._route,
       queryParams: {
         city: city,
         state_code: state,
-        limit: '20',
+        limit: '10',
+        lat: lat,
+        lng: lng
       },
       skipLocationChange: false,
     });
