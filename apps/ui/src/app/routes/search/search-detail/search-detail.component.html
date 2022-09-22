@@ -1,0 +1,21 @@
+<div class="flex">
+  <div class="w-full md:w-7/12 top-18 left-0">
+    <img src="{{ data.photo }}" class="rounded-xl" />
+  </div>
+  <div>
+    <div class="flex">
+      <h1 mat-dialog-title>${{ data.price | number }}</h1>
+      <div class="flex">
+        <p>{{data.beds}} bed</p> 
+        <p>{{data.bath}} bath</p>
+        <p>{{data.sqft}} sqft</p>
+      </div>
+    </div>
+    <div>
+      <p>{{data.address}}</p>
+    </div>
+    <div mat-dialog-actions>
+      <!-- <button mat-button (click)="onNoClick()">Close</button> -->
+    </div>
+  </div>
+</div>

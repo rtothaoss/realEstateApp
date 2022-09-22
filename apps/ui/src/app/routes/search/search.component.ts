@@ -6,19 +6,19 @@ import { Store } from '@ngrx/store';
 import { selectHomeData } from '../../state';
 import * as SearchActions from '../../state/search';
 import { HomeData } from '@starter/api-interfaces';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchDetailComponent } from './search-detail/search-detail.component';
 
 export interface MarkersInterface {
-  
-    position: { lat: number, lng: number },
-    label: {
-      color: string,
-    },
-    title: string,
-    info: number,
-    options: {
-      animation: google.maps.Animation.DROP,
-    },
-  
+  position: { lat: number; lng: number };
+  label: {
+    color: string;
+  };
+  title: string;
+  info: number;
+  options: {
+    animation: google.maps.Animation.DROP;
+  };
 }
 
 @Component({
@@ -29,6 +29,7 @@ export interface MarkersInterface {
 })
 export class SearchComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
+  // @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
   homes!: HomeData[];
@@ -52,7 +53,12 @@ export class SearchComponent implements OnInit {
     minZoom: 8,
   };
 
-  constructor(private store: Store, private geocoder: MapGeocoder, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private geocoder: MapGeocoder,
+    private route: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.getQueryParams();
@@ -111,5 +117,26 @@ export class SearchComponent implements OnInit {
 
   isEmpty(obj: Record<string, never>) {
     return Object.keys(obj).length === 0;
+  }
+
+  openDialog(i: number) {
+    const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
+
+    const dialogRef = this.dialog.open(SearchDetailComponent, {
+      width: '1100px',
+      height: '900px',
+      data: {
+        address: formattedAddress,
+        photo: this.homes[i].primary_photo.href,
+        price: this.homes[i].list_price,
+        beds: this.homes[i].description.beds,
+        bath: this.homes[i].description.baths_full,
+        sqft: this.homes[i].description.sqft,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -12,7 +12,6 @@ export interface Error {
   statusCode: number;
 }
 
-
 export interface HomeData {
   branding: [];
   coming_soon_date: string;
@@ -60,7 +59,7 @@ export interface HomeData {
   open_houses: null;
   other_listings: Record<string, never>;
   permalink: string;
-  photos: Array<{href: string}>;
+  photos: Array<{ href: string }>;
   price_reduced_amount: null;
   primary_photo: {
     href: string;
