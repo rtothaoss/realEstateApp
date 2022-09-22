@@ -29,7 +29,6 @@ export interface MarkersInterface {
 })
 export class SearchComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
-  // @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
   homes!: HomeData[];

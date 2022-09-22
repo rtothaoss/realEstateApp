@@ -3,14 +3,12 @@
     <img src="{{ data.photo }}" class="rounded-xl" />
   </div>
   <div>
-    <div class="flex">
+    
       <h1 mat-dialog-title>${{ data.price | number }}</h1>
-      <div class="flex">
-        <p>{{data.beds}} bed</p> 
-        <p>{{data.bath}} bath</p>
-        <p>{{data.sqft}} sqft</p>
-      </div>
-    </div>
+     
+        <p>{{data.beds}} bed, {{data.bath}} bath, {{data.sqft}} sqft </p> 
+      
+   
     <div>
       <p>{{data.address}}</p>
     </div>

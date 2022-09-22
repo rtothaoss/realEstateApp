@@ -21,7 +21,7 @@
     <div *ngIf="test$ | async; else loadingBlock">
       <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homes; let i = index">
-          <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2">
+          <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer" (click)="openDialog(i)">
             <img src="{{ home?.primary_photo?.href || defaultHouse }}" class="rounded-t-xl" />
             <div class="ml-4">
               <mat-card-title class="mt-2">${{ home?.list_price || '$1,234' | number }}</mat-card-title>
