@@ -3,9 +3,8 @@
     <div class="grid col-span-2">
       <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options">
         <map-marker
-        *ngFor="let marker of markers"
+        *ngFor="let marker of markers; let i = index"
         [position]="marker.position"
-        [label]="marker.label"
         [title]="marker.title"
         [options]="marker.options"
       >

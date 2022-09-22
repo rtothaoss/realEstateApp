@@ -44,7 +44,7 @@ export interface HomeData {
   location: {
     address: {
       city: string;
-      coordinate: { lon: number; lat: number };
+      coordinate: { lat: number; lon: number };
       line: string;
       postal_code: string;
       state: string;
