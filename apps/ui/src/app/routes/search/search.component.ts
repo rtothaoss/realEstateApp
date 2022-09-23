@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, skip, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MapGeocoder, GoogleMap } from '@angular/google-maps';
 import { Store } from '@ngrx/store';
@@ -15,7 +15,6 @@ export interface MarkersInterface {
     color: string;
   };
   title: string;
-  info: number;
   options: {
     animation: google.maps.Animation.DROP;
   };
@@ -62,15 +61,16 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.getQueryParams();
 
-    this.homeDataSub$ = this.store.select(selectHomeData).subscribe((homeData) => {
-      if (!this.isEmpty(homeData)) {
-        this.homes = homeData.data.home_search.results;
-        console.log(this.homes);
-        this.testSubject.next(true);
-        this.addMarkers();
-      }
-    });
-
+    this.homeDataSub$ = this.store
+      .select(selectHomeData)
+      .pipe(skip(1))
+      .subscribe((homeData) => {
+        if (this.homes !== homeData.data.home_search.results) {
+          this.homes = homeData.data.home_search.results;
+          this.addMarkers();
+          this.testSubject.next(true);
+        }
+      });
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
 
     this.centerMap();
@@ -105,8 +105,8 @@ export class SearchComponent implements OnInit {
         label: {
           color: 'red',
         },
-        title: home.location.address.line,
-        info: index,
+        title: index.toString(),
+
         options: {
           animation: google.maps.Animation.DROP,
         },
@@ -119,6 +119,8 @@ export class SearchComponent implements OnInit {
   }
 
   openDialog(i: number) {
+    console.log('this is openDialog');
+
     const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
 
     const dialogRef = this.dialog.open(SearchDetailComponent, {

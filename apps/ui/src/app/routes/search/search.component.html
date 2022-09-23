@@ -8,11 +8,11 @@
           [position]="marker.position"
           [title]="marker.title"
           [options]="marker.options"
-          (mapClick)="openDialog(i)"
+          
+          (mapClick)="openDialog(+marker.title)"
           >
         </map-marker>
 
-        <!-- <map-info-window>{{ infoContent }}</map-info-window> -->
 
       </google-map>
     
