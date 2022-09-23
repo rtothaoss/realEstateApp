@@ -26,7 +26,7 @@ export interface MarkersInterface {
   styleUrls: ['./search.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
@@ -56,7 +56,8 @@ export class SearchComponent implements OnInit {
     private geocoder: MapGeocoder,
     private route: ActivatedRoute,
     public dialog: MatDialog
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.getQueryParams();
@@ -72,8 +73,6 @@ export class SearchComponent implements OnInit {
         }
       });
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
-
-    this.centerMap();
   }
 
   getQueryParams() {
@@ -83,7 +82,9 @@ export class SearchComponent implements OnInit {
       this.limit = params['limit'];
       this.lat = params['lat'];
       this.lng = params['lng'];
+      this.centerMap();
     });
+    
   }
 
   centerMap() {
@@ -139,5 +140,9 @@ export class SearchComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
     });
+  }
+
+  ngOnDestroy(): void {
+      this.homeDataSub$.unsubscribe();
   }
 }
