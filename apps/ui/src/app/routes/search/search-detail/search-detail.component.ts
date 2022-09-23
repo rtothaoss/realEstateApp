@@ -8,7 +8,7 @@ export interface DialogData {
   beds: string;
   bath: string;
   sqft: string;
-
+  overview: string;
 }
 
 @Component({
