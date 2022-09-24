@@ -4,26 +4,35 @@
   </div>
   <div class="w-1/2 pl-10">
     
-      <div class="flex justify-end">
-        <p class="p-4 cursor-pointer underline">Save</p>
-        <p class="p-4 cursor-pointer underline">Share</p>
+      <div class="flex justify-end border-b-2">
+        <mat-icon class="text-xl">save_alt</mat-icon><p class=" cursor-pointer text-lg hover:underline">Save</p>
+        <mat-icon class="text-xl ml-3">share</mat-icon><p class="cursor-pointer text-lg hover:underline">Share</p>
       </div>
-
-      <h1 mat-dialog-title>${{ data.price | number }}</h1>
+      <div class="mt-4">
+        <p class="text-3xl">${{ data.price | number }}</p>
      
-        <p>{{data.beds}} bed, {{data.bath}} bath, {{data.sqft}} sqft </p> 
+        <p class="text-lg"><strong>{{data.beds}}</strong> bed, <strong>{{data.bath}}</strong> bath, <strong>{{data.sqft}}</strong> sqft </p> 
+      </div>
+      
       
    
     <div>
       <p>{{data.address}}</p>
     </div>
-    <div class="flex justify-between">
-      <button type="button" class="w-1/2 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Request a Tour</button>
-      <button type="button" class="inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Contact Agent</button>
+    <div class="flex mt-6">
+      <button type="button" class="w-1/2 h-12 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Request a Tour</button>
+      <button type="button" class="ml-10 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Contact Agent</button>
     </div>
 
-    <div class="mt-4">
-      <h1>MAP GOES HERE</h1>
+    <div class="mt-4 border-t-2">
+      <div class="mt-4">
+        <google-map height="30vh" [options]="options" [center]="center" [zoom]="zoom">
+          <map-marker
+          [position]="markerPosition"
+          >
+        </map-marker>
+        </google-map>
+      </div>
     </div>
 
     <div class="mt-4">
