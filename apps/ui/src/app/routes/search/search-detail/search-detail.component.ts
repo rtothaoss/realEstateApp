@@ -37,4 +37,12 @@ export class SearchDetailComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  onSave() {
+    console.log('saving')
+  }
+
+  onShare() {
+    console.log('sharing')
+  }
 }

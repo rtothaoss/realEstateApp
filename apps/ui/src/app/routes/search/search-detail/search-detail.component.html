@@ -2,11 +2,11 @@
   <div class="w-full md:w-7/12 top-18 left-0">
     <img src="{{ data.photo }}" class="rounded-xl" />
   </div>
-  <div class="w-1/2 pl-10">
+  <div class="w-1/2 pl-4">
     
       <div class="flex justify-end border-b-2">
-        <mat-icon class="text-xl">save_alt</mat-icon><p class=" cursor-pointer text-lg hover:underline">Save</p>
-        <mat-icon class="text-xl ml-3">share</mat-icon><p class="cursor-pointer text-lg hover:underline">Share</p>
+        <mat-icon class="text-xl">save_alt</mat-icon><p (click)="onSave()" class=" cursor-pointer text-lg hover:underline">Save</p>
+        <mat-icon class="text-xl ml-3">share</mat-icon><p (click)="onShare()" class="cursor-pointer text-lg hover:underline">Share</p>
       </div>
       <div class="mt-4">
         <p class="text-3xl">${{ data.price | number }}</p>
@@ -20,13 +20,13 @@
       <p>{{data.address}}</p>
     </div>
     <div class="flex mt-6">
-      <button type="button" class="w-1/2 h-12 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Request a Tour</button>
-      <button type="button" class="ml-10 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Contact Agent</button>
+      <button type="button" class="w-1/2 h-12 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-white hover:text-blue-600 hover:outline  hover:shadow-lg transition duration-150 ease-in-out">Request a Tour</button>
+      <button type="button" class="ml-10 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Contact Agent</button>
     </div>
 
-    <div class="mt-4 border-t-2">
-      <div class="mt-4">
-        <google-map height="30vh" [options]="options" [center]="center" [zoom]="zoom">
+    <div class="border-2 mt-4 px-2 py-2">
+      <div class="">
+        <google-map height="30vh" width="99%" [options]="options" [center]="center" [zoom]="zoom">
           <map-marker
           [position]="markerPosition"
           >
@@ -35,12 +35,38 @@
       </div>
     </div>
 
-    <div class="mt-4">
-      <h1>Overview</h1>
-      <p>{{data.overview}}</p>
+    <div class="border-2 border-t-0 px-4">
+      <p class="pt-4 text-2xl font-bold">Overview</p>
+      <p class="pb-4 text-base">{{data.overview}}</p>
     </div>
-    <div mat-dialog-actions>
-      <!-- <button mat-button (click)="onNoClick()">Close</button> -->
+    <div class="border-2 border-t-0 px-4 py-2">
+      <p class="text-2xl font-bold pt-4">Price History</p>
+      <table class="table-auto w-full">
+        <thead>
+          <tr class="text-left text-lg">
+            <th>Date</th>
+            <th>Event</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t-[1px]">
+            <td class="py-3">9/24/2022</td>
+            <td>Listed for sale</td>
+            <td>$299,000</td>
+          </tr>
+          <tr class="border-t-[1px]">
+            <td class="py-3">9/30/2019</td>
+            <td>Listing removed</td>
+            <td>$269,000</td>
+          </tr>
+          <tr class="border-t-[1px]">
+            <td class="py-3">8/29/2019</td>
+            <td>Listed for sale</td>
+            <td>$269,000</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
