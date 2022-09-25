@@ -9,6 +9,10 @@ export interface DialogData {
   bath: string;
   sqft: string;
   overview: string;
+  marker: {
+    lat: number;
+    lng: number;
+  }
 }
 
 @Component({
@@ -32,7 +36,12 @@ export class SearchDetailComponent {
   constructor(
     public dialogRef: MatDialogRef<SearchDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {}
+  ) {
+    this.markerPosition.lat = data.marker.lat
+    this.markerPosition.lng = data.marker.lng
+    this.center.lat = data.marker.lat
+    this.center.lng = data.marker.lng
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -123,6 +123,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   openDialog(i: number) {
     console.log('this is openDialog');
 
+
     const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
 
     const dialogRef = this.dialog.open(SearchDetailComponent, {
@@ -135,6 +136,10 @@ export class SearchComponent implements OnInit, OnDestroy {
         beds: this.homes[i].description.beds,
         bath: this.homes[i].description.baths_full,
         sqft: this.homes[i].description.sqft,
+        marker: {
+          lat: this.homes[i].location.address.coordinate.lat,
+          lng: this.homes[i].location.address.coordinate.lon
+        }
       },
     });
 
