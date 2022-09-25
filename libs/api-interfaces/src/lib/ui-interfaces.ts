@@ -73,133 +73,154 @@ export interface HomeData {
   virtual_tours: null;
 }
 
-// export interface PropertyDetail {
-//   photos: Array<{ href: string }>;
-//   forwarded_property_ids: Record<string, never>;
-//   mpr_id: number;
-//   address: {
-//     street_post_direction: string;
-//     state: string;
-//     address_validation_code: string;
-//     line: string;
-//     boundary: {
-//       coordinates: [];
-//       type: string;
-//     };
-//     street_number: string;
-//     street_suffix: string;
-//     time_zone: string;
-//     state_code: string;
-//     county: string;
-//     street_direction: string;
-//     postal_code: string;
-//     county_needed_for_uniq: false;
-//     street_name: string;
-//     country: string;
-//     city: string;
-//     location: {
-//       lon: number;
-//       lat: number;
-//     };
-//     unit_value: string;
-//   };
-//   buyer_agent_for_far: Record<string, never>;
-//   property_overview: string;
-//   flood: {
-//     environmental_risk: number;
-//     flood_factor_score: number;
-//     fema_zone: [];
-//     fsid: string;
-//     trend_direction: number;
-//     flood_factor_severity: string;
-//   };
-//   agent: Record<string, never>;
-//   office: Record<string, never>;
-//   noise: {
-//     score_text: string;
-//     traffic_text: string;
-//     local_text: string;
-//     score: number;
-//     airport_text: string;
-//   };
-//   display_property_type: string;
-//   property_id: number;
-//   rental_avm: {
-//     estimate_high: number;
-//     date: string;
-//     id: string;
-//     estimate_low: number;
-//     estimate: number;
-//   };
-//   county: {
-//     fips: string;
-//     name: string;
-//   };
-//   listing_id: number;
-//   stories: number;
-//   search_areas: [];
-//   id: number;
-//   public_records: [
-//     {
-//       garage_spaces: number;
-//       floor_1_sqft: number;
-//       exterior1: string;
-//       baths_1qtr: number;
-//       lot_size: number;
-//       date_updated: string;
-//       baths_full: number;
-//       pool: string;
-//       cl_id: string;
-//       year_built: number;
-//       garage: string;
-//       stories: number;
-//       year_renovated: number;
-//       lot_width: number;
-//       view: string;
-//       roofing: string;
-//       sqft: number;
-//       garage_sqft: number;
-//       style: string;
-//       fireplace: string;
-//       heating: string;
-//       units: number;
-//       prop_type: string;
-//       building_sqft: number;
-//       baths_half: number;
-//       cooling: string;
-//       lot_depth: number;
-//       baths: number;
-//       distinct_baths: number;
-//       construction_quality: string;
-//       rooms: number;
-//       baths_3qtr: number;
-//       beds: number;
-//       construction: number;
-//     }
-//   ];
-//   prop_common: {
-//     baths_full_calc: number;
-//     bath_full: number;
-//     bath: number;
-//     type: string;
-//     last_sold_price: number;
-//     permalink: string;
-//     status: string;
-//     lot_sqft: number;
-//     sqft: number;
-//     garage: string;
-//     baths_partial_calc: null;
-//     description: string;
-//     rental_estimate: number;
-//     year_built: number;
-//     original_price: number;
-//     price: number;
-//   };
-//   query: {
-//     client_id: string;
-//     schema: string;
-//   }
-
-// }
+export interface PropertyDetail {
+  address: {
+    address_validation_code: string;
+    boundary: { coordinates: []; type: 'Point' };
+    city: string;
+    country: string;
+    county: string;
+    county_needed_for_uniq: boolean;
+    fips_code: number;
+    line: string;
+    location: { lon: number; lat: number };
+    postal_code: string;
+    state: string;
+    state_code: string;
+    street_name: string;
+    street_number: string;
+    street_suffix: string;
+    time_zone: string;
+    unit: number;
+  };
+  advertisers: Record<string, unknown>;
+  agent: {
+    advertiser_id: 4092143;
+    email: 'lidia@expressinsurancedallas.com';
+    href: null;
+    mls_membership: Record<string, unknown>;
+    name: 'Lidia Suarez';
+    nrds_id: null;
+    nrds_verified_id: null;
+    office_name: 'Monument Realty';
+    phones: Record<string, never>;
+    photo: { href: 'https://ap.rdcpix.com/2b5b3863b7e667df936f726be47973d3a-c1834936147l.jpg' };
+    profile_name: 'Lidia Suarez';
+    slogan: null;
+    state_license: '0546799';
+  };
+  branding: Record<string, unknown>;
+  broker: Record<string, unknown>;
+  client_display_flags: Record<string, unknown>;
+  client_flags: Record<string, unknown>;
+  display_property_type: string;
+  duplicate_listings: Record<string, unknown>;
+  features: Array<Record<string, unknown>>;
+  flags: Record<string, unknown>;
+  flood: Record<string, unknown>;
+  foreclosures: number;
+  forwarded_mpr_ids: Array<number>;
+  hoa_fee: number;
+  id: number;
+  is_senior: boolean;
+  lead_forms: Array<Record<string, unknown>>;
+  listings: Array<Record<string, unknown>>;
+  mls: Array<Record<string, unknown>>;
+  mls_id: number;
+  mortgage: {
+    estimate: {
+      down_payment: number;
+      hoa_fees: number;
+      loan_amount: number;
+      monthly_home_insurance: number;
+      monthly_mortgage_insurance: number;
+      monthly_payment: number;
+      monthly_property_taxes: number;
+      principal_and_interest: number;
+      rate: number;
+      term: number;
+      total_payment: number;
+    };
+    rates_url: string;
+  };
+  move_in: null;
+  mpr_id: number;
+  neighborhood: string;
+  neighborhoods: Array<Record<string, unknown>>;
+  new_construction: boolean;
+  new_listing: boolean;
+  noise: Record<string, unknown>;
+  office: Record<string, unknown>;
+  other_listings: Record<string, unknown>;
+  parsed_addressed: Record<string, unknown>;
+  photo_attribution: Array<string>;
+  photo_count: number;
+  photos: Array<{ description: string; href: string; tags: Array<Record<string, unknown>>; type: string }>;
+  price_history: Array<Record<string, unknown>>;
+  primary: boolean;
+  product_attributes: Array<Record<string, unknown>>;
+  product_name: string;
+  products: Array<Record<string, unknown>>;
+  prop_common: {
+    bath: number;
+    bath_full: number;
+    baths_3qtr: number;
+    baths_full: number;
+    baths_full_calc: number;
+    baths_half: number;
+    baths_partial_calc: number;
+    baths_total: number;
+    bed: number;
+    construction: number;
+    contingent: boolean;
+    cooling: boolean;
+    description: string
+    exterior: string;
+    fireplace: number;
+    garage: string;
+    heating: string;
+    hoa_fee: number;
+    hoa_historic_fee: null;
+    last_sold_price: null;
+    last_update: string;
+    list_date: string;
+    list_date_raw: string;
+    lot_sqft: number;
+    pending: null;
+    pending_date: null;
+    permalink: string;
+    pool: null;
+    price: number;
+    roofing: null;
+    rooms: null;
+    sqft: number;
+    status: string;
+    stories: number;
+    style: null;
+    sub_type: null;
+    tax_amount: null;
+    type: string;
+    units: null;
+    virtual_tour: Record<string, unknown>;
+    year_built: number;
+    year_renovate: number;
+    zoning: null;
+  };
+  property_history: Array<{datasource_name: string, date: string, event_name: string, price: number, price_changed: number, price_range_max: 0, price_range_min: number, source: string, sqft: number}>
+  public_records: Array<Record<string, unknown>>;
+  query: Array<Record<string, unknown>>;
+  raw: Array<Record<string, unknown>>;
+  school_distrcits: Array<Record<string, unknown>>;
+  schools: Array<{distance_in_miles: number, education_levels: Array<string>, funding_type: string, grades: {range: {high: string, low: string}}, greatschools_id: string, id: string, lat: number, location: {city: string, city_slug_id: string, county: string, postal_code: string, state: string, street: string}, lon: number, name: string, nces_id: string, phone: string, ratings: {great_schools_rating: number, parent_rating: null}, relevance: string, student_count: number, student_teacher_ration: number }>
+  search_areas: Array<{city: string, state_code: string}>
+  search_tags: Array<string>
+  seller_promotion: Record<string, unknown>;
+  short_sale: null;
+  stories: number;
+  suppression_flags: Array<string>;
+  tax_history: Array<{assessment: {building: number, land: number, total: number}, tax: number, year: string}>
+  trend: Record<string, unknown>;
+  videos: null
+}
 
 export type UserUI = User;

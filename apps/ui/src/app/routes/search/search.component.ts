@@ -5,9 +5,10 @@ import { MapGeocoder, GoogleMap } from '@angular/google-maps';
 import { Store } from '@ngrx/store';
 import { selectHomeData } from '../../state';
 import * as SearchActions from '../../state/search';
-import { HomeData } from '@starter/api-interfaces';
+import { HomeData, PropertyDetail } from '@starter/api-interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
+import { SearchService } from '../../shared/services/search.service';
 
 export interface MarkersInterface {
   position: { lat: number; lng: number };
@@ -40,6 +41,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   lng!: string;
   defaultHouse = '../../../assets/img/defaulthouse.jpeg';
   markers: MarkersInterface[] = [];
+  propertyDetail!: PropertyDetail
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -53,11 +55,11 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
-    private geocoder: MapGeocoder,
+    private searchService: SearchService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
-  ) {
-  }
+    public dialog: MatDialog,
+
+  ) {}
 
   ngOnInit() {
     this.getQueryParams();
@@ -68,7 +70,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((homeData) => {
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
-          console.log(this.homes)
+          console.log(this.homes);
           this.addMarkers();
           this.testSubject.next(true);
         }
@@ -85,7 +87,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.lng = params['lng'];
       this.centerMap();
     });
-    
   }
 
   centerMap() {
@@ -122,33 +123,42 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   openDialog(i: number) {
     console.log('this is openDialog');
-
-
+    const propertyID = +this.homes[i].property_id
     const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
 
-    const dialogRef = this.dialog.open(SearchDetailComponent, {
-      width: '1100px',
-      height: '900px',
-      data: {
-        address: formattedAddress,
-        photo: this.homes[i].primary_photo.href,
-        price: this.homes[i].list_price,
-        beds: this.homes[i].description.beds,
-        bath: this.homes[i].description.baths_full,
-        sqft: this.homes[i].description.sqft,
-        marker: {
-          lat: this.homes[i].location.address.coordinate.lat,
-          lng: this.homes[i].location.address.coordinate.lon
-        }
-      },
-    });
+    this.searchService.propertyDetailApi(propertyID).subscribe(details => {
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
-    });
+      //put this in a seperate function to make things look cleaner
+      console.log(details)
+      this.propertyDetail = details.data.property_detail;
+      const dialogRef = this.dialog.open(SearchDetailComponent, {
+        width: '1100px',
+        height: '900px',
+        data: {
+          address: formattedAddress,
+          photo: this.homes[i].primary_photo.href,
+          price: this.homes[i].list_price,
+          beds: this.homes[i].description.beds,
+          bath: this.homes[i].description.baths_full,
+          sqft: this.homes[i].description.sqft,
+          marker: {
+            lat: this.homes[i].location.address.coordinate.lat,
+            lng: this.homes[i].location.address.coordinate.lon,
+          },
+          overview: this.propertyDetail.prop_common.description
+        },
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log('The dialog was closed');
+      });
+    })
+   
+ 
   }
 
+
   ngOnDestroy(): void {
-      this.homeDataSub$.unsubscribe();
+    this.homeDataSub$.unsubscribe();
   }
 }
