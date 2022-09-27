@@ -1,8 +1,15 @@
-<div class="flex">
-  <div class="w-full md:w-7/12 top-18 left-0">
-    <img src="{{ data.photo }}" class="rounded-xl" />
+<div class="flex h-full overflow-hidden">
+  <div class="w-full md:w-7/12 top-18 left-0 overflow-y-scroll">
+    <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
+      <div class="col-span-2">
+        <img src="{{ data.photo }}" class="p-2" />
+      </div>
+      <div *ngFor="let photos of data.photos | slice: 1; let i = index">
+        <img src="{{ photos['href'] }}" class="p-2" />
+      </div>
   </div>
-  <div class="w-1/2 pl-4">
+  </div>
+  <div class="w-1/2 pl-4 overflow-y-scroll">
     
       <div class="flex justify-end border-b-2">
         <mat-icon class="text-xl">save_alt</mat-icon><p (click)="onSave()" class=" cursor-pointer text-lg hover:underline">Save</p>
@@ -49,21 +56,11 @@
             <th>Price</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngFor = "let priceData of data.propertyHistory; let i = index">
           <tr class="border-t-[1px]">
-            <td class="py-3">9/24/2022</td>
-            <td>Listed for sale</td>
-            <td>$299,000</td>
-          </tr>
-          <tr class="border-t-[1px]">
-            <td class="py-3">9/30/2019</td>
-            <td>Listing removed</td>
-            <td>$269,000</td>
-          </tr>
-          <tr class="border-t-[1px]">
-            <td class="py-3">8/29/2019</td>
-            <td>Listed for sale</td>
-            <td>$269,000</td>
+            <td class="py-3">{{priceData.date}}</td>
+            <td>{{ priceData.event_name}}</td>
+            <td>${{priceData.price | number}}</td>
           </tr>
         </tbody>
       </table>

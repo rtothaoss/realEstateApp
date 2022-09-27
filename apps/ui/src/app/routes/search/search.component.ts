@@ -145,7 +145,9 @@ export class SearchComponent implements OnInit, OnDestroy {
             lat: this.homes[i].location.address.coordinate.lat,
             lng: this.homes[i].location.address.coordinate.lon,
           },
-          overview: this.propertyDetail.prop_common.description
+          overview: this.propertyDetail.prop_common.description,
+          photos: this.propertyDetail.photos,
+          propertyHistory: this.propertyDetail.property_history
         },
       });
   

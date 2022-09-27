@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
   address: string;
@@ -12,7 +12,19 @@ export interface DialogData {
   marker: {
     lat: number;
     lng: number;
-  }
+  };
+  photos: Array<Record<string, unknown>>;
+  propertyHistory: Array<{
+    datasource_name: string;
+    date: string;
+    event_name: string;
+    price: number;
+    price_changed: number;
+    price_range_max: number;
+    price_range_min: number;
+    source: string;
+    sqft: number;
+  }>;
 }
 
 @Component({
@@ -21,26 +33,22 @@ export interface DialogData {
   styleUrls: ['./search-detail.component.scss'],
 })
 export class SearchDetailComponent {
-
   center: google.maps.LatLngLiteral = { lat: 32.821688, lng: -96.792936 };
   options: google.maps.MapOptions = {
     zoomControl: true,
     mapTypeControl: false,
     scrollwheel: false,
     disableDoubleClickZoom: false,
-    streetViewControl: false
+    streetViewControl: false,
   };
-  markerPosition = {lat: 32.821688, lng: -96.792936}
+  markerPosition = { lat: 32.821688, lng: -96.792936 };
   zoom = 15;
 
-  constructor(
-    public dialogRef: MatDialogRef<SearchDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-  ) {
-    this.markerPosition.lat = data.marker.lat
-    this.markerPosition.lng = data.marker.lng
-    this.center.lat = data.marker.lat
-    this.center.lng = data.marker.lng
+  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    this.markerPosition.lat = data.marker.lat;
+    this.markerPosition.lng = data.marker.lng;
+    this.center.lat = data.marker.lat;
+    this.center.lng = data.marker.lng;
   }
 
   onNoClick(): void {
@@ -48,10 +56,10 @@ export class SearchDetailComponent {
   }
 
   onSave() {
-    console.log('saving')
+    console.log('saving');
   }
 
   onShare() {
-    console.log('sharing')
+    console.log('sharing');
   }
 }
