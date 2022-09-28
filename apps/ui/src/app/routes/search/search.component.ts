@@ -151,7 +151,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           overview: this.propertyDetail.prop_common.description,
           photos: this.propertyDetail.photos,
           propertyHistory: this.propertyDetail.property_history,
-          mortgageInfo: this.propertyDetail.mortgage.estimate
+          mortgageInfo: this.propertyDetail.mortgage.estimate,
+          schools: this.propertyDetail.schools
         },
       });
   

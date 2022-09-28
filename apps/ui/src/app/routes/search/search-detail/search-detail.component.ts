@@ -38,6 +38,31 @@ export interface DialogData {
     term: number;
     total_payment: number;
   };
+  schools: Array<{
+    distance_in_miles: number;
+    education_levels: Array<string>;
+    funding_type: string;
+    grades: { range: { high: string; low: string } };
+    greatschools_id: string;
+    id: string;
+    lat: number;
+    location: {
+      city: string;
+      city_slug_id: string;
+      county: string;
+      postal_code: string;
+      state: string;
+      street: string;
+    };
+    lon: number;
+    name: string;
+    nces_id: string;
+    phone: string;
+    ratings: { great_schools_rating: number; parent_rating: null };
+    relevance: string;
+    student_count: number;
+    student_teacher_ration: number;
+  }>;
 }
 
 @Component({
