@@ -25,6 +25,19 @@ export interface DialogData {
     source: string;
     sqft: number;
   }>;
+  mortgageInfo: {
+    down_payment: number;
+    hoa_fees: number;
+    loan_amount: number;
+    monthly_home_insurance: number;
+    monthly_mortgage_insurance: number;
+    monthly_payment: number;
+    monthly_property_taxes: number;
+    principal_and_interest: number;
+    rate: number;
+    term: number;
+    total_payment: number;
+  };
 }
 
 @Component({
@@ -43,12 +56,19 @@ export class SearchDetailComponent {
   };
   markerPosition = { lat: 32.821688, lng: -96.792936 };
   zoom = 15;
+  totalMonthlyPayment = 0;
 
   constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.markerPosition.lat = data.marker.lat;
     this.markerPosition.lng = data.marker.lng;
     this.center.lat = data.marker.lat;
     this.center.lng = data.marker.lng;
+    this.totalMonthlyPayment =
+      data.mortgageInfo.principal_and_interest +
+      data.mortgageInfo.monthly_mortgage_insurance +
+      data.mortgageInfo.monthly_property_taxes +
+      data.mortgageInfo.monthly_home_insurance +
+      data.mortgageInfo.hoa_fees;
   }
 
   onNoClick(): void {

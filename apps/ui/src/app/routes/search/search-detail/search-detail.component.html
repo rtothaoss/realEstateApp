@@ -7,44 +7,51 @@
       <div *ngFor="let photos of data.photos | slice: 1; let i = index">
         <img src="{{ photos['href'] }}" class="p-2" />
       </div>
-  </div>
+    </div>
   </div>
   <div class="w-1/2 pl-4 overflow-y-scroll">
-    
-      <div class="flex justify-end border-b-2">
-        <mat-icon class="text-xl">save_alt</mat-icon><p (click)="onSave()" class=" cursor-pointer text-lg hover:underline">Save</p>
-        <mat-icon class="text-xl ml-3">share</mat-icon><p (click)="onShare()" class="cursor-pointer text-lg hover:underline">Share</p>
-      </div>
-      <div class="mt-4">
-        <p class="text-3xl">${{ data.price | number }}</p>
-     
-        <p class="text-lg"><strong>{{data.beds}}</strong> bed, <strong>{{data.bath}}</strong> bath, <strong>{{data.sqft}}</strong> sqft </p> 
-      </div>
-      
-      
-   
+    <div class="flex justify-end border-b-2">
+      <mat-icon class="text-xl">save_alt</mat-icon>
+      <p (click)="onSave()" class="cursor-pointer text-lg hover:underline">Save</p>
+      <mat-icon class="text-xl ml-3">share</mat-icon>
+      <p (click)="onShare()" class="cursor-pointer text-lg hover:underline">Share</p>
+    </div>
+    <div class="mt-4">
+      <p class="text-3xl">${{ data.price | number }}</p>
+
+      <p class="text-lg">
+        <strong>{{ data.beds }}</strong> bed, <strong>{{ data.bath }}</strong> bath,
+        <strong>{{ data.sqft }}</strong> sqft
+      </p>
+    </div>
+
     <div>
-      <p>{{data.address}}</p>
+      <p>{{ data.address }}</p>
     </div>
     <div class="flex mt-6">
-      <button type="button" class="w-1/2 h-12 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-white hover:text-blue-600 hover:outline  hover:shadow-lg transition duration-150 ease-in-out">Request a Tour</button>
-      <button type="button" class="ml-10 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">Contact Agent</button>
+      <button
+        type="button"
+        class="w-1/2 h-12 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-white hover:text-blue-600 hover:outline hover:shadow-lg transition duration-150 ease-in-out">
+        Request a Tour
+      </button>
+      <button
+        type="button"
+        class="ml-10 inline-block px-6 py-2 border-2 border-blue-600 text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out">
+        Contact Agent
+      </button>
     </div>
 
     <div class="border-2 mt-4 px-2 py-2">
       <div class="">
         <google-map height="30vh" width="99%" [options]="options" [center]="center" [zoom]="zoom">
-          <map-marker
-          [position]="markerPosition"
-          >
-        </map-marker>
+          <map-marker [position]="markerPosition"> </map-marker>
         </google-map>
       </div>
     </div>
 
     <div class="border-2 border-t-0 px-4">
       <p class="pt-4 text-2xl font-bold">Overview</p>
-      <p class="pb-4 text-base">{{data.overview}}</p>
+      <p class="pb-4 text-base">{{ data.overview }}</p>
     </div>
     <div class="border-2 border-t-0 px-4 py-2">
       <p class="text-2xl font-bold pt-4">Price History</p>
@@ -56,14 +63,39 @@
             <th>Price</th>
           </tr>
         </thead>
-        <tbody *ngFor = "let priceData of data.propertyHistory; let i = index">
+        <tbody *ngFor="let priceData of data.propertyHistory; let i = index">
           <tr class="border-t-[1px]">
-            <td class="py-3">{{priceData.date}}</td>
-            <td>{{ priceData.event_name}}</td>
-            <td>${{priceData.price | number}}</td>
+            <td class="py-3">{{ priceData.date }}</td>
+            <td>{{ priceData.event_name }}</td>
+            <td>${{ priceData.price | number }}</td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="border-2 border-t-0 px-4">
+      <p class="pt-4 text-2xl font-bold">Monthly Cost</p>
+      <div class="flex justify-center"><p class="text-base">Total Monthly Payment: </p><p class="pl-2 font-bold text-base">${{this.totalMonthlyPayment | number}}</p></div>
+
+      <div class="flex justify-between mt-2">
+        <p>Principale & Interest</p>
+        <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.principal_and_interest | number }}/month</p>
+      </div>
+      <div class="flex justify-between">
+        <p>Mortgage Insurance</p>
+        <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.monthly_mortgage_insurance | number }}/month</p>
+      </div>
+      <div class="flex justify-between">
+        <p>Property Taxes</p>
+        <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.monthly_property_taxes | number }}/month</p>
+      </div>
+      <div class="flex justify-between">
+        <p>Home Insurance</p>
+        <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.monthly_home_insurance | number }}/month</p>
+      </div>
+      <div class="flex justify-between">
+        <p>HOA Fees</p>
+        <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.hoa_fees | number }}/month</p>
+      </div>
     </div>
   </div>
 </div>
