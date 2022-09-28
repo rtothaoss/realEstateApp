@@ -28,6 +28,7 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
+ 
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
@@ -42,6 +43,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   defaultHouse = '../../../assets/img/defaulthouse.jpeg';
   markers: MarkersInterface[] = [];
   propertyDetail!: PropertyDetail
+  isDisabled = false;
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -122,6 +124,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   openDialog(i: number) {
+    this.isDisabled = true;
     console.log('this is openDialog');
     const propertyID = +this.homes[i].property_id
     const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
@@ -154,6 +157,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed().subscribe((result) => {
         console.log('The dialog was closed');
       });
+      this.isDisabled = false;
     })
    
  
