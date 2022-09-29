@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ImageDetailComponent } from '../image-detail/image-detail.component';
 
 export interface DialogData {
   address: string;
@@ -83,7 +84,7 @@ export class SearchDetailComponent {
   zoom = 15;
   totalMonthlyPayment = 0;
 
-  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) {
     this.markerPosition.lat = data.marker.lat;
     this.markerPosition.lng = data.marker.lng;
     this.center.lat = data.marker.lat;
@@ -106,5 +107,20 @@ export class SearchDetailComponent {
 
   onShare() {
     console.log('sharing');
+  }
+
+  showImage(ref: any) {
+    console.log(ref)
+    const imageDialogRef = this.dialog.open(ImageDetailComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        href: ref.src
+      }
+    });
+
+    imageDialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+    
   }
 }

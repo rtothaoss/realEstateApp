@@ -8,10 +8,19 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ImageDetailComponent } from './image-detail/image-detail.component';
 
 @NgModule({
-  declarations: [SearchComponent, SearchDetailComponent],
-  imports: [CommonModule, SearchRoutingModule, SharedModule, GoogleMapsModule, HttpClientJsonpModule, HttpClientModule, MatDialogModule],
+  declarations: [SearchComponent, SearchDetailComponent, ImageDetailComponent],
+  imports: [
+    CommonModule,
+    SearchRoutingModule,
+    SharedModule,
+    GoogleMapsModule,
+    HttpClientJsonpModule,
+    HttpClientModule,
+    MatDialogModule,
+  ],
   exports: [SearchComponent],
 })
 export class SearchModule {}
