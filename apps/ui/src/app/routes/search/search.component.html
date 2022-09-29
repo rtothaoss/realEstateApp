@@ -17,7 +17,7 @@
     
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
-    <div *ngIf="test$ | async; else loadingBlock">
+    <div *ngIf="loading$ | async; else loadingBlock">
       <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homes; let i = index">
           <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer" (click)="!isDisabled && openDialog(i)">

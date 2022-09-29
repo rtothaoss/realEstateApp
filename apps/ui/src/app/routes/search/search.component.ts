@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Observable, skip, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, skip, Subscription, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MapGeocoder, GoogleMap } from '@angular/google-maps';
 import { Store } from '@ngrx/store';
@@ -33,8 +33,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
   homes!: HomeData[];
-  testSubject = new BehaviorSubject<boolean>(false);
-  test$ = this.testSubject.asObservable();
+  loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
   city = '';
   state = '';
   limit = '';
@@ -44,6 +44,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   markers: MarkersInterface[] = [];
   propertyDetail!: PropertyDetail
   isDisabled = false;
+
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -74,9 +75,11 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.homes = homeData.data.home_search.results;
           console.log(this.homes);
           this.addMarkers();
-          this.testSubject.next(true);
+          this.loadingSubject.next(true);
         }
       });
+
+
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
   }
 

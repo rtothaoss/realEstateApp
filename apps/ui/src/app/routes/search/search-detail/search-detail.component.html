@@ -1,5 +1,5 @@
 <div class="flex h-full overflow-hidden">
-  <div class="w-full md:w-7/12 top-18 left-0 overflow-y-scroll">
+  <div class="w-full md:w-7/12 overflow-y-scroll mb-2">
     <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
       <div class="col-span-2">
         <img src="{{ data.photo }}" class="p-2" />
@@ -97,7 +97,7 @@
         <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.hoa_fees | number }}/month</p>
       </div>
     </div>
-    <div class="border-2 border-t-0 px-4">
+    <div class="border-2 border-t-0 px-4 mb-2">
       <p class="pt-4 text-2xl font-bold">Schools Nearby</p>
       <div *ngFor="let school of data.schools | slice:0:3; let i = index" class="flex">
        <p>{{school.education_levels[0] | titlecase }}:</p><p class="font-bold pl-1">{{school.name}}</p>
