@@ -1,26 +1,35 @@
 <div class="relative">
   <div class="md:fixed w-full md:w-7/12 min-h-screen top-18 left-0">
-    
-      <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options">
-        <map-marker
-          #markerElem
-          *ngFor="let marker of markers; let i = index"
-          [position]="marker.position"
-          [title]="marker.title"
-          [options]="marker.options"
-          (mapClick)="!isDisabled && openDialog(+marker.title)"
-          >
-        </map-marker>
+    <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options">
+      <map-marker
+        #somemarker="mapMarker"
+        *ngFor="let marker of markers; let i = index"
+        [position]="marker.position"
+        [title]="marker.title"
+        [options]="marker.options"
+        (mapClick)="!isDisabled && openDialog(i)"
+       (mapMouseover)="openInfo(somemarker, i)"
+      (mapMouseout)="closeInfo()"
+        >
+        
+      </map-marker>
 
-
-      </google-map>
-    
+      <map-info-window class="info-window">
+        <div class="m-0 p-0 info-window">
+          <p class="m-0 p-0 info-window">${{infoContent?.list_price | number}}</p>
+          <p class="m-0 p-0 info-window">{{infoContent?.description?.beds}} bed, {{infoContent?.description?.baths_full}} bath</p>
+          <p class="m-0 p-0 info-window">{{infoContent?.description?.sqft}} sqft</p>
+        </div>
+      </map-info-window>
+    </google-map>
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
     <div *ngIf="loading$ | async; else loadingBlock">
       <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homeData; let i = index">
-          <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer" (click)="!isDisabled && openDialog(i)">
+          <mat-card
+            class="h-80 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer"
+            (click)="!isDisabled && openDialog(i)">
             <img src="{{ home?.primary_photo?.href || defaultHouse }}" class="rounded-t-xl" />
             <div class="ml-4">
               <mat-card-title class="mt-2">${{ home?.list_price || '$1,234' | number }}</mat-card-title>
@@ -34,12 +43,13 @@
           </mat-card>
         </div>
       </div>
-      <mat-paginator [length]="homes.length"
-      [pageSize]="size"
-      [pageIndex]="page"
-      [pageSizeOptions]="[4, 6, 8]"
-      (page)="getData($event)">
-</mat-paginator>
+      <mat-paginator
+        [length]="homes.length"
+        [pageSize]="size"
+        [pageIndex]="page"
+        [pageSizeOptions]="[4, 6, 8]"
+        (page)="getData($event)">
+      </mat-paginator>
     </div>
 
     <ng-template #loadingBlock>

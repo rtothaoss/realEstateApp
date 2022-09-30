@@ -77,7 +77,7 @@
       <div class="flex justify-center"><p class="text-base">Total Monthly Payment: </p><p class="pl-2 font-bold text-base">${{this.totalMonthlyPayment | number}}</p></div>
 
       <div class="flex justify-between mt-2">
-        <p>Principale & Interest</p>
+        <p>Principal & Interest</p>
         <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.principal_and_interest | number }}/month</p>
       </div>
       <div class="flex justify-between">
@@ -97,7 +97,7 @@
         <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.hoa_fees | number }}/month</p>
       </div>
     </div>
-    <div class="border-2 border-t-0 px-4 mb-2">
+    <div class="border-2 border-t-0 px-4 pb-4 mb-4">
       <p class="pt-4 text-2xl font-bold">Schools Nearby</p>
       <div *ngFor="let school of data.schools | slice:0:3; let i = index" class="flex">
        <p>{{school.education_levels[0] | titlecase }}:</p><p class="font-bold pl-1">{{school.name}}</p>

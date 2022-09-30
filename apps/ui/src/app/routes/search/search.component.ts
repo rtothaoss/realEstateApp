@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, skip, Subscription, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { MapGeocoder, GoogleMap } from '@angular/google-maps';
+import { MapGeocoder, GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
 import { Store } from '@ngrx/store';
 import { selectHomeData } from '../../state';
 import * as SearchActions from '../../state/search';
@@ -14,6 +14,7 @@ export interface MarkersInterface {
   position: { lat: number; lng: number };
   label: {
     color: string;
+    text: string;
   };
   title: string;
   options: {
@@ -28,6 +29,7 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
@@ -46,6 +48,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   homeData! : HomeData[];
   page = 0;
   size = 8;
+  infoContent!: HomeData
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -111,13 +114,14 @@ export class SearchComponent implements OnInit, OnDestroy {
   addMarkers() {
     console.log('running addMarkers');
     for (const [index, home] of this.homes.entries()) {
+      
       this.markers.push({
         position: { lat: home.location.address.coordinate.lat, lng: home.location.address.coordinate.lon },
         label: {
           color: 'red',
+          text: 'This is a marker label',
         },
-        title: index.toString(),
-
+        title: home.list_price.toString(),
         options: {
           animation: google.maps.Animation.DROP,
         },
@@ -179,6 +183,15 @@ export class SearchComponent implements OnInit, OnDestroy {
     });
 
     console.log(this.homeData)
+  }
+
+  openInfo(marker: any, i: number) {
+    this.infoContent = this.homes[i]
+    this.infoWindow.open(marker)
+  }
+
+  closeInfo() {
+    this.infoWindow.close()
   }
 
   ngOnDestroy(): void {
