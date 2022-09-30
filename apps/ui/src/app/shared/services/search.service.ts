@@ -11,7 +11,7 @@ export class SearchService {
 
   realEstateApi(city: string, state: string) {
     const options = {
-      params: { offset: '0', limit: '8', state_code: state, city: city, sort: 'newest' },
+      params: { offset: '0', limit: '16', state_code: state, city: city, sort: 'newest' },
       headers: {
         'X-RapidAPI-Key': `${environment.realEstateApiKey}`,
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',

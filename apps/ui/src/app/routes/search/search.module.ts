@@ -9,6 +9,7 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
+import {MatPaginatorModule} from '@angular/material/paginator'
 
 @NgModule({
   declarations: [SearchComponent, SearchDetailComponent, ImageDetailComponent],
@@ -20,6 +21,7 @@ import { ImageDetailComponent } from './image-detail/image-detail.component';
     HttpClientJsonpModule,
     HttpClientModule,
     MatDialogModule,
+    MatPaginatorModule
   ],
   exports: [SearchComponent],
 })

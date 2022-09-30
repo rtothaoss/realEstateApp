@@ -28,7 +28,6 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
- 
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
@@ -42,9 +41,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   lng!: string;
   defaultHouse = '../../../assets/img/defaulthouse.jpeg';
   markers: MarkersInterface[] = [];
-  propertyDetail!: PropertyDetail
+  propertyDetail!: PropertyDetail;
   isDisabled = false;
-
+  homeData! : HomeData[];
+  page = 0;
+  size = 8;
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -60,12 +61,12 @@ export class SearchComponent implements OnInit, OnDestroy {
     private store: Store,
     private searchService: SearchService,
     private route: ActivatedRoute,
-    public dialog: MatDialog,
-
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
     this.getQueryParams();
+   
 
     this.homeDataSub$ = this.store
       .select(selectHomeData)
@@ -74,13 +75,15 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
           console.log(this.homes);
+          this.getData({pageIndex: this.page, pageSize: this.size});
           this.addMarkers();
           this.loadingSubject.next(true);
         }
       });
 
-
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
+
+    
   }
 
   getQueryParams() {
@@ -129,13 +132,12 @@ export class SearchComponent implements OnInit, OnDestroy {
   openDialog(i: number) {
     this.isDisabled = true;
     console.log('this is openDialog');
-    const propertyID = +this.homes[i].property_id
+    const propertyID = +this.homes[i].property_id;
     const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
 
-    this.searchService.propertyDetailApi(propertyID).subscribe(details => {
-
+    this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
       //put this in a seperate function to make things look cleaner
-      console.log(details)
+      console.log(details);
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {
         width: '1100px',
@@ -155,19 +157,29 @@ export class SearchComponent implements OnInit, OnDestroy {
           photos: this.propertyDetail.photos,
           propertyHistory: this.propertyDetail.property_history,
           mortgageInfo: this.propertyDetail.mortgage.estimate,
-          schools: this.propertyDetail.schools
+          schools: this.propertyDetail.schools,
         },
       });
-  
+
       dialogRef.afterClosed().subscribe((result) => {
         console.log('The dialog was closed');
       });
       this.isDisabled = false;
-    })
-   
- 
+    });
   }
 
+  getData(obj: any) {
+    let index=0
+       const startingIndex=obj.pageIndex * obj.pageSize
+       const endingIndex=startingIndex + obj.pageSize;
+
+    this.homeData = this.homes.filter(() => {
+      index++;
+      return (index > startingIndex && index <= endingIndex) ? true : false;
+    });
+
+    console.log(this.homeData)
+  }
 
   ngOnDestroy(): void {
     this.homeDataSub$.unsubscribe();

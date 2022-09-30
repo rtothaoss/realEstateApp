@@ -19,7 +19,7 @@
   <div class="w-full md:w-5/12 ml-auto h-96">
     <div *ngIf="loading$ | async; else loadingBlock">
       <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
-        <div *ngFor="let home of homes; let i = index">
+        <div *ngFor="let home of homeData; let i = index">
           <mat-card class="h-72 w-[95%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer" (click)="!isDisabled && openDialog(i)">
             <img src="{{ home?.primary_photo?.href || defaultHouse }}" class="rounded-t-xl" />
             <div class="ml-4">
@@ -34,6 +34,12 @@
           </mat-card>
         </div>
       </div>
+      <mat-paginator [length]="homes.length"
+      [pageSize]="size"
+      [pageIndex]="page"
+      [pageSizeOptions]="[4, 6, 8]"
+      (page)="getData($event)">
+</mat-paginator>
     </div>
 
     <ng-template #loadingBlock>
