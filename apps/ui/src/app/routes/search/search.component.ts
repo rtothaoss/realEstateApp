@@ -133,11 +133,23 @@ export class SearchComponent implements OnInit, OnDestroy {
     return Object.keys(obj).length === 0;
   }
 
-  openDialog(i: number) {
+  openDialog(i: number, type: string) {
     this.isDisabled = true;
     console.log('this is openDialog');
-    const propertyID = +this.homes[i].property_id;
-    const formattedAddress = `${this.homes[i].location.address.line},  ${this.homes[i].location.address.city}, ${this.homes[i].location.address.state_code} ${this.homes[i].location.address.postal_code}`;
+    console.log(type)
+
+    let formattedPath = this.homes[i]
+    let propertyID = +formattedPath.property_id;
+    let formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
+
+    if(type === 'card') {
+      formattedPath = this.homeData[i],
+      propertyID = +formattedPath.property_id;
+      formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
+    }
+    
+
+    
 
     this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
       //put this in a seperate function to make things look cleaner
@@ -148,14 +160,14 @@ export class SearchComponent implements OnInit, OnDestroy {
         height: '900px',
         data: {
           address: formattedAddress,
-          photo: this.homes[i].primary_photo.href,
-          price: this.homes[i].list_price,
-          beds: this.homes[i].description.beds,
-          bath: this.homes[i].description.baths_full,
-          sqft: this.homes[i].description.sqft,
+          photo: formattedPath.primary_photo.href,
+          price: formattedPath.list_price,
+          beds: formattedPath.description.beds,
+          bath: formattedPath.description.baths_full,
+          sqft: formattedPath.description.sqft,
           marker: {
-            lat: this.homes[i].location.address.coordinate.lat,
-            lng: this.homes[i].location.address.coordinate.lon,
+            lat: formattedPath.location.address.coordinate.lat,
+            lng: formattedPath.location.address.coordinate.lon,
           },
           overview: this.propertyDetail.prop_common.description,
           photos: this.propertyDetail.photos,
