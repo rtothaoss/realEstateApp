@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
 
 export interface DialogData {
@@ -84,7 +85,7 @@ export class SearchDetailComponent {
   zoom = 15;
   totalMonthlyPayment = 0;
 
-  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog) {
+  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog, private searchService: SearchService) {
     this.markerPosition.lat = data.marker.lat;
     this.markerPosition.lng = data.marker.lng;
     this.center.lat = data.marker.lat;
@@ -102,7 +103,7 @@ export class SearchDetailComponent {
   }
 
   onSave() {
-    console.log('saving');
+    this.searchService.saveHouse();
   }
 
   onShare() {

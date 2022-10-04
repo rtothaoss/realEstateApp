@@ -40,8 +40,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       this.place = autocomplete.getPlace();
-      console.log(this.place.geometry?.location?.lat())
-      console.log(this.place.geometry?.location?.lng())
     });
   }
 

@@ -34,11 +34,7 @@ export class SearchService {
     return this.http.get<any>('https://us-real-estate.p.rapidapi.com/v2/property-detail', options);
   }
 
-  testApi() {
-    return this.http.get<any>('https://dog.ceo/api/breed/hound/list');
-  }
-
-  getHoundList() {
-    return this.http.get<any>('https://dog.ceo/api/breed/hound/list');
+  saveHouse() {
+    console.log('this house was saved')
   }
 }

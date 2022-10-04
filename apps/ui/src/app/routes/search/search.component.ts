@@ -77,7 +77,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((homeData) => {
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
-          console.log(this.homes);
           this.getData({pageIndex: this.page, pageSize: this.size});
           this.addMarkers();
           this.loadingSubject.next(true);
@@ -112,7 +111,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   addMarkers() {
-    console.log('running addMarkers');
     for (const [index, home] of this.homes.entries()) {
       
       this.markers.push({
@@ -135,8 +133,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   openDialog(i: number, type: string) {
     this.isDisabled = true;
-    console.log('this is openDialog');
-    console.log(type)
 
     let formattedPath = this.homes[i]
     let propertyID = +formattedPath.property_id;
@@ -153,7 +149,6 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
       //put this in a seperate function to make things look cleaner
-      console.log(details);
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {
         width: '1100px',
@@ -194,7 +189,6 @@ export class SearchComponent implements OnInit, OnDestroy {
       return (index > startingIndex && index <= endingIndex) ? true : false;
     });
 
-    console.log(this.homeData)
   }
 
   openInfo(marker: any, i: number) {

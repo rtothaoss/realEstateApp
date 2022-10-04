@@ -16,7 +16,6 @@ const initialState: SearchState = {
 export const searchReducer = createReducer(
   initialState,
   on(setHomeData, (state, payload) => {
-    console.log(payload);
     return { ...state, homeData: payload };
   }),
   on(searchRequestError, (state, payload) => {
