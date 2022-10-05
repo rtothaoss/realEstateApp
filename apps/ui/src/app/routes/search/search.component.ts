@@ -148,6 +148,7 @@ export class SearchComponent implements OnInit, OnDestroy {
     
 
     this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
+      console.log(details)
       //put this in a seperate function to make things look cleaner
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {

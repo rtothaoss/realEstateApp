@@ -22,7 +22,6 @@ export class SearchService {
   }
 
   propertyDetailApi(propID: number) {
-    console.log('we get here');
     const options = {
       params: { property_id: propID },
       headers: {
@@ -37,4 +36,19 @@ export class SearchService {
   saveHouse() {
     console.log('this house was saved')
   }
+
+  savedHomes() {
+    console.log('return saved homes for a user')
+  }
+
+  savedSearches() {
+    console.log('return saved searches for a user')
+  }
+
+  userHome() {
+    console.log('return users home')
+  }
+
+  
 }
+

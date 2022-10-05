@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { SearchService } from '../../shared/services/search.service';
 import { SearchDetailComponent } from '../search/search-detail/search-detail.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { SearchDetailComponent } from '../search/search-detail/search-detail.com
 })
 export class DashboardComponent {
 
-  constructor(public dialog: MatDialog){}
+  constructor(public dialog: MatDialog, private searchService: SearchService){}
 
   location = '2203 Allen St, Dallas, TX 75204';
   photo = 'https://ap.rdcpix.com/f05645e43168d43ebb134a6eaa210913l-m2327927031s-w1024_h768.jpg';
@@ -19,10 +20,9 @@ export class DashboardComponent {
   bath = '4';
   sqft = '3306';
   overview = 'Fabulous, One of a Kind Single Family Residence located in the State Thomas Neighborhood! Home has 4 Bedrooms, 3.1 Baths with a Large Private Courtyard with French Antique Bronze Sculpture, 2 Terraces with Views of Downtown, Private Elevator, & 3 Fireplaces. 1st Level Bedroom has a Separate Entry, Kitchen, Private Laundry Room, & attached Bath. Could be used as Separate Apt or Guest Quarters. Living Room has Fireplace & Terrace access. Kitchen with Stainless Steel Appliances, Butlers Pantry & Bar, & Separate'
-
+  defaultHouse = '../../../assets/img/defaulthouse.jpeg';
 
   openDialog() {
-    console.log('this is openDialog');
 
 
     const dialogRef = this.dialog.open(SearchDetailComponent, {
@@ -44,5 +44,19 @@ export class DashboardComponent {
     });
   }
 
+  accountSettings() {
+    console.log('account settings')
+  }
 
+  yourHome() {
+    this.searchService.userHome();
+  }
+
+  savedSearches() {
+    this.searchService.savedSearches();
+  }
+
+  savedHomes() {
+    this.searchService.savedHomes();
+  }
 }
