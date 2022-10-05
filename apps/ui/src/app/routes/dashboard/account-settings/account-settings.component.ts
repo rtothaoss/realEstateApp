@@ -5,8 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './account-settings.component.html',
   styleUrls: ['./account-settings.component.scss'],
 })
-export class AccountSettingsComponent implements OnInit {
-  constructor() {}
+export class AccountSettingsComponent {
+  
 
-  ngOnInit(): void {}
+  profile() {
+    console.log('clicked profile')
+  }
+
+  notifications() {
+    console.log('clicked notifications')
+  }
+
+  documentPreferences() {
+    console.log('clicked document preferences')
+  }
+ 
 }

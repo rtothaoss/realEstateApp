@@ -1,1 +1,48 @@
-<p>account-settings works!</p>
+<div>
+<div>
+  <p class="text-4xl font-semibold pl-40 pt-4">Account Settings</p>
+</div>
+<div class="mt-12">
+  <div class="w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="profile()">
+    <div class="flex justify-between h-full">
+      <div class="flex pl-20 items-center justify-center">
+        <div>
+            <p class="font-semibold text-xl">Profile</p>
+            <p>Personalize your account and update your sign in preferences.</p>
+        </div>
+        
+      </div>
+      <div class="flex align-middle pr-10">
+        <button><mat-icon class="scale-150">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="notifications()">
+    <div class="flex justify-between h-full">
+      <div class="flex pl-20 items-center justify-center">
+        <div>
+            <p class="font-semibold text-xl">Notifications</p>
+            <p>Manage the content and frequency of your Zillow emails.</p>
+        </div>
+        
+      </div>
+      <div class="flex align-middle pr-10">
+        <button><mat-icon class="scale-150">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </div>
+  <div class="w-4/6 m-auto h-32 bg-white mb-32 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="documentPreferences()">
+    <div class="flex justify-between h-full">
+      <div class="flex pl-20 items-center justify-center">
+        <div>
+            <p class="font-semibold text-xl">Document Preferences</p>
+            <p>View your legal documents, and manage your preferences for receiving and signing documents</p>
+        </div>
+        
+      </div>
+      <div class="flex align-middle pr-10">
+        <button><mat-icon class="scale-150">keyboard_arrow_right</mat-icon></button>
+      </div>
+    </div>
+  </div>
+</div>
