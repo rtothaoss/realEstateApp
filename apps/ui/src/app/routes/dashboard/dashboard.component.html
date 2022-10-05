@@ -1,82 +1,22 @@
-<div class="flex justify-center mt-6">
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="savedHomes()">Saved Homes</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="savedSearches()">Saved Searches</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="yourHome()">Your Home</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="accountSettings()">Account Settings</button>
+<div class="flex justify-center mt-6 border-blue-600 pb-4">
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="picker('savedHomes')" >Saved Homes</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="picker('savedSearches')">Saved Searches</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="picker('yourHome')">Your Home</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer text-lg ml-2 mr-2" (click)="picker('accountSettings')">Account Settings</button>
 </div>
-<div class="pl-40 pr-40">
-  <div class="grid grid-cols-3 grid-flow-row auto-rows-min mt-8">
-    <mat-card
-    #cardRef
-    class="h-auto w-[80%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer justify-center"
-    >
-    <img src="{{ photo || defaultHouse }}" class="rounded-t-xl" />
-    <div class="ml-4 pb-6">
-      <mat-card-title class="mt-2">${{ price || '$1,234' | number }}</mat-card-title>
-      <mat-card-subtitle class="mt-2 p-0"
-        >{{ beds || '0' }} Beds, {{ bath || '0' }} Bath,
-
-        {{ sqft }} SqFt</mat-card-subtitle
-      >
-      <mat-card-content>{{ location || '123 Address Ln' }}</mat-card-content>
-      <div class="grid grid-cols-3 grid-flow-row auto-rows-min text-center">
-        <div class="mt-3"><p class="text-sm font-medium">Type</p><p class="text-sm">Single Family Residence</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Year Built</p><p class="text-sm">2022</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Heating</p><p class="text-sm">Central, Zoned</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Cooling</p><p class="text-sm">Ceiling Fan(s), Central Ai...</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Parking</p><p class="text-sm">2 Carport Spaces</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Lot</p><p class="text-sm">5,706 sqft</p></div>
-        <div class="mt-3"><p class="text-sm font-medium">Price/sqft</p><p class="text-sm">$377</p></div>
-      </div>
-    </div>
-  </mat-card>
-  <mat-card
-  #cardRef
-  class="h-auto w-[80%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer justify-center"
-  >
-  <img src="{{ photo || defaultHouse }}" class="rounded-t-xl" />
-  <div class="ml-4 pb-6">
-    <mat-card-title class="mt-2">${{ price || '$1,234' | number }}</mat-card-title>
-    <mat-card-subtitle class="mt-2 p-0"
-      >{{ beds || '0' }} Beds, {{ bath || '0' }} Bath,
-
-      {{ sqft }} SqFt</mat-card-subtitle
-    >
-    <mat-card-content>{{ location || '123 Address Ln' }}</mat-card-content>
-    <div class="grid grid-cols-3 grid-flow-row auto-rows-min text-center">
-      <div class="mt-3"><p class="text-sm font-medium">Type</p><p class="text-sm">Single Family Residence</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Year Built</p><p class="text-sm">2022</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Heating</p><p class="text-sm">Central, Zoned</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Cooling</p><p class="text-sm">Ceiling Fan(s), Central Ai...</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Parking</p><p class="text-sm">2 Carport Spaces</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Lot</p><p class="text-sm">5,706 sqft</p></div>
-      <div class="mt-3"><p class="text-sm font-medium">Price/sqft</p><p class="text-sm">$377</p></div>
-    </div>
-  </div>
-</mat-card>
-<mat-card
-#cardRef
-class="h-auto w-[80%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer justify-center"
->
-<img src="{{ photo || defaultHouse }}" class="rounded-t-xl" />
-<div class="ml-4 pb-6">
-  <mat-card-title class="mt-2">${{ price || '$1,234' | number }}</mat-card-title>
-  <mat-card-subtitle class="mt-2 p-0"
-    >{{ beds || '0' }} Beds, {{ bath || '0' }} Bath,
-
-    {{ sqft }} SqFt</mat-card-subtitle
-  >
-  <mat-card-content>{{ location || '123 Address Ln' }}</mat-card-content>
-  <div class="grid grid-cols-3 grid-flow-row auto-rows-min text-center">
-    <div class="mt-3"><p class="text-sm font-medium">Type</p><p class="text-sm">Single Family Residence</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Year Built</p><p class="text-sm">2022</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Heating</p><p class="text-sm">Central, Zoned</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Cooling</p><p class="text-sm">Ceiling Fan(s), Central Ai...</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Parking</p><p class="text-sm">2 Carport Spaces</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Lot</p><p class="text-sm">5,706 sqft</p></div>
-    <div class="mt-3"><p class="text-sm font-medium">Price/sqft</p><p class="text-sm">$377</p></div>
-  </div>
+<div class="bg-gray-50 h-full pb-10">
+<div *ngIf="content === 'savedHomes'">
+  <starter-saved-homes></starter-saved-homes>
 </div>
-</mat-card>
-  </div>
+<div *ngIf="content === 'savedSearches'">
+  <starter-saved-searches></starter-saved-searches>
 </div>
+<div *ngIf="content === 'yourHome'">
+  <starter-your-home></starter-your-home>
+</div>
+<div *ngIf="content === 'accountSettings'">
+  <starter-account-settings></starter-account-settings>
+</div>
+</div>
+
+

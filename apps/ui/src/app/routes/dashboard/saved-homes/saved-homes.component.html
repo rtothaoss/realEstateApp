@@ -1,0 +1,38 @@
+<div>
+    <p class="text-4xl font-semibold pl-40 pt-4">Saved Homes</p>
+  </div>
+  <div class="pl-44 pr-44">
+  
+    <div class="grid grid-cols-3 grid-flow-row auto-rows-min mt-8">
+      <div
+      #cardRef
+      class="h-auto w-[80%] rounded-xl bg-black/[.05] ml-2 mt-2 cursor-pointer justify-center shadow-xl transform transition duration-500 hover:scale-105"
+      >
+      <img src="{{ photo || defaultHouse }}" class="rounded-t-xl" />
+      <div class="ml-4 pb-2">
+        
+        <p class="mt-2 text-2xl">${{ price || '$1,234' | number }}</p>
+        <p class="mt-1 p-0"
+          >{{ beds || '0' }} Beds, {{ bath || '0' }} Bath,
+  
+          {{ sqft }} SqFt</p
+        >
+        <p class="pb-2">{{ location || '123 Address Ln' }}</p>
+        </div>
+  
+        <div class="border-blue-500 border-b-2"></div>
+        <div class="grid grid-cols-3 grid-flow-row auto-rows-min text-center pb-4">
+          <div class="mt-3"><p class="text-sm font-medium">Type</p><p class="text-sm">Single Family Residence</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Year Built</p><p class="text-sm">2022</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Heating</p><p class="text-sm">Central, Zoned</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Cooling</p><p class="text-sm">Ceiling Fan(s), Central Ai...</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Parking</p><p class="text-sm">2 Carport Spaces</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Lot</p><p class="text-sm">5,706 sqft</p></div>
+          <div class="mt-3"><p class="text-sm font-medium">Price/sqft</p><p class="text-sm">$377</p></div>
+        </div>
+     
+    </div>
+    
+    
+    </div>
+  </div>
