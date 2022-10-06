@@ -12,7 +12,7 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   email     String   @unique
@@ -28,7 +28,7 @@ model SavedSearch {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   location String
-  userId String
+  userId Int
   user   User @relation(fields: [userId], references: [id])
   @@map("savedsearches")
 }
@@ -50,7 +50,7 @@ model SavedHome {
   lot Int
   pricePerSqft Int
   image String
-  userId String
+  userId Int
   user   User @relation(fields: [userId], references: [id])
   @@map("savedhomes")
 }
