@@ -18,6 +18,39 @@ model User {
   email     String   @unique
   hash      String
   name      String?
-
+  savedsearches SavedSearch[]
+  savedhomes SavedHome[]
   @@map("users")
+}
+
+model SavedSearch {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  location String
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+  @@map("savedsearches")
+}
+
+model SavedHome {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  price Int
+  beds Int
+  bath Int
+  sqft Int
+  address String
+  type String
+  yearBuilt Int
+  heating String
+  cooling String
+  parking String
+  lot Int
+  pricePerSqft Int
+  image String
+  userId String
+  user   User @relation(fields: [userId], references: [id])
+  @@map("savedhomes")
 }
