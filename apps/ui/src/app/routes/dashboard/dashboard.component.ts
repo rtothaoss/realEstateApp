@@ -15,22 +15,7 @@ export class DashboardComponent {
   constructor(public dialog: MatDialog, private searchService: SearchService) {}
 
   picker(title: string) {
-    switch (title) {
-      case 'savedHomes':
-        this.content = title;
-        return;
-      case 'savedSearches':
-        this.content = title;
-        return;
-      case 'yourHome':
-        this.content = title;
-        return;
-      case 'accountSettings':
-        this.content = title;
-        return;
-        default:
-          this.content = 'savedHomes'
-    }
+    this.content = title;
   }
 
   accountSettings() {

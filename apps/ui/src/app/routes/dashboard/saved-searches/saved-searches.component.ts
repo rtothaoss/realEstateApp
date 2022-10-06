@@ -5,8 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './saved-searches.component.html',
   styleUrls: ['./saved-searches.component.scss'],
 })
-export class SavedSearchesComponent implements OnInit {
-  constructor() {}
+export class SavedSearchesComponent  {
+ 
 
-  ngOnInit(): void {}
+ 
+  onEdit(id: number) {
+    console.log('edit this search')
+  }
+
+  onDelete(id: number) {
+    console.log('delete this search')
+  }
+
 }
