@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { localStorageSync } from 'ngrx-store-localstorage';
-
+import { AuthInterceptor } from '../app/shared/services/auth-interceptor.service'
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { userReducer, msgReducer, AppState, UserEffects, searchReducer, SearchEffects } from './state';
@@ -52,6 +52,13 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
       logOnly: environment.production, // Restrict extension to log-only mode
       autoPause: true, // Pauses recording actions and state changes when the extension window is not open
     }),
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

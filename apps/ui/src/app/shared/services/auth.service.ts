@@ -11,6 +11,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  getToken() {
+    const userData = localStorage.getItem('starter-user');
+    if (!userData) {
+      return null;
+    }
+
+    const token = JSON.parse(userData)['user']['accessToken'];
+
+    return token;
+  }
+
   login(data: Login) {
     return this.http.post<UserUI>(`${this.baseUrl}/login`, data);
   }

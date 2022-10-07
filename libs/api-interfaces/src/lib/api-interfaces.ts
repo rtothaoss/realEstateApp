@@ -10,7 +10,7 @@ export class UserEntity implements User {
   name!: string | null;
 
   @ApiProperty()
-  id!: string;
+  id!: number;
 
   @ApiProperty()
   email!: string;

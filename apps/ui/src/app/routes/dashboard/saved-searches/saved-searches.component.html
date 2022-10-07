@@ -1,52 +1,23 @@
 <div>
-    <p class="text-4xl font-semibold pl-40 pt-4">Saved Searches</p>
-  </div>
-  <div class="mt-12">
-    <div class="w-4/6 m-auto h-28 bg-white mb-6 border-2">
-        <div class="flex justify-between h-full">
-          <div class="flex pl-20 items-center">
-            <div>
-                <p class="font-semibold text-blue-600 cursor-pointer">Plano, TX</p>
-                <p>For Sale</p>
-            </div>
-            
-          </div>
-          <div class="flex items-center pr-10">
-            <p class="text-blue-600 text-lg cursor-pointer">Edit</p>
-            <p class="ml-10 text-blue-600 text-lg cursor-pointer">Delete</p>
-          </div>
-        </div>
-      </div>
+  <p class="text-4xl font-semibold pl-40 pt-4">Saved Searches</p>
+</div>
+<div class="mt-12">
+  <div *ngIf="loading$ | async">
+    <div *ngFor="let data of locations; let i = index">
       <div class="w-4/6 m-auto h-28 bg-white mb-6 border-2">
         <div class="flex justify-between h-full">
           <div class="flex pl-20 items-center">
             <div>
-                <p class="font-semibold text-blue-600 cursor-pointer">Dallas, TX</p>
-                <p>For Sale</p>
+              <p class="font-semibold text-blue-600 cursor-pointer">{{ data['location'] }}</p>
+              <p>For Sale</p>
             </div>
-            
           </div>
           <div class="flex items-center pr-10">
-            <p class="text-blue-600 text-lg cursor-pointer">Edit</p>
-            <p class="ml-10 text-blue-600 text-lg cursor-pointer">Delete</p>
+            <p class="text-blue-600 text-lg cursor-pointer" (click)="onEdit(i)">Edit</p>
+            <p class="ml-10 text-blue-600 text-lg cursor-pointer" (click)="onDelete(i)">Delete</p>
           </div>
         </div>
       </div>
-      <div class="w-4/6 m-auto h-28 bg-white mb-48 border-2">
-        <div class="flex justify-between h-full">
-          <div class="flex pl-20 items-center">
-            <div>
-                <p class="font-semibold text-blue-600 cursor-pointer">Austin, TX</p>
-                <p>For Sale</p>
-            </div>
-            
-          </div>
-          <div class="flex items-center pr-10">
-            <p class="text-blue-600 text-lg cursor-pointer">Edit</p>
-            <p class="ml-10 text-blue-600 text-lg cursor-pointer">Delete</p>
-          </div>
-        </div>
-      </div>
-
-
+    </div>
   </div>
+</div>

@@ -7,6 +7,8 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class SearchService {
+  baseUrl = `${environment.apiUrl}`;
+
   constructor(private http: HttpClient) {}
 
   realEstateApi(city: string, state: string) {
@@ -38,7 +40,7 @@ export class SearchService {
   }
 
   savedHomes() {
-    console.log('return saved homes for a user')
+    return this.http.get<any>(`${this.baseUrl}/savedsearches`)
   }
 
   savedSearches() {
