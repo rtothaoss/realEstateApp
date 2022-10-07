@@ -23,4 +23,20 @@ export class SearchService {
     });
     return savedSearch;
   }
+
+  async deleteSearchById(userId: number, searchId: number) {
+    const search = await this.prisma.savedSearch.findUnique({
+      where: {
+        id: searchId,
+      },
+    });
+
+    if (!search || search.userId !== userId) throw new ForbiddenException('Access to resources denied');
+
+    await this.prisma.savedSearch.delete({
+      where: {
+        id: searchId,
+      },
+    });
+  }
 }

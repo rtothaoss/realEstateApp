@@ -30,4 +30,10 @@ export class HomeController {
   addSavedHome(@GetUser('id') userId: number, @Body() dto: SaveHomeDto) {
     return this.homeService.addHome(userId, dto);
   }
+
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':id')
+  deleteHomeById(@GetUser('id') userId: number, @Param('id', ParseIntPipe) homeId: number) {
+    return this.homeService.deleteHomeById(userId, homeId);
+  }
 }

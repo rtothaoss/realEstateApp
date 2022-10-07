@@ -30,6 +30,10 @@ export class SearchController {
   addSavedSearch(@GetUser('id') userId: number, @Body() dto: SaveSearchDto) {
     return this.searchService.addSearch(userId, dto);
   }
+
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @Delete(':id')
+  deleteHomeById(@GetUser('id') userId: number, @Param('id', ParseIntPipe) searchId: number) {
+    return this.searchService.deleteSearchById(userId, searchId);
+  }
 }
-
-
