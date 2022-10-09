@@ -17,7 +17,7 @@ export class SavedSearchesComponent implements OnInit {
   constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
-    this.searchService.savedHomes().subscribe((details) => {
+    this.searchService.savedSearches().subscribe((details) => {
       this.locations = details
       console.log(this.locations)
       this.loadingSubject.next(true);

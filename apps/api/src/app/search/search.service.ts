@@ -15,13 +15,24 @@ export class SearchService {
   }
 
   async addSearch(userId: number, dto: SaveSearchDto) {
-    const savedSearch = await this.prisma.savedSearch.create({
-      data: {
-        userId,
-        ...dto,
+    const duplicate = await this.prisma.savedSearch.findFirst({
+      where: {
+        location: dto.location,
       },
     });
-    return savedSearch;
+
+    if (!duplicate) {
+      const savedSearch = await this.prisma.savedSearch.create({
+        data: {
+          userId,
+          ...dto,
+        },
+      });
+
+      return savedSearch;
+    }
+
+    return null;
   }
 
   async deleteSearchById(userId: number, searchId: number) {

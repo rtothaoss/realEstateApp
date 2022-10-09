@@ -40,11 +40,19 @@ export class SearchService {
   }
 
   savedHomes() {
-    return this.http.get<any>(`${this.baseUrl}/savedsearches`)
+    console.log('this returns saved homes')
+  }
+
+  addSearch(location: string) {
+    const data = {
+      location
+    }
+    
+    return this.http.post(`${this.baseUrl}/savedsearches`, data)
   }
 
   savedSearches() {
-    console.log('return saved searches for a user')
+    return this.http.get<any>(`${this.baseUrl}/savedsearches`)
   }
 
   userHome() {

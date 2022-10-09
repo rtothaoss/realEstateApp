@@ -69,7 +69,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getQueryParams();
-   
+    this.saveSearch();
 
     this.homeDataSub$ = this.store
       .select(selectHomeData)
@@ -97,6 +97,12 @@ export class SearchComponent implements OnInit, OnDestroy {
       this.lng = params['lng'];
       this.centerMap();
     });
+  }
+
+  saveSearch() {
+    const location = `${this.city}, ${this.state}`
+    
+    this.searchService.addSearch(location).subscribe(details => console.log(details))
   }
 
   centerMap() {

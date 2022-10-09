@@ -28,6 +28,7 @@ export class SearchController {
 
   @Post()
   addSavedSearch(@GetUser('id') userId: number, @Body() dto: SaveSearchDto) {
+    console.log(dto)
     return this.searchService.addSearch(userId, dto);
   }
 
