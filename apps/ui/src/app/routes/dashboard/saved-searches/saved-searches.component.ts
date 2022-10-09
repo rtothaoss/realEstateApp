@@ -17,18 +17,25 @@ export class SavedSearchesComponent implements OnInit {
   constructor(private searchService: SearchService) {}
 
   ngOnInit(): void {
+    this.fetchData();
+}
+
+  fetchData() {
     this.searchService.savedSearches().subscribe((details) => {
       this.locations = details
       console.log(this.locations)
       this.loadingSubject.next(true);
     })
-}
+  }
 
   onEdit(id: number) {
     console.log('edit this search');
   }
 
-  onDelete(id: number) {
-    console.log('delete this search');
+  onDelete(id: any) {
+    this.searchService.deleteSearch(id).subscribe((data: any) => {
+      this.fetchData();
+      
+    })
   }
 }

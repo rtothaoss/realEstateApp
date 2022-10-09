@@ -36,29 +36,30 @@ export class SearchService {
   }
 
   saveHouse() {
-    console.log('this house was saved')
+    console.log('this house was saved');
   }
 
   savedHomes() {
-    console.log('this returns saved homes')
+    console.log('this returns saved homes');
   }
 
   addSearch(location: string) {
     const data = {
-      location
-    }
-    
-    return this.http.post(`${this.baseUrl}/savedsearches`, data)
+      location,
+    };
+
+    return this.http.post(`${this.baseUrl}/savedsearches`, data);
   }
 
   savedSearches() {
-    return this.http.get<any>(`${this.baseUrl}/savedsearches`)
+    return this.http.get<any>(`${this.baseUrl}/savedsearches`);
+  }
+
+  deleteSearch(id: number) {
+    return this.http.delete(`${this.baseUrl}/savedsearches/${id}`);
   }
 
   userHome() {
-    console.log('return users home')
+    console.log('return users home');
   }
-
-  
 }
-
