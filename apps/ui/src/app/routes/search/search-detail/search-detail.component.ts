@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
 
+
 export interface DialogData {
   address: string;
   photo: string;
@@ -84,6 +85,7 @@ export class SearchDetailComponent {
   markerPosition = { lat: 32.821688, lng: -96.792936 };
   zoom = 15;
   totalMonthlyPayment = 0;
+  defaultHouse = '../../../../assets/img/defaulthouse.jpeg';
 
   constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog, private searchService: SearchService) {
     this.markerPosition.lat = data.marker.lat;

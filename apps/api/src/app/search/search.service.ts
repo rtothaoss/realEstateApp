@@ -44,7 +44,7 @@ export class SearchService {
 
     if (!search || search.userId !== userId) throw new ForbiddenException('Access to resources denied');
 
-    await this.prisma.savedSearch.delete({
+    const deletion = await this.prisma.savedSearch.delete({
       where: {
         id: searchId,
       },

@@ -9,6 +9,7 @@ import { HomeData, PropertyDetail } from '@starter/api-interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { SearchService } from '../../shared/services/search.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 export interface MarkersInterface {
   position: { lat: number; lng: number };
@@ -64,12 +65,16 @@ export class SearchComponent implements OnInit, OnDestroy {
     private store: Store,
     private searchService: SearchService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.getQueryParams();
-    this.saveSearch();
+    // if(this.authService.getToken()) {
+    //   console.log('we get here')
+    // }
+    // this.saveSearch();
 
     this.homeDataSub$ = this.store
       .select(selectHomeData)
@@ -117,19 +122,24 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   addMarkers() {
+   console.log(this.homes)
     for (const [index, home] of this.homes.entries()) {
-      
-      this.markers.push({
-        position: { lat: home.location.address.coordinate.lat, lng: home.location.address.coordinate.lon },
-        label: {
-          color: 'red',
-          text: 'This is a marker label',
-        },
-        title: home.list_price.toString(),
-        options: {
-          animation: google.maps.Animation.DROP,
-        },
-      });
+    
+      if(typeof home.location.address.coordinate?.lat === 'number' ) {
+        console.log(home)
+        this.markers.push({
+          position: { lat: home.location.address.coordinate.lat, lng: home.location.address.coordinate.lon },
+          label: {
+            color: 'red',
+            text: 'This is a marker label',
+          },
+          title: home.list_price.toString(),
+          options: {
+            animation: google.maps.Animation.DROP,
+          },
+        });
+      } 
+
     }
   }
 
@@ -162,7 +172,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         height: '900px',
         data: {
           address: formattedAddress,
-          photo: formattedPath.primary_photo.href,
+          photo: formattedPath.primary_photo?.href,
           price: formattedPath.list_price,
           beds: formattedPath.description.beds,
           bath: formattedPath.description.baths_full,

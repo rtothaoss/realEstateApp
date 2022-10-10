@@ -2,10 +2,10 @@
   <div class="w-full md:w-7/12 overflow-y-scroll mb-2">
     <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
       <div class="col-span-2">
-        <img #mainImageRef src="{{ data.photo }}" class="p-2" (click)="showImage(mainImageRef)"  />
+        <img #mainImageRef src="{{ data.photo || defaultHouse  }}" class="p-2, {{!data.photo ? 'min-w-full min-h-full' : ''}}" (click)="showImage(mainImageRef)"  />
       </div>
       <div *ngFor="let photos of data.photos | slice: 1; let i = index">
-        <img #imageRef src="{{ photos['href'] }}" class="p-2 w-[275px] h-[187px] object-cover" (click)="showImage(imageRef)"/>
+        <img #imageRef src="{{ photos['href']}} " class="p-2 w-[275px] h-[187px] object-cover" (click)="showImage(imageRef)"/>
       </div>
     </div>
   </div>
