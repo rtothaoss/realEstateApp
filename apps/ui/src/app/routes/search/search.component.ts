@@ -71,10 +71,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getQueryParams();
-    // if(this.authService.getToken()) {
-    //   console.log('we get here')
-    // }
-    // this.saveSearch();
+    if(this.authService.getToken()) {
+      this.saveSearch();
+    }
 
     this.homeDataSub$ = this.store
       .select(selectHomeData)
@@ -122,11 +121,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   addMarkers() {
-   console.log(this.homes)
+ 
     for (const [index, home] of this.homes.entries()) {
     
       if(typeof home.location.address.coordinate?.lat === 'number' ) {
-        console.log(home)
+     
         this.markers.push({
           position: { lat: home.location.address.coordinate.lat, lng: home.location.address.coordinate.lon },
           label: {

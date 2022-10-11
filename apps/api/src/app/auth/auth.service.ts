@@ -51,7 +51,7 @@ export class AuthService {
   async signToken(user: UserEntity): Promise<UserEntity> {
     const payload = {
       sub: user.id,
-      email: user.email,
+      email: user.email
     };
 
     const token = await this.jwtSvc.signAsync(payload, {
@@ -63,7 +63,7 @@ export class AuthService {
 
     return {
       ...user,
-      accessToken: token,
+      accessToken: token
     };
   }
 }

@@ -14,6 +14,13 @@ export class UserEffects {
       mergeMap((data) =>
         this.authService.login(data.user).pipe(
           map((user) => {
+            
+            //Add Correct 60m token expiration here
+            
+            const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+            console.log(expirationDate)
+            localStorage.setItem('expirationTime', JSON.stringify(expirationDate))
+
             return UserActions.loginSuccess({ user });
           }),
           catchError((err) => {

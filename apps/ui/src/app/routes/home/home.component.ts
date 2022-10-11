@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private _route: ActivatedRoute,
     private _router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {

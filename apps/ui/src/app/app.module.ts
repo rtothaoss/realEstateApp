@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { localStorageSync } from 'ngrx-store-localstorage';
-import { AuthInterceptor } from '../app/shared/services/auth-interceptor.service'
+import { AuthInterceptor } from '../app/shared/services/auth-interceptor.service';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { userReducer, msgReducer, AppState, UserEffects, searchReducer, SearchEffects } from './state';
@@ -16,12 +16,25 @@ import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-
-
-const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer, search: searchReducer};
+const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer, search: searchReducer };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  let shouldRehydrate;
+  
+  const expirationToken = JSON.parse(localStorage.getItem('expirationTime') || '{}');
+  if (expirationToken === '{}') {
+    shouldRehydrate = false;
+  }
+
+  const newDate = new Date(expirationToken);
+  const now = new Date();
+
+  if (now > newDate) {
+    shouldRehydrate = false;
+  } else {
+    shouldRehydrate = true;
+  }
+
   return localStorageSync({
     keys: [
       {
@@ -29,7 +42,9 @@ export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionRedu
       },
     ],
     storageKeySerializer: (key: string) => `starter-${key}`,
-    rehydrate: true,
+    rehydrate: shouldRehydrate,
+
+    //Add rehydrate ternary statement to see if token is beyond expiration date
   })(reducer);
 }
 const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
@@ -57,8 +72,8 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
