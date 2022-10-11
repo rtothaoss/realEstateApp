@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Login, UserUI } from '@starter/api-interfaces';
+import { Store } from '@ngrx/store';
+import { selectUser, logoutUser, showMsg } from '../../state'
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,11 @@ import { Login, UserUI } from '@starter/api-interfaces';
 export class AuthService {
   baseUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private http: HttpClient) {}
+  private tokenExpirationTimer: any;
+
+  user$ = this.store.select(selectUser);
+
+  constructor(private http: HttpClient, private store: Store) {}
 
   getToken() {
     const userData = localStorage.getItem('starter-user');
@@ -40,8 +46,20 @@ export class AuthService {
   }
 
   //Add setLogoutTimer Here
+  setLogoutTimer(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.store.dispatch(logoutUser());
+    }, expirationDuration)
+}
 
   //Add clearLogoutTimer Here
+
+  clearLogoutTimer() {
+    if(this.tokenExpirationTimer) {
+        clearTimeout(this.tokenExpirationTimer);
+        this.tokenExpirationTimer = null;
+    }
+}
 
   login(data: Login) {
     return this.http.post<UserUI>(`${this.baseUrl}/login`, data);

@@ -5,6 +5,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { selectUser, logoutUser, showMsg } from '../../../../state';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'starter-nav',
@@ -24,7 +25,7 @@ export class NavComponent {
 
   open = false;
 
-  constructor(private breakpointObserver: BreakpointObserver, private store: Store) {}
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store, private authService: AuthService) {}
 
   toggle(trigger: CdkOverlayOrigin) {
     this.triggerOrigin = trigger;
@@ -33,6 +34,7 @@ export class NavComponent {
 
   logout(): void {
     this.store.dispatch(logoutUser());
+    this.authService.clearLogoutTimer();
     this.store.dispatch(showMsg({ msg: { message: 'You have been logged out!' } }));
   }
 }
