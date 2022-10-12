@@ -43,7 +43,7 @@ export class SaveHomeDto {
     @IsNotEmpty()
     parking: string
 
-    @IsInt()
+   @IsInt()
     @IsNotEmpty()
     lot: number
 

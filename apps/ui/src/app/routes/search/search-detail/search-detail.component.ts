@@ -105,7 +105,7 @@ export class SearchDetailComponent {
   }
 
   onSave() {
-    this.searchService.saveHouse();
+    this.searchService.saveHouse("body");
   }
 
   onShare() {

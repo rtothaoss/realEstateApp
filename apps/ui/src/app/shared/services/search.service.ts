@@ -35,12 +35,12 @@ export class SearchService {
     return this.http.get<any>('https://us-real-estate.p.rapidapi.com/v2/property-detail', options);
   }
 
-  saveHouse() {
-    console.log('this house was saved');
+  saveHouse(body: any) {
+    return this.http.post(`${this.baseUrl}/savedhomes`, body);
   }
 
   savedHomes() {
-    console.log('this returns saved homes');
+    return this.http.get<any>(`${this.baseUrl}/savedhomes`);
   }
 
   addSearch(location: string) {
