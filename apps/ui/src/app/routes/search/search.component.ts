@@ -81,6 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((homeData) => {
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
+          console.log(this.homes)
           this.getData({pageIndex: this.page, pageSize: this.size});
           this.addMarkers();
           this.loadingSubject.next(true);
@@ -151,6 +152,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     let formattedPath = this.homes[i]
     let propertyID = +formattedPath.property_id;
+    
     let formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
 
     if(type === 'card') {
@@ -185,6 +187,11 @@ export class SearchComponent implements OnInit, OnDestroy {
           propertyHistory: this.propertyDetail.property_history,
           mortgageInfo: this.propertyDetail.mortgage.estimate,
           schools: this.propertyDetail.schools,
+          propertyID: propertyID,
+          type: this.propertyDetail.display_property_type,
+          yearBuilt: this.propertyDetail.prop_common.year_built,
+          parking: this.propertyDetail.prop_common.garage,
+          lot: this.propertyDetail.prop_common.lot_sqft
         },
       });
 

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { type } from 'os';
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
 
@@ -66,6 +67,11 @@ export interface DialogData {
     student_count: number;
     student_teacher_ration: number;
   }>;
+  propertyID: number;
+  type: string;
+  yearBuilt: number;
+  parking: number;
+  lot: number;
 }
 
 @Component({
@@ -105,7 +111,24 @@ export class SearchDetailComponent {
   }
 
   onSave() {
-    this.searchService.saveHouse("body");
+
+    const body = {
+      price: this.data.price,
+      beds: this.data.beds,
+      bath: this.data.bath,
+      sqft: this.data.sqft,
+      type: this.data.type,
+      yearBuilt: this.data.yearBuilt,
+      address: this.data.address,
+      heating: "Central, Zoned",
+      cooling: "Ceiling Fan(s), Central Ai...",
+      parking: this.data.parking,
+      lot: this.data.lot,
+      image: this.data.photo,
+      propertyId: this.data.propertyID
+    }
+
+    this.searchService.saveHouse(body).subscribe(details => console.log(details));
   }
 
   onShare() {

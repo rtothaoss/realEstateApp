@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsInt } from "class-validator";
+import { IsNotEmpty, IsString, IsInt, IsNumber } from "class-validator";
 
 export class SaveHomeDto {
 
@@ -43,18 +43,16 @@ export class SaveHomeDto {
     @IsNotEmpty()
     parking: string
 
-   @IsInt()
-    @IsNotEmpty()
-    lot: number
-
     @IsInt()
     @IsNotEmpty()
-    pricePerSqft: number
+    lot: number
 
     @IsString()
     @IsNotEmpty()
     image: string
 
-  
+    @IsNumber()
+    @IsNotEmpty()
+    propertyId: number
    
 }

@@ -48,8 +48,8 @@ model SavedHome {
   cooling String
   parking String
   lot Int
-  pricePerSqft Int
   image String
+  propertyId Int
   userId Int
   user   User @relation(fields: [userId], references: [id])
   @@map("savedhomes")

@@ -36,6 +36,7 @@ export class SearchService {
   }
 
   saveHouse(body: any) {
+    console.log(body)
     return this.http.post(`${this.baseUrl}/savedhomes`, body);
   }
 

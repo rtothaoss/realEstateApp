@@ -35,7 +35,7 @@ export class SavedHomesComponent implements OnInit{
 
   
 
-  openDialog(ref: any) {
+  openDialog(propertyID: number) {
 
 
     const dialogRef = this.dialog.open(SearchDetailComponent, {
