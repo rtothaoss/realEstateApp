@@ -25,7 +25,7 @@ export class RegisterComponent {
       if (user.id) {
         this.loadingSubject.next(false);
         this.store.dispatch(showMsg({ msg: { message: 'You have been logged in!' } }));
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/']);
       }
     })
   );

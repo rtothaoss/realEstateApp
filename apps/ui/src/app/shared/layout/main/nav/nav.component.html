@@ -9,6 +9,16 @@
     </div>
     <div>
       <button
+      mat-button
+      *ngIf="user.id"
+      class="login-btn text-black invisible sm:visible"
+      data-cy="login"
+      cdkOverlayOrigin
+      #trigger="cdkOverlayOrigin"
+      routerLink="dashboard">
+      Dashboard
+    </button>
+      <button
         mat-button
         *ngIf="!user.id"
         class="login-btn text-black invisible sm:visible"

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Login, UserUI } from '@starter/api-interfaces';
 import { Store } from '@ngrx/store';
-import { selectUser, logoutUser, showMsg } from '../../state'
+import { selectUser, logoutUser } from '../../state'
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +28,12 @@ export class AuthService {
     return token;
   }
 
+  get isLoggedIn(): boolean {
+    const authToken = this.getToken()
+   console.log('this is authToken in getIsLoggedIn() ' + authToken)
+    return authToken !== undefined ? true : false
+  }
+
   verifyTokenExpirationRemoval() {
     const expirationToken = localStorage.getItem('expirationTime');
     if (!expirationToken) {
@@ -37,6 +43,7 @@ export class AuthService {
 
     const newDate = new Date(tokenExpirationDate)
     const now = new Date();
+
 
     if(now > newDate) {
       return true
