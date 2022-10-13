@@ -44,6 +44,14 @@ export class SearchService {
     return this.http.get<any>(`${this.baseUrl}/savedhomes`);
   }
 
+  checkForSavedHome(propertyId: number) {
+    return this.http.get<any>(`${this.baseUrl}/savedhomes/${propertyId}`);
+  }
+
+  deleteHome(id: number) {
+    return this.http.delete<any>(`${this.baseUrl}/savedhomes/${id}`);
+  }
+
   addSearch(location: string) {
     const data = {
       location,

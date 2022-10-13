@@ -14,6 +14,15 @@ export class HomeService {
     });
   }
 
+  getHomeByPropertyId(userId: number, propertyId: number) {
+    return this.prisma.savedHome.findFirst({
+      where: {
+        propertyId: propertyId,
+        userId
+      }
+    })
+  }
+
   async addHome(userId: number, dto: SaveHomeDto) {
     const savedHome = await this.prisma.savedHome.create({
       data: {

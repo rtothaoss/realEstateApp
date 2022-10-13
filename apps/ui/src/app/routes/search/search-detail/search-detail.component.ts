@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { type } from 'os';
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
-
 
 export interface DialogData {
   address: string;
@@ -79,7 +77,7 @@ export interface DialogData {
   templateUrl: './search-detail.component.html',
   styleUrls: ['./search-detail.component.scss'],
 })
-export class SearchDetailComponent {
+export class SearchDetailComponent implements OnInit {
   center: google.maps.LatLngLiteral = { lat: 32.821688, lng: -96.792936 };
   options: google.maps.MapOptions = {
     zoomControl: true,
@@ -92,8 +90,15 @@ export class SearchDetailComponent {
   zoom = 15;
   totalMonthlyPayment = 0;
   defaultHouse = '../../../../assets/img/defaulthouse.jpeg';
+  saved = false;
+  homeId = 0;
 
-  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, public dialog: MatDialog, private searchService: SearchService) {
+  constructor(
+    public dialogRef: MatDialogRef<SearchDetailComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public dialog: MatDialog,
+    private searchService: SearchService
+  ) {
     this.markerPosition.lat = data.marker.lat;
     this.markerPosition.lng = data.marker.lng;
     this.center.lat = data.marker.lat;
@@ -106,29 +111,53 @@ export class SearchDetailComponent {
       data.mortgageInfo.hoa_fees;
   }
 
+  ngOnInit(): void {
+    this.searchService.checkForSavedHome(this.data.propertyID).subscribe((details) => {
+      console.log(this.data.propertyID);
+      console.log(details);
+      if (details !== null) {
+        this.saved = true;
+        this.homeId = details.id;
+        console.log(this.homeId);
+      }
+    });
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onSave() {
+  onSaveOrDelete() {
+    console.log(this.saved);
+    if (this.saved) {
+      console.log('deleting home');
+      this.searchService.deleteHome(this.homeId).subscribe((details) => {
+        console.log(details);
+        this.saved = false;
+      });
+    } else {
+      console.log('saving home');
+      const body = {
+        price: this.data.price,
+        beds: this.data.beds,
+        bath: this.data.bath,
+        sqft: this.data.sqft,
+        type: this.data.type,
+        yearBuilt: this.data.yearBuilt,
+        address: this.data.address,
+        heating: 'Central, Zoned',
+        cooling: 'Ceiling Fan(s), Central Ai...',
+        parking: this.data.parking,
+        lot: this.data.lot,
+        image: this.data.photo,
+        propertyId: this.data.propertyID,
+      };
 
-    const body = {
-      price: this.data.price,
-      beds: this.data.beds,
-      bath: this.data.bath,
-      sqft: this.data.sqft,
-      type: this.data.type,
-      yearBuilt: this.data.yearBuilt,
-      address: this.data.address,
-      heating: "Central, Zoned",
-      cooling: "Ceiling Fan(s), Central Ai...",
-      parking: this.data.parking,
-      lot: this.data.lot,
-      image: this.data.photo,
-      propertyId: this.data.propertyID
+      this.searchService.saveHouse(body).subscribe((details) => {
+        console.log(details);
+        this.saved = true;
+      });
     }
-
-    this.searchService.saveHouse(body).subscribe(details => console.log(details));
   }
 
   onShare() {
@@ -136,17 +165,16 @@ export class SearchDetailComponent {
   }
 
   showImage(ref: any) {
-    console.log(ref)
+    console.log(ref);
     const imageDialogRef = this.dialog.open(ImageDetailComponent, {
       panelClass: 'custom-dialog-container',
       data: {
-        href: ref.src
-      }
+        href: ref.src,
+      },
     });
 
-    imageDialogRef.afterClosed().subscribe(result => {
+    imageDialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
-    
   }
 }

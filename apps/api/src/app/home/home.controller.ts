@@ -26,6 +26,13 @@ export class HomeController {
     return this.homeService.getHomes(userId);
   }
 
+  @Get(':id')
+  getHomeByPropertyId(@GetUser('id') userId: number, @Param('id', ParseIntPipe) propertyId: number) {
+    
+    return this.homeService.getHomeByPropertyId(userId, propertyId)
+  }
+
+
   @Post()
   addSavedHome(@GetUser('id') userId: number, @Body() dto: SaveHomeDto) {
     return this.homeService.addHome(userId, dto);
