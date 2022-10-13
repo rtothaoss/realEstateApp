@@ -17,14 +17,14 @@ export class HomeService {
   getHomeByPropertyId(userId: number, propertyId: string) {
     return this.prisma.savedHome.findFirst({
       where: {
-        propertyId: propertyId,
+        propertyId,
         userId
       }
     })
   }
 
   async addHome(userId: number, dto: SaveHomeDto) {
-    console.log(dto.propertyId)
+    
     const savedHome = await this.prisma.savedHome.create({
       data: {
         userId,

@@ -112,13 +112,13 @@ export class SearchDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.data.propertyID)
     this.searchService.checkForSavedHome(this.data.propertyID).subscribe((details) => {
-      console.log(this.data.propertyID);
-      console.log(details);
+      
       if (details !== null) {
         this.saved = true;
         this.homeId = details.id;
-        console.log(this.homeId);
+       
       }
     });
   }
@@ -128,8 +128,7 @@ export class SearchDetailComponent implements OnInit {
   }
 
   onSaveOrDelete() {
-    console.log(this.saved);
-    console.log(this.data.propertyID)
+   
     if (this.saved) {
       console.log('deleting home');
       this.searchService.deleteHome(this.homeId).subscribe((details) => {
@@ -139,22 +138,21 @@ export class SearchDetailComponent implements OnInit {
     } else {
       console.log('saving home');
       const body = {
-        price: this.data.price,
-        beds: this.data.beds,
-        bath: this.data.bath,
-        sqft: this.data.sqft,
-        type: this.data.type,
-        yearBuilt: this.data.yearBuilt,
-        address: this.data.address,
+        price: this.data.price || 0,
+        beds: this.data.beds || 0,
+        bath: this.data.bath || 0,
+        sqft: this.data.sqft || 0,
+        type: this.data.type || 'Home',
+        yearBuilt: this.data.yearBuilt || 0,
+        address: this.data.address || '123 Address Ln',
         heating: 'Central, Zoned',
         cooling: 'Ceiling Fan(s), Central Ai...',
-        parking: this.data.parking,
-        lot: this.data.lot,
-        image: this.data.photo,
+        parking: this.data.parking || 0, 
+        lot: this.data.lot || 0,
+        image: this.data.photo || '',
         propertyId: this.data.propertyID,
       };
-      console.log(this.data.propertyID)
-      console.log(body.propertyId)
+      
       this.searchService.saveHouse(body).subscribe((details) => {
         console.log(details);
         this.saved = true;
