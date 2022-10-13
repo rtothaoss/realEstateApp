@@ -51,8 +51,8 @@ export class SaveHomeDto {
     @IsNotEmpty()
     image: string
 
-    @IsNumber()
+    @IsString()
     @IsNotEmpty()
-    propertyId: number
+    propertyId: string
    
 }

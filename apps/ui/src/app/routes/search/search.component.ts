@@ -151,13 +151,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.isDisabled = true;
 
     let formattedPath = this.homes[i]
-    let propertyID = +formattedPath.property_id;
+    let propertyID = formattedPath.property_id;
     
     let formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
 
     if(type === 'card') {
       formattedPath = this.homeData[i],
-      propertyID = +formattedPath.property_id;
+      propertyID = formattedPath.property_id;
       formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
     }
     
@@ -166,6 +166,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
       console.log(details)
+      console.log(propertyID)
       //put this in a seperate function to make things look cleaner
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {

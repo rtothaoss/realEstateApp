@@ -65,7 +65,7 @@ export interface DialogData {
     student_count: number;
     student_teacher_ration: number;
   }>;
-  propertyID: number;
+  propertyID: string;
   type: string;
   yearBuilt: number;
   parking: number;
@@ -129,6 +129,7 @@ export class SearchDetailComponent implements OnInit {
 
   onSaveOrDelete() {
     console.log(this.saved);
+    console.log(this.data.propertyID)
     if (this.saved) {
       console.log('deleting home');
       this.searchService.deleteHome(this.homeId).subscribe((details) => {
@@ -152,7 +153,8 @@ export class SearchDetailComponent implements OnInit {
         image: this.data.photo,
         propertyId: this.data.propertyID,
       };
-
+      console.log(this.data.propertyID)
+      console.log(body.propertyId)
       this.searchService.saveHouse(body).subscribe((details) => {
         console.log(details);
         this.saved = true;

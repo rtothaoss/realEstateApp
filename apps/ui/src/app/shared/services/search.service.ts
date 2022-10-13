@@ -23,9 +23,9 @@ export class SearchService {
     return this.http.get<any>('https://us-real-estate.p.rapidapi.com/v2/for-sale', options);
   }
 
-  propertyDetailApi(propID: number) {
+  propertyDetailApi(propID: string) {
     const options = {
-      params: { property_id: propID },
+      params: { property_id: +propID },
       headers: {
         'X-RapidAPI-Key': `${environment.realEstateApiKey}`,
         'X-RapidAPI-Host': 'us-real-estate.p.rapidapi.com',
@@ -44,7 +44,7 @@ export class SearchService {
     return this.http.get<any>(`${this.baseUrl}/savedhomes`);
   }
 
-  checkForSavedHome(propertyId: number) {
+  checkForSavedHome(propertyId: string) {
     return this.http.get<any>(`${this.baseUrl}/savedhomes/${propertyId}`);
   }
 

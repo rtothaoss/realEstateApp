@@ -27,7 +27,7 @@ export class HomeController {
   }
 
   @Get(':id')
-  getHomeByPropertyId(@GetUser('id') userId: number, @Param('id', ParseIntPipe) propertyId: number) {
+  getHomeByPropertyId(@GetUser('id') userId: number, @Param('id', ParseIntPipe) propertyId: string) {
     
     return this.homeService.getHomeByPropertyId(userId, propertyId)
   }
@@ -35,6 +35,7 @@ export class HomeController {
 
   @Post()
   addSavedHome(@GetUser('id') userId: number, @Body() dto: SaveHomeDto) {
+    console.log(dto.propertyId)
     return this.homeService.addHome(userId, dto);
   }
 
