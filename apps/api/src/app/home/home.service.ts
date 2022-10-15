@@ -35,10 +35,10 @@ export class HomeService {
     return savedHome;
   }
 
-  async deleteHomeById(userId: number, homeId: number) {
-    const home = await this.prisma.savedHome.findUnique({
+  async deleteHomeById(userId: number, propertyId: string) {
+    const home = await this.prisma.savedHome.findFirst({
       where: {
-        id: homeId,
+        propertyId: propertyId
       },
     });
 
@@ -46,7 +46,7 @@ export class HomeService {
 
     await this.prisma.savedHome.delete({
       where: {
-        id: homeId,
+        id: home.id,
       },
     });
   }

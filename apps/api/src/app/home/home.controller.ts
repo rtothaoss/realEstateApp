@@ -41,7 +41,7 @@ export class HomeController {
 
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  deleteHomeById(@GetUser('id') userId: number, @Param('id', ParseIntPipe) homeId: number) {
-    return this.homeService.deleteHomeById(userId, homeId);
+  deleteHomeById(@GetUser('id') userId: number, @Param('id') propertyId: string) {
+    return this.homeService.deleteHomeById(userId, propertyId);
   }
 }

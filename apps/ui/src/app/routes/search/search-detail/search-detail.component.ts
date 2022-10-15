@@ -138,7 +138,7 @@ export class SearchDetailComponent implements OnInit {
     if(this.authService.getToken()) {
       if (this.saved) {
         console.log('deleting home');
-        this.searchService.deleteHome(this.homeId).subscribe((details) => {
+        this.searchService.deleteHome(this.data.propertyID.toString()).subscribe((details) => {
           console.log(details);
           this.saved = false;
         });
