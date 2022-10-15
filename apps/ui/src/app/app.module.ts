@@ -16,11 +16,12 @@ import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer, search: searchReducer };
 
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   let shouldRehydrate;
-  
+
   const expirationToken = JSON.parse(localStorage.getItem('expirationTime') || '{}');
   if (expirationToken === '{}') {
     shouldRehydrate = false;

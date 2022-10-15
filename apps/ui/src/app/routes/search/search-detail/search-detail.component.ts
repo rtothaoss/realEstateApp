@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from '../../../shared/services/auth.service';
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
+import { LoginModalComponent } from '../login-modal/login-modal.component';
 
 export interface DialogData {
   address: string;
@@ -97,7 +99,8 @@ export class SearchDetailComponent implements OnInit {
     public dialogRef: MatDialogRef<SearchDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dialog: MatDialog,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private authService: AuthService
   ) {
     this.markerPosition.lat = data.marker.lat;
     this.markerPosition.lng = data.marker.lng;
@@ -112,15 +115,18 @@ export class SearchDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data.propertyID)
-    this.searchService.checkForSavedHome(this.data.propertyID).subscribe((details) => {
+    
+    if(this.authService.getToken()) {
+      this.searchService.checkForSavedHome(this.data.propertyID).subscribe((details) => {
       
-      if (details !== null) {
-        this.saved = true;
-        this.homeId = details.id;
-       
-      }
-    });
+        if (details !== null) {
+          this.saved = true;
+          this.homeId = details.id;
+         
+        }
+      });
+    }
+ 
   }
 
   onNoClick(): void {
@@ -128,36 +134,42 @@ export class SearchDetailComponent implements OnInit {
   }
 
   onSaveOrDelete() {
-   
-    if (this.saved) {
-      console.log('deleting home');
-      this.searchService.deleteHome(this.homeId).subscribe((details) => {
-        console.log(details);
-        this.saved = false;
-      });
+
+    if(this.authService.getToken()) {
+      if (this.saved) {
+        console.log('deleting home');
+        this.searchService.deleteHome(this.homeId).subscribe((details) => {
+          console.log(details);
+          this.saved = false;
+        });
+      } else {
+        console.log('saving home');
+        const body = {
+          price: this.data.price || 0,
+          beds: this.data.beds || 0,
+          bath: this.data.bath || 0,
+          sqft: this.data.sqft || 0,
+          type: this.data.type || 'Home',
+          yearBuilt: this.data.yearBuilt || 0,
+          address: this.data.address || '123 Address Ln',
+          heating: 'Central, Zoned',
+          cooling: 'Ceiling Fan(s), Central Ai...',
+          parking: this.data.parking || '0', 
+          lot: this.data.lot || 0,
+          image: this.data.photo || '',
+          propertyId: this.data.propertyID,
+        };
+        
+        this.searchService.saveHouse(body).subscribe((details) => {
+          console.log(details);
+          this.saved = true;
+        });
+      }
     } else {
-      console.log('saving home');
-      const body = {
-        price: this.data.price || 0,
-        beds: this.data.beds || 0,
-        bath: this.data.bath || 0,
-        sqft: this.data.sqft || 0,
-        type: this.data.type || 'Home',
-        yearBuilt: this.data.yearBuilt || 0,
-        address: this.data.address || '123 Address Ln',
-        heating: 'Central, Zoned',
-        cooling: 'Ceiling Fan(s), Central Ai...',
-        parking: this.data.parking || 0, 
-        lot: this.data.lot || 0,
-        image: this.data.photo || '',
-        propertyId: this.data.propertyID,
-      };
-      
-      this.searchService.saveHouse(body).subscribe((details) => {
-        console.log(details);
-        this.saved = true;
-      });
+      this.showLogin();
     }
+   
+   
   }
 
   onShare() {
@@ -177,4 +189,18 @@ export class SearchDetailComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  showLogin() {
+    const loginDialogRef = this.dialog.open(LoginModalComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        // href: ref.src,
+      },
+    });
+
+    loginDialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  
 }

@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'starter-footer',
@@ -7,5 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
+
+  constructor(public router: Router) {}
   footerDate = new Date().getFullYear();
 }

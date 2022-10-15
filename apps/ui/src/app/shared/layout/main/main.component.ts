@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs';
 import { selectMsg } from '../../../state';
@@ -26,9 +27,14 @@ export class MainComponent implements OnInit {
       );
     })
   );
-  constructor(private store: Store, private snackBar: MatSnackBar) {}
+
+
+  constructor(private store: Store, private snackBar: MatSnackBar) {
+   
+  }
 
   ngOnInit(): void {
     this.error$.subscribe();
   }
+
 }

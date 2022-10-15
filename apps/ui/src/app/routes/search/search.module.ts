@@ -9,10 +9,11 @@ import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
-import {MatPaginatorModule} from '@angular/material/paginator'
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoginModalComponent } from './login-modal/login-modal.component';
 
 @NgModule({
-  declarations: [SearchComponent, SearchDetailComponent, ImageDetailComponent],
+  declarations: [SearchComponent, SearchDetailComponent, ImageDetailComponent, LoginModalComponent],
   imports: [
     CommonModule,
     SearchRoutingModule,
@@ -21,7 +22,7 @@ import {MatPaginatorModule} from '@angular/material/paginator'
     HttpClientJsonpModule,
     HttpClientModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   exports: [SearchComponent],
 })

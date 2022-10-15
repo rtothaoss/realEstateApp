@@ -81,7 +81,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       .subscribe((homeData) => {
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
-          console.log(this.homes)
+        
           this.getData({pageIndex: this.page, pageSize: this.size});
           this.addMarkers();
           this.loadingSubject.next(true);
