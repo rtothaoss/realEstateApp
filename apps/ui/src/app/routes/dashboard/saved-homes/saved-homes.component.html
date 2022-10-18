@@ -8,10 +8,11 @@
       <div *ngFor="let data of location; let i = index"> 
       <div
       #cardRef
-      class="h-auto w-[80%] rounded-xl ml-2 mt-2 cursor-pointer justify-center shadow-xl transform transition duration-500 hover:scale-105"
+      class="h-[575px] w-[80%] rounded-xl ml-2 mb-6 cursor-pointer justify-center shadow-xl transform transition duration-500 hover:scale-105"
       (click)="openDialog(data.propertyId)"
       >
-      <img src="{{ data.image || defaultHouse }}" class="rounded-t-xl" />
+      <img src="{{closedHeart}}" class="absolute top-2 right-2" (click)="unSave(data.propertyId)"/>
+      <img src="{{ data.image || defaultHouse }}" class="rounded-t-xl object-cover w-full h-[250px]" />
       <div class="ml-4 pb-2">
         
         <p class="mt-2 text-2xl">${{ data.price || '$1,234' | number }}</p>
