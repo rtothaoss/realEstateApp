@@ -3,6 +3,7 @@
 </div>
 <div class="mt-12">
   <div *ngIf="loading$ | async">
+    <div *ngIf="!locations?.length"><p class="text-2xl text-center">You have no saved searches.</p></div>
     <div *ngFor="let data of locations; let i = index">
       <div class="w-4/6 m-auto h-28 bg-white mb-6 border-2">
         <div class="flex justify-between h-full">

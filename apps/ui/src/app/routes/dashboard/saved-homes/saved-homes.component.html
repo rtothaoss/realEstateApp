@@ -4,6 +4,7 @@
   <div class="pl-44 pr-44">
   
     <div *ngIf="loading$ | async; else loadingBlock">
+      <div *ngIf="!location?.length"><p class="text-2xl text-center">You have no saved homes.</p></div>
     <div class="grid grid-cols-3 grid-flow-row auto-rows-min mt-8">
       <div *ngFor="let data of location; let i = index"> 
       <div

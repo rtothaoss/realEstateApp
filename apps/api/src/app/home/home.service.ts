@@ -31,7 +31,6 @@ export class HomeService {
         ...dto
       },
     });
-    console.log(savedHome)
     return savedHome;
   }
 
