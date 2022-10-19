@@ -1,23 +1,23 @@
 <ng-container *ngIf="user$ | async as user">
   <mat-toolbar>
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <!-- fix this centering workaround -->
-    <div class="ml-36 invisible sm:visible">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    </button>
+    <!-- fix this centering workaround -->
+    <div class="ml-36">
       <button routerLink="/">Real Estate App</button>
     </div>
-    <div>
+    <div class="hidden sm:block">
       <button
-      mat-button
-      *ngIf="user.id"
-      class="login-btn text-black invisible sm:visible"
-      data-cy="login"
-      cdkOverlayOrigin
-      #trigger="cdkOverlayOrigin"
-      routerLink="dashboard">
-      Dashboard
-    </button>
+        mat-button
+        *ngIf="user.id"
+        class="login-btn text-black invisible sm:visible"
+        data-cy="login"
+        cdkOverlayOrigin
+        #trigger="cdkOverlayOrigin"
+        routerLink="dashboard">
+        Dashboard
+      </button>
       <button
         mat-button
         *ngIf="!user.id"
@@ -63,6 +63,7 @@
       <mat-nav-list>
         <a mat-list-item routerLink=""><mat-icon class="icon-right">home</mat-icon> Home</a>
         <a mat-list-item routerLink="dashboard"><mat-icon class="icon-right">dashboard</mat-icon> Dashboard</a>
+        <a mat-list-item><mat-icon class="icon-right">login</mat-icon>Login</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

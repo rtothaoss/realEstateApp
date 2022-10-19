@@ -1,5 +1,5 @@
 <div class="relative">
-  <div class="md:fixed w-full md:w-7/12 min-h-screen top-18 left-0">
+  <div class="hidden md:block md:fixed w-full md:w-7/12 min-h-screen top-18 left-0">
     <google-map height="93vh" width="99%" [center]="center" [zoom]="zoom" [options]="options">
       <map-marker
         #somemarker="mapMarker"
@@ -25,7 +25,7 @@
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
     <div *ngIf="loading$ | async; else loadingBlock">
-      <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
+      <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homeData; let i = index">
           <mat-card
             #cardRef

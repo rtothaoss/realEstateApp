@@ -1,14 +1,14 @@
 
-<div>
-  <p class="text-4xl font-semibold pl-40 pt-4">Account Settings</p>
+<div class="text-center sm:text-start">
+  <p class="text-4xl font-semibold sm:pl-40 pt-4">Account Settings</p>
 </div>
 <div class="mt-12">
-  <div class="w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="profile()">
+  <div class="w-5/6 sm:w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="profile()">
     <div class="flex justify-between h-full">
       <div class="flex pl-20 items-center justify-center">
         <div>
-            <p class="font-semibold text-xl">Profile</p>
-            <p>Personalize your account and update your sign in preferences.</p>
+            <p class="font-semibold sm:text-xl">Profile</p>
+            <p class="text-sm">Personalize your account and update your sign in preferences.</p>
         </div>
         
       </div>
@@ -17,12 +17,12 @@
       </div>
     </div>
   </div>
-  <div class="w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="notifications()">
+  <div class="w-5/6 sm:w-4/6 m-auto h-32 bg-white mb-10 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="notifications()">
     <div class="flex justify-between h-full">
       <div class="flex pl-20 items-center justify-center">
         <div>
-            <p class="font-semibold text-xl">Notifications</p>
-            <p>Manage the content and frequency of your Zillow emails.</p>
+            <p class="font-semibold sm:text-xl">Notifications</p>
+            <p class="text-sm">Manage the content and frequency of your Zillow emails.</p>
         </div>
         
       </div>
@@ -31,12 +31,13 @@
       </div>
     </div>
   </div>
-  <div class="w-4/6 m-auto h-32 bg-white mb-32 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="documentPreferences()">
+  <div class="w-5/6 sm:w-4/6 m-auto h-32 bg-white mb-32 transform transition duration-500 hover:scale-105 cursor-pointer border-2" (click)="documentPreferences()">
     <div class="flex justify-between h-full">
       <div class="flex pl-20 items-center justify-center">
         <div>
-            <p class="font-semibold text-xl">Document Preferences</p>
-            <p>View your legal documents, and manage your preferences for receiving and signing documents</p>
+            <p class="font-semibold sm:text-xl">Document Preferences</p>
+            <p class="text-sm">View your legal documents, and manage your preferences...</p>
+            <p class="hidden sm:visible">View your legal documents, and manage your preferences for receiving and signing documents</p>
         </div>
         
       </div>
