@@ -202,5 +202,9 @@ export class SearchDetailComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  closeDialog() {
+    this.dialog.closeAll();
+  }
   
 }

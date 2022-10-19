@@ -9,11 +9,13 @@
       </div>
     </div>
   </div>
-  <div class="w-full sm:w-1/2 pl-4 overflow-y-scroll">
-    <div class="flex justify-end border-b-2">
-      <mat-icon class="text-xl">save_alt</mat-icon>
+  <div class="w-full sm:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
+
+    <div class="flex justify-start sm:justify-end border-b-2 pr-4 sm:pr-0">
+      <mat-icon class="visible sm:invisible mr-36" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
+      <mat-icon class="invisible sm:visible text-xl">save_alt</mat-icon>
       <p (click)="onSaveOrDelete()" class="cursor-pointer text-lg hover:underline">{{!saved ? 'Save' : 'Saved'}}</p>
-      <mat-icon class="text-xl ml-3">share</mat-icon>
+      <mat-icon class="invisible sm:visible text-xl sm:ml-3">share</mat-icon>
       <p (click)="onShare()" class="cursor-pointer text-lg hover:underline">Share</p>
     </div>
     <!-- image carousel goes here in the future -->

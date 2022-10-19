@@ -172,6 +172,7 @@ export class SearchComponent implements OnInit, OnDestroy {
       const dialogRef = this.dialog.open(SearchDetailComponent, {
         width: '1100px',
         height: '900px',
+        panelClass: 'custom-dialog-container',
         data: {
           address: formattedAddress,
           photo: formattedPath.primary_photo?.href,
