@@ -25,7 +25,7 @@
   </div>
   <div class="w-full md:w-5/12 ml-auto h-96">
     <div *ngIf="loading$ | async; else loadingBlock">
-      <div class="grid grid-cols-1 sm:grid-cols-2 grid-flow-row auto-rows-min">
+      <div class="grid grid-cols-1 lg:grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homeData; let i = index">
           <mat-card
             #cardRef

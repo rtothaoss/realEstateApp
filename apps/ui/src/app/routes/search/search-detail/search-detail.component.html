@@ -1,5 +1,5 @@
 <div class="flex h-full overflow-hidden">
-  <div class="hidden sm:flex w-full md:w-7/12 overflow-y-scroll mb-2">
+  <div class="hidden lg:flex w-full md:w-7/12 overflow-y-scroll mb-2">
     <div class="grid grid-cols-2 grid-flow-row auto-rows-min">
       <div class="col-span-2">
         <img #mainImageRef src="{{ data.photo || defaultHouse  }}" class="p-2, {{!data.photo ? 'min-w-full min-h-full' : ''}}" (click)="showImage(mainImageRef)"  />
@@ -9,10 +9,10 @@
       </div>
     </div>
   </div>
-  <div class="w-full sm:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
+  <div class="w-full lg:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
 
     <div class="flex justify-start sm:justify-end border-b-2 pr-4 sm:pr-0">
-      <mat-icon class="visible sm:invisible mr-36" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
+      <mat-icon class="visible lg:invisible mr-36 cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
       <mat-icon class="invisible sm:visible text-xl">save_alt</mat-icon>
       <p (click)="onSaveOrDelete()" class="cursor-pointer text-lg hover:underline">{{!saved ? 'Save' : 'Saved'}}</p>
       <mat-icon class="invisible sm:visible text-xl sm:ml-3">share</mat-icon>
@@ -21,8 +21,44 @@
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->
-    <div class="sm:hidden pt-2">
-      <img #mainImageRef src="{{ data.photo || defaultHouse  }}" class="p-2, {{!data.photo ? 'min-w-full min-h-full' : ''}}" (click)="showImage(mainImageRef)"  />
+    <div class="lg:hidden pt-2">
+      
+      <div class="navigation-wrapper">
+        <div class="keen-slider keen-slider--vertical" #sliderRef>
+          <div *ngFor="let photos of data.photos; let i = index">
+            <div class="keen-slider__slide"><img #imageRef src="{{ photos['href']  }}" class="p-2, {{!photos['href'] ? 'min-w-full ' : ''}}" (click)="showImage(imageRef)"  /></div>
+          </div>
+          
+         
+        </div>
+        <svg
+          [ngClass]="
+            'arrow arrow--left ' + (currentSlide === 0 ? 'arrow--disabled' : '')
+          "
+          (click)="slider.prev()"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"
+          />
+        </svg>
+        <svg
+          *ngIf="slider"
+          [ngClass]="
+            'arrow arrow--right ' +
+            (slider.track.details.slides.length - 1 === currentSlide
+              ? 'arrow--disabled'
+              : '')
+          "
+          (click)="slider.next()"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path d="M5 3l3.057-3 11.943 12-11.943 12-3.057-3 9-9z" />
+        </svg>
+      </div>
+
     </div>
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->

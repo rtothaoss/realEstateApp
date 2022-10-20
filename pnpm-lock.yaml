@@ -61,6 +61,7 @@ specifiers:
   jest: 28.1.3
   jest-environment-jsdom: 28.1.1
   jest-preset-angular: 12.2.2
+  keen-slider: ^6.8.3
   ngrx-store-localstorage: ^14.0.0
   nx: 14.6.4
   passport: ^0.6.0
@@ -107,6 +108,7 @@ dependencies:
   class-transformer: 0.5.1
   class-validator: 0.13.2
   husky: 8.0.1
+  keen-slider: 6.8.3
   ngrx-store-localstorage: 14.0.0_hqflrcfir66pt5agpunjcfvgei
   passport: 0.6.0
   passport-jwt: 4.0.0
@@ -8068,6 +8070,10 @@ packages:
     dependencies:
       source-map-support: 0.5.21
     dev: true
+
+  /keen-slider/6.8.3:
+    resolution: {integrity: sha512-tJFokyUiHAtbGGQHnNMm3MLCpOm+z1JZsaOOMVnzTYAfAqLDT/zI/cE1mf82Bxmp1uHSIeUUkH+EZGzRQrSO/w==}
+    dev: false
 
   /kind-of/6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}

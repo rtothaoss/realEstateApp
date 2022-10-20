@@ -1,9 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import KeenSlider, { KeenSliderInstance } from 'keen-slider';
 import { AuthService } from '../../../shared/services/auth.service';
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+
 
 export interface DialogData {
   address: string;
@@ -77,9 +79,10 @@ export interface DialogData {
 @Component({
   selector: 'starter-search-detail',
   templateUrl: './search-detail.component.html',
-  styleUrls: ['./search-detail.component.scss'],
+  styleUrls: ['../../../../../../../node_modules/keen-slider/keen-slider.css', './search-detail.component.scss'],
 })
-export class SearchDetailComponent implements OnInit {
+export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
+
   center: google.maps.LatLngLiteral = { lat: 32.821688, lng: -96.792936 };
   options: google.maps.MapOptions = {
     zoomControl: true,
@@ -94,6 +97,13 @@ export class SearchDetailComponent implements OnInit {
   defaultHouse = '../../../../assets/img/defaulthouse.jpeg';
   saved = false;
   homeId = 0;
+
+
+  @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>
+
+  currentSlide = 0
+ 
+  slider!: KeenSliderInstance
 
   constructor(
     public dialogRef: MatDialogRef<SearchDetailComponent>,
@@ -127,6 +137,18 @@ export class SearchDetailComponent implements OnInit {
       });
     }
  
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.slider = new KeenSlider(this.sliderRef.nativeElement, {
+        initial: this.currentSlide,
+        slideChanged: (s) => {
+          this.currentSlide = s.track.details.rel
+        },
+      })
+
+    })
   }
 
   onNoClick(): void {
@@ -205,6 +227,10 @@ export class SearchDetailComponent implements OnInit {
 
   closeDialog() {
     this.dialog.closeAll();
+  }
+
+  ngOnDestroy() {
+    if (this.slider) this.slider.destroy()
   }
   
 }
