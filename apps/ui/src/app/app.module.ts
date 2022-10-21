@@ -15,6 +15,7 @@ import { userReducer, msgReducer, AppState, UserEffects, searchReducer, SearchEf
 import { environment } from '../environments/environment';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const reducers: ActionReducerMap<AppState> = { user: userReducer, msg: msgReducer, search: searchReducer };
@@ -61,6 +62,7 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     HttpClientModule,
     GoogleMapsModule,
     HttpClientJsonpModule,
+    MatDialogModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([UserEffects, SearchEffects]),
     StoreDevtoolsModule.instrument({

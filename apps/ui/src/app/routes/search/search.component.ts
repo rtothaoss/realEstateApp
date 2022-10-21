@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject, Observable, skip, Subscription, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { MapGeocoder, GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
@@ -30,6 +30,7 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
+ 
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
@@ -92,6 +93,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
     
   }
+
 
   getQueryParams() {
     this.route.queryParams.subscribe((params) => {

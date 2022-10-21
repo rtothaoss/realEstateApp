@@ -1,6 +1,6 @@
 <starter-nav>
-  <main class="main bg-gray-100">
+  <main class="main {{background}} {{height}}">
     <router-outlet></router-outlet>
   </main>
-  <starter-footer></starter-footer>
+  <starter-footer *ngIf="showFooter"></starter-footer>
 </starter-nav>

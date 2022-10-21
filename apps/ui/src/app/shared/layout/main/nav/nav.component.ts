@@ -7,6 +7,8 @@ import { selectUser, logoutUser, showMsg } from '../../../../state';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginModalComponent } from '../../../../routes/search/login-modal/login-modal.component';
 
 @Component({
   selector: 'starter-nav',
@@ -26,7 +28,7 @@ export class NavComponent {
 
   open = false;
 
-  constructor(private breakpointObserver: BreakpointObserver, private store: Store, private authService: AuthService, private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver, private store: Store, private authService: AuthService, private router: Router, public dialog: MatDialog) {}
 
   toggle(trigger: CdkOverlayOrigin) {
     this.triggerOrigin = trigger;
@@ -41,5 +43,18 @@ export class NavComponent {
       this.router.navigate(['/'])
     }
     
+  }
+
+  showLogin() {
+    const loginDialogRef = this.dialog.open(LoginModalComponent, {
+      panelClass: 'custom-dialog-container',
+      data: {
+        // href: ref.src,
+      },
+    });
+
+    loginDialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
