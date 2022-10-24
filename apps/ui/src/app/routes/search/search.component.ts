@@ -10,6 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { SearchService } from '../../shared/services/search.service';
 import { AuthService } from '../../shared/services/auth.service';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState
+} from '@angular/cdk/layout';
 
 export interface MarkersInterface {
   position: { lat: number; lng: number };
@@ -30,6 +35,10 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
+
+  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(
+    Breakpoints.XSmall
+  );
  
   @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
@@ -67,7 +76,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     private searchService: SearchService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private breakpointObserver: BreakpointObserver
   ) {}
 
   ngOnInit() {
@@ -172,8 +182,10 @@ export class SearchComponent implements OnInit, OnDestroy {
       //put this in a seperate function to make things look cleaner
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {
-        width: '1100px',
-        height: '900px',
+        maxHeight: '100vh',
+        maxWidth: '100vw',
+        width: '60%',
+        height: '100%',
         panelClass: 'custom-dialog-container',
         data: {
           address: formattedAddress,
@@ -199,9 +211,17 @@ export class SearchComponent implements OnInit, OnDestroy {
         },
       });
 
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log('The dialog was closed');
+      const smallDialogSubscription = this.isExtraSmall.subscribe(size => {
+        if (size.matches) {
+          dialogRef.updateSize('100vw', '100vh');
+        } else {
+          console.log('nothing happens')
+        }
       });
+      dialogRef.afterClosed().subscribe(() => {
+        smallDialogSubscription.unsubscribe();
+      });
+
       this.isDisabled = false;
     });
   }

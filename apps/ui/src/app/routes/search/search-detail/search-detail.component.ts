@@ -5,76 +5,7 @@ import { AuthService } from '../../../shared/services/auth.service';
 import { SearchService } from '../../../shared/services/search.service';
 import { ImageDetailComponent } from '../image-detail/image-detail.component';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
-
-
-export interface DialogData {
-  address: string;
-  photo: string;
-  price: number;
-  beds: string;
-  bath: string;
-  sqft: string;
-  overview: string;
-  marker: {
-    lat: number;
-    lng: number;
-  };
-  photos: Array<Record<string, unknown>>;
-  propertyHistory: Array<{
-    datasource_name: string;
-    date: string;
-    event_name: string;
-    price: number;
-    price_changed: number;
-    price_range_max: number;
-    price_range_min: number;
-    source: string;
-    sqft: number;
-  }>;
-  mortgageInfo: {
-    down_payment: number;
-    hoa_fees: number;
-    loan_amount: number;
-    monthly_home_insurance: number;
-    monthly_mortgage_insurance: number;
-    monthly_payment: number;
-    monthly_property_taxes: number;
-    principal_and_interest: number;
-    rate: number;
-    term: number;
-    total_payment: number;
-  };
-  schools: Array<{
-    distance_in_miles: number;
-    education_levels: Array<string>;
-    funding_type: string;
-    grades: { range: { high: string; low: string } };
-    greatschools_id: string;
-    id: string;
-    lat: number;
-    location: {
-      city: string;
-      city_slug_id: string;
-      county: string;
-      postal_code: string;
-      state: string;
-      street: string;
-    };
-    lon: number;
-    name: string;
-    nces_id: string;
-    phone: string;
-    ratings: { great_schools_rating: number; parent_rating: null };
-    relevance: string;
-    student_count: number;
-    student_teacher_ration: number;
-  }>;
-  propertyID: string;
-  type: string;
-  yearBuilt: number;
-  parking: number;
-  lot: number;
-}
+import { DialogData } from '../../../../../../../libs/api-interfaces/src/lib/ui-interfaces';
 
 @Component({
   selector: 'starter-search-detail',

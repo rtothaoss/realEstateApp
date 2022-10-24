@@ -12,11 +12,11 @@
   <div class="w-full lg:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
 
     <div class="flex justify-start sm:justify-end border-b-2 pr-4 sm:pr-0">
-      <mat-icon class="visible lg:invisible mr-36 cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
+      <mat-icon class="visible lg:invisible mr-[60%] sm:mr-[68%] cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
       <mat-icon class="invisible sm:visible text-xl">save_alt</mat-icon>
       <p (click)="onSaveOrDelete()" class="cursor-pointer text-lg hover:underline">{{!saved ? 'Save' : 'Saved'}}</p>
       <mat-icon class="invisible sm:visible text-xl sm:ml-3">share</mat-icon>
-      <p (click)="onShare()" class="cursor-pointer text-lg hover:underline">Share</p>
+      <p (click)="onShare()" class="cursor-pointer text-lg hover:underline pr-2">Share</p>
     </div>
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->
@@ -98,7 +98,7 @@
 
     <div class="border-2 border-t-0 px-4">
       <p class="pt-4 text-2xl font-bold">Overview</p>
-      <p class="pb-4 text-base">{{ data.overview }}</p>
+      <p class="pb-4 text-sm sm:text-base">{{ data.overview }}</p>
     </div>
     <div class="border-2 border-t-0 px-4 py-2">
       <p class="text-2xl font-bold pt-4">Price History</p>

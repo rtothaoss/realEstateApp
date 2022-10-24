@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ImageDetailComponent } from './image-detail/image-detail.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginModalComponent } from './login-modal/login-modal.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [SearchComponent, SearchDetailComponent, ImageDetailComponent, LoginModalComponent],
@@ -23,6 +24,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
     HttpClientModule,
     MatDialogModule,
     MatPaginatorModule,
+    LayoutModule
   ],
   exports: [SearchComponent],
 })
