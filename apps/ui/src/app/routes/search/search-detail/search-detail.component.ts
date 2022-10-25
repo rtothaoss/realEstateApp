@@ -13,7 +13,6 @@ import { DialogData } from '../../../../../../../libs/api-interfaces/src/lib/ui-
   styleUrls: ['../../../../../../../node_modules/keen-slider/keen-slider.css', './search-detail.component.scss'],
 })
 export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
-
   center: google.maps.LatLngLiteral = { lat: 32.821688, lng: -96.792936 };
   options: google.maps.MapOptions = {
     zoomControl: true,
@@ -29,12 +28,11 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   saved = false;
   homeId = 0;
 
+  @ViewChild('sliderRef') sliderRef!: ElementRef<HTMLElement>;
 
-  @ViewChild("sliderRef") sliderRef!: ElementRef<HTMLElement>
+  currentSlide = 0;
 
-  currentSlide = 0
- 
-  slider!: KeenSliderInstance
+  slider!: KeenSliderInstance;
 
   constructor(
     public dialogRef: MatDialogRef<SearchDetailComponent>,
@@ -56,18 +54,14 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    
-    if(this.authService.getToken()) {
+    if (this.authService.getToken()) {
       this.searchService.checkForSavedHome(this.data.propertyID).subscribe((details) => {
-      
         if (details !== null) {
           this.saved = true;
           this.homeId = details.id;
-         
         }
       });
     }
- 
   }
 
   ngAfterViewInit() {
@@ -75,11 +69,10 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
       this.slider = new KeenSlider(this.sliderRef.nativeElement, {
         initial: this.currentSlide,
         slideChanged: (s) => {
-          this.currentSlide = s.track.details.rel
+          this.currentSlide = s.track.details.rel;
         },
-      })
-
-    })
+      });
+    });
   }
 
   onNoClick(): void {
@@ -87,16 +80,15 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSaveOrDelete() {
-
-    if(this.authService.getToken()) {
+    if (this.authService.getToken()) {
       if (this.saved) {
-        console.log('deleting home');
+      
         this.searchService.deleteHome(this.data.propertyID.toString()).subscribe((details) => {
-          console.log(details);
+         
           this.saved = false;
         });
       } else {
-        console.log('saving home');
+       
         const body = {
           price: this.data.price || 0,
           beds: this.data.beds || 0,
@@ -107,22 +99,20 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
           address: this.data.address || '123 Address Ln',
           heating: 'Central, Zoned',
           cooling: 'Ceiling Fan(s), Central Ai...',
-          parking: this.data.parking || '0', 
+          parking: this.data.parking || '0',
           lot: this.data.lot || 0,
           image: this.data.photo || '',
           propertyId: this.data.propertyID,
         };
-        
+
         this.searchService.saveHouse(body).subscribe((details) => {
-          console.log(details);
+         
           this.saved = true;
         });
       }
     } else {
       this.showLogin();
     }
-   
-   
   }
 
   onShare() {
@@ -130,7 +120,7 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showImage(ref: any) {
-    console.log(ref);
+    
     const imageDialogRef = this.dialog.open(ImageDetailComponent, {
       panelClass: 'custom-dialog-container',
       data: {
@@ -138,9 +128,6 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     });
 
-    imageDialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   showLogin() {
@@ -150,10 +137,6 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
         // href: ref.src,
       },
     });
-
-    loginDialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
   closeDialog() {
@@ -161,7 +144,6 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.slider) this.slider.destroy()
+    if (this.slider) this.slider.destroy();
   }
-  
 }

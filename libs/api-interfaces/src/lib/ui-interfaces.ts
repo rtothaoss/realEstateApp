@@ -292,4 +292,5 @@ export interface DialogData {
   lot: number;
 }
 
+
 export type UserUI = User;

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,12 +15,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   form!: FormGroup;
   place!: google.maps.places.PlaceResult;
 
-  constructor(
-    private http: HttpClient,
-    private _route: ActivatedRoute,
-    private _router: Router,
-    private fb: FormBuilder,
-  ) {}
+  constructor(private _route: ActivatedRoute, private _router: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -46,8 +40,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   search() {
     const city = this.place.address_components?.at(0)?.long_name;
     const state = this.place.address_components?.at(2)?.short_name;
-    const lat = this.place.geometry?.location?.lat()
-    const lng = this.place.geometry?.location?.lng()
+    const lat = this.place.geometry?.location?.lat();
+    const lng = this.place.geometry?.location?.lng();
 
     this._router.navigate(['/search'], {
       relativeTo: this._route,
@@ -56,7 +50,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         state_code: state,
         limit: '10',
         lat: lat,
-        lng: lng
+        lng: lng,
       },
       skipLocationChange: false,
     });

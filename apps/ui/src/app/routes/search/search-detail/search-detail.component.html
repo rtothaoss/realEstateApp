@@ -23,10 +23,13 @@
     <!-- image carousel goes here in the future -->
     <div class="lg:hidden pt-2">
       
+      <div *ngIf="data.photos; else defaultPhotoTemplate">
+
+      
       <div class="navigation-wrapper">
         <div class="keen-slider keen-slider--vertical" #sliderRef>
           <div *ngFor="let photos of data.photos; let i = index">
-            <div class="keen-slider__slide"><img #imageRef src="{{ photos['href']  }}" class="p-2, {{!photos['href'] ? 'min-w-full ' : ''}}" (click)="showImage(imageRef)"  /></div>
+            <div class="keen-slider__slide"><img #imageRef src="{{ photos['href'] }}" class="p-2 h-[275px] object-cover min-w-full"   /></div>
           </div>
           
          
@@ -59,6 +62,8 @@
         </svg>
       </div>
 
+
+    </div>
     </div>
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->
@@ -152,4 +157,9 @@
       </div>
     </div>
   </div>
+  <ng-template #defaultPhotoTemplate>
+    <div>
+      <img src="{{ defaultHouse  }}" class="p-2 h-[275px] object-cover min-w-full"  />
+    </div>
+  </ng-template>
 </div>

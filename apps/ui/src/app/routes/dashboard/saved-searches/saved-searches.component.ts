@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { AuthService } from '../../../shared/services/auth.service';
 import { SearchService } from '../../../shared/services/search.service';
 
 @Component({
@@ -9,7 +8,7 @@ import { SearchService } from '../../../shared/services/search.service';
   styleUrls: ['./saved-searches.component.scss'],
 })
 export class SavedSearchesComponent implements OnInit {
-  locations!: Record<string, unknown>[]
+  locations!: Record<string, unknown>[];
   savedHomesSub = Subscription;
   loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
@@ -18,14 +17,14 @@ export class SavedSearchesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchData();
-}
+  }
 
   fetchData() {
     this.searchService.savedSearches().subscribe((details) => {
-      this.locations = details
-      console.log(this.locations)
+      this.locations = details;
+
       this.loadingSubject.next(true);
-    })
+    });
   }
 
   onEdit(id: number) {
@@ -35,7 +34,6 @@ export class SavedSearchesComponent implements OnInit {
   onDelete(id: any) {
     this.searchService.deleteSearch(id).subscribe((data: any) => {
       this.fetchData();
-      
-    })
+    });
   }
 }

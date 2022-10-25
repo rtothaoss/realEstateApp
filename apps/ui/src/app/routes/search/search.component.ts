@@ -1,7 +1,7 @@
-import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { BehaviorSubject, Observable, skip, Subscription, tap } from 'rxjs';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable, skip, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { MapGeocoder, GoogleMap, MapMarker, MapInfoWindow } from '@angular/google-maps';
+import { GoogleMap, MapInfoWindow } from '@angular/google-maps';
 import { Store } from '@ngrx/store';
 import { selectHomeData } from '../../state';
 import * as SearchActions from '../../state/search';
@@ -10,11 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SearchDetailComponent } from './search-detail/search-detail.component';
 import { SearchService } from '../../shared/services/search.service';
 import { AuthService } from '../../shared/services/auth.service';
-import {
-  BreakpointObserver,
-  Breakpoints,
-  BreakpointState
-} from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 export interface MarkersInterface {
   position: { lat: number; lng: number };
@@ -35,12 +31,9 @@ export interface MarkersInterface {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchComponent implements OnInit, OnDestroy {
+  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
 
-  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(
-    Breakpoints.XSmall
-  );
- 
-  @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow
+  @ViewChild(MapInfoWindow, { static: false }) infoWindow!: MapInfoWindow;
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   apiLoaded!: Observable<boolean>;
   homeDataSub$!: Subscription;
@@ -56,10 +49,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   markers: MarkersInterface[] = [];
   propertyDetail!: PropertyDetail;
   isDisabled = false;
-  homeData! : HomeData[];
+  homeData!: HomeData[];
   page = 0;
   size = 8;
-  infoContent!: HomeData
+  infoContent!: HomeData;
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -82,7 +75,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getQueryParams();
-    if(this.authService.getToken()) {
+    if (this.authService.getToken()) {
       this.saveSearch();
     }
 
@@ -90,20 +83,19 @@ export class SearchComponent implements OnInit, OnDestroy {
       .select(selectHomeData)
       .pipe(skip(1))
       .subscribe((homeData) => {
+        console.log(homeData)
         if (this.homes !== homeData.data.home_search.results) {
           this.homes = homeData.data.home_search.results;
-        
-          this.getData({pageIndex: this.page, pageSize: this.size});
+       
+          this.getData({ pageIndex: this.page, pageSize: this.size });
           this.addMarkers();
           this.loadingSubject.next(true);
         }
       });
-
+      console.log(this.city)
+      console.log(this.state)
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
-
-    
   }
-
 
   getQueryParams() {
     this.route.queryParams.subscribe((params) => {
@@ -117,9 +109,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   saveSearch() {
-    const location = `${this.city}, ${this.state}`
-    
-    this.searchService.addSearch(location).subscribe(details => console.log(details))
+    const location = `${this.city}, ${this.state}`;
+
+    this.searchService.addSearch(location).subscribe((details) => console.log(details));
   }
 
   centerMap() {
@@ -134,11 +126,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   addMarkers() {
- 
     for (const [index, home] of this.homes.entries()) {
-    
-      if(typeof home.location.address.coordinate?.lat === 'number' ) {
-     
+      if (typeof home.location.address.coordinate?.lat === 'number') {
         this.markers.push({
           position: { lat: home.location.address.coordinate.lat, lng: home.location.address.coordinate.lon },
           label: {
@@ -150,8 +139,7 @@ export class SearchComponent implements OnInit, OnDestroy {
             animation: google.maps.Animation.DROP,
           },
         });
-      } 
-
+      }
     }
   }
 
@@ -162,24 +150,22 @@ export class SearchComponent implements OnInit, OnDestroy {
   openDialog(i: number, type: string) {
     this.isDisabled = true;
 
-    let formattedPath = this.homes[i]
+    let formattedPath = this.homes[i];
     let propertyID = formattedPath.property_id;
-    
+
     let formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
 
-    if(type === 'card') {
-      formattedPath = this.homeData[i],
-      propertyID = formattedPath.property_id;
+    if (type === 'card') {
+      (formattedPath = this.homeData[i]), (propertyID = formattedPath.property_id);
       formattedAddress = `${formattedPath.location.address.line},  ${formattedPath.location.address.city}, ${formattedPath.location.address.state_code} ${formattedPath.location.address.postal_code}`;
     }
-    
-
-    
 
     this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
-      console.log(details)
-      console.log(propertyID)
       //put this in a seperate function to make things look cleaner
+      if(details.data === null) {
+        this.isDisabled = false;
+        return;
+      }
       this.propertyDetail = details.data.property_detail;
       const dialogRef = this.dialog.open(SearchDetailComponent, {
         maxHeight: '100vh',
@@ -207,15 +193,15 @@ export class SearchComponent implements OnInit, OnDestroy {
           type: this.propertyDetail.display_property_type,
           yearBuilt: this.propertyDetail.prop_common.year_built,
           parking: this.propertyDetail.prop_common.garage,
-          lot: this.propertyDetail.prop_common.lot_sqft
+          lot: this.propertyDetail.prop_common.lot_sqft,
         },
       });
 
-      const smallDialogSubscription = this.isExtraSmall.subscribe(size => {
+      const smallDialogSubscription = this.isExtraSmall.subscribe((size) => {
         if (size.matches) {
           dialogRef.updateSize('100vw', '100vh');
         } else {
-          console.log('nothing happens')
+          console.log('nothing happens');
         }
       });
       dialogRef.afterClosed().subscribe(() => {
@@ -227,24 +213,23 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   getData(obj: any) {
-    let index=0
-       const startingIndex=obj.pageIndex * obj.pageSize
-       const endingIndex=startingIndex + obj.pageSize;
+    let index = 0;
+    const startingIndex = obj.pageIndex * obj.pageSize;
+    const endingIndex = startingIndex + obj.pageSize;
 
     this.homeData = this.homes.filter(() => {
       index++;
-      return (index > startingIndex && index <= endingIndex) ? true : false;
+      return index > startingIndex && index <= endingIndex ? true : false;
     });
-
   }
 
   openInfo(marker: any, i: number) {
-    this.infoContent = this.homes[i]
-    this.infoWindow.open(marker)
+    this.infoContent = this.homes[i];
+    this.infoWindow.open(marker);
   }
 
   closeInfo() {
-    this.infoWindow.close()
+    this.infoWindow.close();
   }
 
   ngOnDestroy(): void {

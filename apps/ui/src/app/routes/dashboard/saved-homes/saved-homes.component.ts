@@ -1,11 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PropertyDetail } from '@starter/api-interfaces';
 import { BehaviorSubject } from 'rxjs';
-import { formatWithOptions } from 'util';
 import { SearchService } from '../../../shared/services/search.service';
 import { SearchDetailComponent } from '../../search/search-detail/search-detail.component';
-
 
 @Component({
   selector: 'starter-saved-homes',
@@ -26,33 +24,26 @@ export class SavedHomesComponent implements OnInit {
   loadingSubject = new BehaviorSubject<boolean>(false);
   loading$ = this.loadingSubject.asObservable();
   propertyDetail!: PropertyDetail;
-  closedHeart = '../../../../assets/img/blueHeart.png'
+  closedHeart = '../../../../assets/img/blueHeart.png';
   deleting = false;
 
   constructor(public dialog: MatDialog, private searchService: SearchService) {}
 
   ngOnInit(): void {
-    this.savedHomesSub()
+    this.savedHomesSub();
   }
 
   savedHomesSub() {
     this.searchService.savedHomes().subscribe((details) => {
-      console.log('this fired off')
       this.location = details;
-      console.log(details);
+
       this.loadingSubject.next(true);
     });
   }
 
   openDialog(propertyID: string) {
-    console.log(this.deleting)
-    console.log(!this.deleting)
-   
-    if(!this.deleting) {
-      console.log(this.deleting)
-      console.log(propertyID)
+    if (!this.deleting) {
       this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
-        console.log(details)
         //put this in a seperate function to make things look cleaner
         this.propertyDetail = details.data.property_detail;
         const formattedAddress = `${this.propertyDetail.address.line}, ${this.propertyDetail.address.city}, ${this.propertyDetail.address.state_code} ${this.propertyDetail.address.postal_code}`;
@@ -82,22 +73,15 @@ export class SavedHomesComponent implements OnInit {
             lot: this.propertyDetail.prop_common.lot_sqft,
           },
         });
-  
-        dialogRef.afterClosed().subscribe((result) => {
-          console.log(result)
-          console.log('The dialog was closed');
-        });
       });
     }
- 
   }
 
   unSave(propertyId: string) {
     this.deleting = true;
     this.searchService.deleteHome(propertyId).subscribe((details) => {
-      this.savedHomesSub()
+      this.savedHomesSub();
       this.deleting = false;
     });
   }
-
 }
