@@ -37,15 +37,24 @@ export class MainComponent implements OnInit {
   constructor(private store: Store, private snackBar: MatSnackBar, private router: Router) {
     router.events.subscribe((event: Event) => {
       if(event instanceof NavigationEnd) {
-        if(event.url.split('?')[0] === '/search') {
-          this.showFooter = false;
+        // if(event.url.split('?')[0] === '/search') {
+        //   this.showFooter = false;
+        //   this.height = 'h-[calc(100vh_-_5rem)]'
+        //   this.background = 'bg-white'
+
+        // } else {
+        //   this.showFooter = true;
+        //   this.height = 'h-[calc(100vh_-_8rem)]'
+        //   this.background = 'bg-gray-100'
+        // }
+        console.log(event.url.split('?')[0])
+        if(event.url.split('?')[0] === '/') {
+          
+          this.showFooter = true;
+        } else {
+             this.showFooter = false;
           this.height = 'h-[calc(100vh_-_5rem)]'
           this.background = 'bg-white'
-
-        } else {
-          this.showFooter = true;
-          this.height = 'h-[calc(100vh_-_8rem)]'
-          this.background = 'bg-gray-100'
         }
       }
     })

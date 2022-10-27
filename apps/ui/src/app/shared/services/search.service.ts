@@ -12,8 +12,7 @@ export class SearchService {
   constructor(private http: HttpClient) {}
 
   realEstateApi(city: string, state: string) {
-    console.log(state)
-    console.log(city)
+  
     const options = {
       params: { offset: '0', limit: '16', state_code: state, city: city, sort: 'newest' },
       headers: {

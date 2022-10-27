@@ -18,7 +18,7 @@
         <mat-icon *ngIf="(loading$ | async) === false">login</mat-icon>
         <mat-spinner [diameter]="24" *ngIf="loading$ | async" class="spinner-icon"></mat-spinner> Login
       </button>
-      <a mat-raised-button routerLink="register" type="button" (click)="this.closeOverlay.emit()" class="create-btn"
+      <a mat-raised-button routerLink="register" type="button" (click)="this.closeOverlay.emit(); this.closeDialog()" class="create-btn"
         ><mat-icon>person_add</mat-icon> Create an Account</a
       >
     </div>

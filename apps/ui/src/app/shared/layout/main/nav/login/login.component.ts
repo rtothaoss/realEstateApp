@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Login, LoginForm } from '@starter/api-interfaces';
 import { BehaviorSubject, combineLatest, tap } from 'rxjs';
@@ -49,7 +50,7 @@ export class LoginComponent {
 
   @Output() closeOverlay = new EventEmitter();
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, public dialog: MatDialog) {}
 
   submit(): void {
     if (this.form.invalid) {
@@ -58,5 +59,9 @@ export class LoginComponent {
     this.loadingSubject.next(true);
     const data = { user: this.form.value as Login };
     this.store.dispatch(UserActions.loginRequest(data));
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
   }
 }

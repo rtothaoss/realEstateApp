@@ -58,7 +58,7 @@
       #drawer
       class="sidenav sm:bg-gray-300"
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      mode="over"
       >
       <mat-nav-list>
         <a mat-list-item routerLink=""><mat-icon class="icon-right">home</mat-icon> Home</a>

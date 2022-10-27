@@ -14,6 +14,8 @@ export class LoginModalComponent implements OnDestroy {
 
   private storeSub: Subscription;
 
+  open = false
+
   constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: ImageData, private store: Store) {
 
     this.storeSub = this.store.select(selectUser).subscribe(user => {

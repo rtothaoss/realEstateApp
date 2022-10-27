@@ -53,6 +53,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   page = 0;
   size = 8;
   infoContent!: HomeData;
+  
 
   zoom = 12;
   center: google.maps.LatLngLiteral = { lat: 33.019844, lng: -96.698883 };
@@ -92,8 +93,7 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.loadingSubject.next(true);
         }
       });
-      console.log(this.city)
-      console.log(this.state)
+     
     this.store.dispatch(SearchActions.searchRequest({ city: this.city, state: this.state }));
   }
 
