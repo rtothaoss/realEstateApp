@@ -1,8 +1,8 @@
-<div class="flex justify-center mt-6 border-blue-600 pb-5 bg-white">
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('savedHomes')" >Saved Homes</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('savedSearches')">Saved Searches</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('yourHome')">Your Home</button>
-<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('accountSettings')">Account Settings</button>
+<div class="flex sm:justify-center mt-6 border-blue-600 pb-5 bg-white overflow-x-scroll sm:overflow-x-hidden whitespace-nowrap">
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2 " (click)="picker('savedHomes')" >Saved Homes</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2 " (click)="picker('savedSearches')">Saved Searches</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2 " (click)="picker('yourHome')">Your Home</button>
+<button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2 " (click)="picker('accountSettings')">Account Settings</button>
 </div>
 <div class="bg-gray-100 pb-10 min-h-screen">
 <div *ngIf="content === 'savedHomes'">
