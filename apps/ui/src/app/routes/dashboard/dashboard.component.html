@@ -4,7 +4,7 @@
 <button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('yourHome')">Your Home</button>
 <button class="focus:underline focus:decoration-blue-700 focus:text-blue-700 underline-offset-8  focus:cursor-pointer sm:text-lg ml-2 mr-2" (click)="picker('accountSettings')">Account Settings</button>
 </div>
-<div class="bg-gray-100 pb-10 min-h-screen overflow-hidden">
+<div class="bg-gray-100 pb-10 min-h-screen">
 <div *ngIf="content === 'savedHomes'">
   <starter-saved-homes></starter-saved-homes>
 </div>

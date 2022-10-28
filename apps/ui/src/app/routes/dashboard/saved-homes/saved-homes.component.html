@@ -1,16 +1,16 @@
-<div class="text-center sm:text-start">
-    <p class="text-4xl font-semibold sm:pl-40 pt-4">Saved Homes</p>
+<div class="text-center lg:text-start">
+    <p class="text-4xl font-semibold lg:pl-40 pt-4">Saved Homes</p>
   </div>
-  <div class="sm:pl-44 sm:pr-44">
+  <div class="md:pl-20 lg:pl-44 lg:pr-44">
   
     <div *ngIf="loading$ | async; else loadingBlock">
       <div *ngIf="!location?.length"><p class="text-2xl text-center">You have no saved homes.</p></div>
-    <div class="grid grid-cols-1 sm:grid-cols-3 grid-flow-row auto-rows-min mt-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row auto-rows-min mt-8">
       <div *ngFor="let data of location; let i = index"> 
       <div
       #cardRef
       class="h-[575px] w-full sm:w-[80%] rounded-xl pl-2 pr-2 sm:pr-0 sm:pl-0 sm:ml-2 mb-6 cursor-pointer justify-center shadow-xl transform transition duration-500 hover:scale-105"
-      (click)="openDialog(data.propertyId)"
+      (click)="!isDisabled && openDialog(data.propertyId)"
       >
       <img src="{{closedHeart}}" class="absolute top-2 right-2" (click)="unSave(data.propertyId)"/>
       <img src="{{ data.image || defaultHouse }}" class="rounded-t-xl object-cover w-full h-[250px]" />

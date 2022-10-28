@@ -1,7 +1,8 @@
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PropertyDetail } from '@starter/api-interfaces';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SearchService } from '../../../shared/services/search.service';
 import { SearchDetailComponent } from '../../search/search-detail/search-detail.component';
 
@@ -11,6 +12,8 @@ import { SearchDetailComponent } from '../../search/search-detail/search-detail.
   styleUrls: ['./saved-homes.component.scss'],
 })
 export class SavedHomesComponent implements OnInit {
+  isExtraSmall: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.XSmall);
+  isTablet: Observable<BreakpointState> = this.breakpointObserver.observe(Breakpoints.Small);
   location!: Array<any>;
   address = '2203 Allen St, Dallas, TX 75204';
   photo = 'https://ap.rdcpix.com/f05645e43168d43ebb134a6eaa210913l-m2327927031s-w1024_h768.jpg';
@@ -26,8 +29,13 @@ export class SavedHomesComponent implements OnInit {
   propertyDetail!: PropertyDetail;
   closedHeart = '../../../../assets/img/blueHeart.png';
   deleting = false;
+  isDisabled = false;
 
-  constructor(public dialog: MatDialog, private searchService: SearchService) {}
+  constructor(
+    public dialog: MatDialog,
+    private searchService: SearchService,
+    private breakpointObserver: BreakpointObserver
+  ) {}
 
   ngOnInit(): void {
     this.savedHomesSub();
@@ -42,14 +50,22 @@ export class SavedHomesComponent implements OnInit {
   }
 
   openDialog(propertyID: string) {
+    this.isDisabled = true;
     if (!this.deleting) {
       this.searchService.propertyDetailApi(propertyID).subscribe((details) => {
+        if(details.data === null) {
+          this.isDisabled = false;
+          return;
+        }
         //put this in a seperate function to make things look cleaner
         this.propertyDetail = details.data.property_detail;
         const formattedAddress = `${this.propertyDetail.address.line}, ${this.propertyDetail.address.city}, ${this.propertyDetail.address.state_code} ${this.propertyDetail.address.postal_code}`;
         const dialogRef = this.dialog.open(SearchDetailComponent, {
-          width: '1100px',
-          height: '900px',
+          maxHeight: '100vh',
+          maxWidth: '100vw',
+          width: '60%',
+          height: '100%',
+          panelClass: 'custom-dialog-container',
           data: {
             address: formattedAddress,
             photo: this.propertyDetail.photos[0].href,
@@ -73,6 +89,30 @@ export class SavedHomesComponent implements OnInit {
             lot: this.propertyDetail.prop_common.lot_sqft,
           },
         });
+        const tableDialogSubscription = this.isTablet.subscribe((size) => {
+          if (size.matches) {
+            dialogRef.updateSize('80vw', '100vh');
+          } else {
+            console.log('tablet');
+            console.log('nothing happens');
+          }
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          tableDialogSubscription.unsubscribe();
+        });
+        const smallDialogSubscription = this.isExtraSmall.subscribe((size) => {
+          if (size.matches) {
+            dialogRef.updateSize('100vw', '100vh');
+          } else {
+            console.log('mobile');
+            console.log('nothing happens');
+          }
+        });
+        dialogRef.afterClosed().subscribe(() => {
+          smallDialogSubscription.unsubscribe();
+        });
+
+        this.isDisabled = false;
       });
     }
   }

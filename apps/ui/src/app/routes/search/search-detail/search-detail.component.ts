@@ -29,10 +29,9 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   homeId = 0;
 
   @ViewChild('sliderRef') sliderRef!: ElementRef<HTMLElement>;
-
   currentSlide = 0;
-
   slider!: KeenSliderInstance;
+  
 
   constructor(
     public dialogRef: MatDialogRef<SearchDetailComponent>,
@@ -82,13 +81,10 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   onSaveOrDelete() {
     if (this.authService.getToken()) {
       if (this.saved) {
-      
         this.searchService.deleteHome(this.data.propertyID.toString()).subscribe((details) => {
-         
           this.saved = false;
         });
       } else {
-       
         const body = {
           price: this.data.price || 0,
           beds: this.data.beds || 0,
@@ -106,7 +102,6 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
         };
 
         this.searchService.saveHouse(body).subscribe((details) => {
-         
           this.saved = true;
         });
       }
@@ -120,14 +115,18 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showImage(ref: any) {
-    
-    const imageDialogRef = this.dialog.open(ImageDetailComponent, {
-      panelClass: 'custom-dialog-container',
-      data: {
-        href: ref.src,
-      },
-    });
-
+    const deviceWidth = this.dialogRef['_ref']['containerInstance']['_elementRef']['nativeElement']['clientWidth'];
+    console.log(deviceWidth);
+    if (deviceWidth > 400) {
+      const imageDialogRef = this.dialog.open(ImageDetailComponent, {
+        panelClass: 'custom-dialog-container',
+        data: {
+          href: ref.src,
+        },
+      });
+    } else {
+      return;
+    }
   }
 
   showLogin() {

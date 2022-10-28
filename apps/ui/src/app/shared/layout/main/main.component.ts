@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, OnInit, AfterViewChecked, AfterContentInit, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Event, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { Event, NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, tap } from 'rxjs';
 import { selectMsg } from '../../../state';
@@ -49,7 +49,9 @@ export class MainComponent implements OnInit {
         // }
         console.log(event.url.split('?')[0])
         if(event.url.split('?')[0] === '/') {
-          
+          console.log('we make it into here')
+          this.background = 'bg-gray-100'
+          this.height = 'h-[calc(100vh_-_8rem)]'
           this.showFooter = true;
         } else {
              this.showFooter = false;

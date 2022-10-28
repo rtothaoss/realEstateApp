@@ -12,7 +12,7 @@
   <div class="w-full lg:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
 
     <div class="flex justify-start sm:justify-end border-b-2 pr-4 sm:pr-0">
-      <mat-icon class="visible lg:invisible mr-[60%] sm:mr-[68%] cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
+      <mat-icon class="visible lg:invisible mr-[60%] md:mr-[80%] lg:mr-[75%] cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
       <!-- <mat-icon class="invisible sm:visible text-xl">save_alt</mat-icon> -->
       <p (click)="onSaveOrDelete()" class="cursor-pointer text-lg hover:underline mr-4">{{!saved ? 'Save' : 'Saved'}}</p>
       <!-- <mat-icon class="invisible sm:visible text-xl">share</mat-icon> -->
@@ -29,7 +29,7 @@
       <div class="navigation-wrapper">
         <div class="keen-slider keen-slider--vertical" #sliderRef>
           <div *ngFor="let photos of data.photos; let i = index">
-            <div class="keen-slider__slide"><img #imageRef src="{{ photos['href'] }}" class="p-2 h-[275px] object-cover min-w-full"   /></div>
+            <div class="keen-slider__slide"><img #imageRef src="{{ photos['href'] }}" class="h-[300px] object-cover min-w-full" (click)="showImage(imageRef)"   /></div>
           </div>
           
          
