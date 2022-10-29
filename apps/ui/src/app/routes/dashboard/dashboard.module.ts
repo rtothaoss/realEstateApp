@@ -17,6 +17,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     SavedSearchesComponent,
     YourHomeComponent,
     AccountSettingsComponent,
+
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, MatDialogModule],
 })

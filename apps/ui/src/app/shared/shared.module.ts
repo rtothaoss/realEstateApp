@@ -37,6 +37,6 @@ const sharedModules = [
 @NgModule({
   declarations: [FooterComponent, MainComponent, LoginComponent, NavComponent],
   imports: sharedModules,
-  exports: [sharedModules, LoginComponent]
+  exports: [sharedModules, LoginComponent, FooterComponent]
 })
 export class SharedModule {}
