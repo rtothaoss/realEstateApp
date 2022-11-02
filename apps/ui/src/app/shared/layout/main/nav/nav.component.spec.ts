@@ -6,11 +6,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {HttpClientModule} from '@angular/common/http';
 
 import { NavComponent } from './nav.component';
 import { of } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CdkOverlayOrigin, OverlayModule } from '@angular/cdk/overlay';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 const breakpointObserverMock = {
   observe: jest.fn().mockReturnValue(of()),
@@ -28,14 +30,18 @@ describe('NavComponent', () => {
       imports: [
         NoopAnimationsModule,
         LayoutModule,
+        MatDialogModule,
         MatButtonModule,
         MatIconModule,
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
         OverlayModule,
+        HttpClientModule
       ],
       providers: [
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: []},
         provideMockStore({
           initialState: initialState,
         }),

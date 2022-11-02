@@ -16,7 +16,7 @@ export class LoginModalComponent implements OnDestroy {
 
   open = false
 
-  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, @Inject(MAT_DIALOG_DATA) public data: ImageData, private store: Store) {
+  constructor(public dialogRef: MatDialogRef<SearchDetailComponent>, private store: Store) {
 
     this.storeSub = this.store.select(selectUser).subscribe(user => {
       if(Object.keys(user).length > 0) {
