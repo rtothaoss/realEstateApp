@@ -9,16 +9,22 @@
         [options]="marker.options"
         (mapClick)="!isDisabled && openDialog(i, 'marker')"
        (mapMouseover)="openInfo(somemarker, i)"
-      (mapMouseout)="closeInfo()"
+       (mapMouseout)="closeInfo()"
         >
         
       </map-marker>
 
       <map-info-window class="info-window">
-        <div class="m-0 p-0 info-window">
-          <p class="m-0 p-0 info-window">${{infoContent?.list_price | number}}</p>
-          <p class="m-0 p-0 info-window">{{infoContent?.description?.beds}} bed, {{infoContent?.description?.baths_full}} bath</p>
-          <p class="m-0 p-0 info-window">{{infoContent?.description?.sqft}} sqft</p>
+        <div class="m-0 p-0 info-window flex">
+          <div>
+            <img src="{{infoContent?.primary_photo?.href || defaultHouse}}" class="cover h-full w-[150px]" />
+          </div>
+          <div class="m-auto pl-2">
+            <p class="m-0 p-0 info-window text-lg">${{infoContent?.list_price | number}}</p>
+            <p class="m-0 p-0 info-window text-lg">{{infoContent?.description?.beds}} bed, {{infoContent?.description?.baths_full}} bath</p>
+            <p class="m-0 p-0 info-window text-lg">{{infoContent?.description?.sqft}} sqft</p>
+          </div>
+         
         </div>
       </map-info-window>
     </google-map>

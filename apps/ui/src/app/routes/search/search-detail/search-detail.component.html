@@ -5,7 +5,7 @@
         <img #mainImageRef src="{{ data.photo || defaultHouse  }}" class="p-2, {{!data.photo ? 'min-w-full min-h-full' : ''}}" (click)="showImage(mainImageRef)"  />
       </div>
       <div *ngFor="let photos of data.photos | slice: 1; let i = index">
-        <img #imageRef src="{{ photos['href']}} " class="p-2 w-[275px] h-[187px] object-cover" (click)="showImage(imageRef)"/>
+        <img #imageRef src="{{ photos['href']}} " class="pt-2 w-[275px] h-[187px] object-cover m-auto" (click)="showImage(imageRef)"/>
       </div>
     </div>
   </div>
