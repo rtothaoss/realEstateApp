@@ -116,7 +116,7 @@ export class SearchDetailComponent implements OnInit, AfterViewInit, OnDestroy {
 
   showImage(ref: any) {
     const deviceWidth = this.dialogRef['_ref']['containerInstance']['_elementRef']['nativeElement']['clientWidth'];
-    console.log(deviceWidth);
+    
     if (deviceWidth > 400) {
       const imageDialogRef = this.dialog.open(ImageDetailComponent, {
         panelClass: 'custom-dialog-container',

@@ -1,6 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SearchService } from '../../shared/services/search.service';
 
 @Component({
   selector: 'starter-dashboard',
@@ -11,25 +10,10 @@ import { SearchService } from '../../shared/services/search.service';
 export class DashboardComponent {
   content = 'savedHomes';
 
-  constructor(public dialog: MatDialog, private searchService: SearchService) {}
+  constructor(public dialog: MatDialog) {}
 
   picker(title: string) {
     this.content = title;
   }
 
-  accountSettings() {
-    console.log('account settings');
-  }
-
-  yourHome() {
-    this.searchService.userHome();
-  }
-
-  savedSearches() {
-    this.searchService.savedSearches();
-  }
-
-  savedHomes() {
-    this.searchService.savedHomes();
-  }
 }

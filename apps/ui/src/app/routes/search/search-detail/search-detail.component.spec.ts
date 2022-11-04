@@ -18,6 +18,7 @@ describe('SearchDetailComponent', () => {
   let component: SearchDetailComponent;
   let store: MockStore;
   let fixture: ComponentFixture<SearchDetailComponent>;
+  
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,7 +28,7 @@ describe('SearchDetailComponent', () => {
         SearchService,
         AuthService,
         {provide: MAT_DIALOG_DATA, useValue: [ ]},
-        {provide: MatDialogRef, useValue: { SearchDetailComponent }},
+        {provide: MatDialogRef, useValue: { }},
         provideMockStore({
           initialState: initialState,
         }),

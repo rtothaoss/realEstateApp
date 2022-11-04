@@ -33,6 +33,7 @@ export class SavedSearchesComponent implements OnInit {
 
   onDelete(id: any) {
     this.searchService.deleteSearch(id).subscribe((data: any) => {
+      console.log(data)
       this.fetchData();
     });
   }

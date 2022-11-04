@@ -94,7 +94,7 @@ export class SavedHomesComponent implements OnInit {
             dialogRef.updateSize('80vw', '100vh');
           } else {
             console.log('tablet');
-            console.log('nothing happens');
+            
           }
         });
         dialogRef.afterClosed().subscribe(() => {
@@ -105,7 +105,7 @@ export class SavedHomesComponent implements OnInit {
             dialogRef.updateSize('100vw', '100vh');
           } else {
             console.log('mobile');
-            console.log('nothing happens');
+            
           }
         });
         dialogRef.afterClosed().subscribe(() => {
