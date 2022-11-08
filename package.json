@@ -3,14 +3,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "engines": {
-    "node": "16.13.2"
+    "node": "16.x"
   },
   "scripts": {
     "ng": "nx",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
-    "start": "nx serve",
-    "build": "nx build",
+    "start": "node dist/apps/api/main",
+    "start:dev":"nx serve",
     "test": "nx test",
     "lint:all": "nx run-many --target=lint --project=all",
     "test:all": "nx run-many --target=test --project=all",
@@ -21,8 +21,7 @@
     "db:dev:up": "docker compose -f tools/scripts/docker-compose.yml up dev-db -d",
     "db:dev": "npx pnpm run db:dev:rm && npx pnpm run db:dev:up && sleep 1 && npx prisma generate && npx pnpm run prisma:dev:deploy",
     "prepare": "husky install",
-    "nest": "npx nx run api:serve",
-    "heroku-postbuild": "nx build starter --prod"
+    "nest": "npx nx run api:serve"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +42,7 @@
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/serve-static": "^3.0.0",
     "@nestjs/swagger": "^6.0.5",
     "@ngrx/effects": "^14.3.0",
     "@ngrx/store": "^14.3.0",
