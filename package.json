@@ -18,7 +18,8 @@
     "db:dev:up": "docker compose -f tools/scripts/docker-compose.yml up dev-db -d",
     "db:dev": "npx pnpm run db:dev:rm && npx pnpm run db:dev:up && sleep 1 && npx prisma generate && npx pnpm run prisma:dev:deploy",
     "prepare": "husky install",
-    "nest": "npx nx run api:serve"
+    "nest": "npx nx run api:serve",
+    "heroku-postbuild": "nx build starter --prod"
   },
   "private": true,
   "dependencies": {
