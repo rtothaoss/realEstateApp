@@ -16,6 +16,7 @@
     "build:all": "nx run-many --target=build --projects=ui,api --configuration=production",
     "prod": "pnpm run lint:all && pnpm run build:all && pnpm run test:all && pnpm db:dev && nx run e2e:e2e",
     "prisma:dev:deploy": "prisma migrate deploy",
+    "prepare": "npx prisma generate",
     "db:dev:rm": "docker compose -f tools/scripts/docker-compose.yml rm dev-db -sfv",
     "db:dev:up": "docker compose -f tools/scripts/docker-compose.yml up dev-db -d",
     "db:dev": "npx pnpm run db:dev:rm && npx pnpm run db:dev:up && sleep 1 && npx prisma generate && npx pnpm run prisma:dev:deploy",
