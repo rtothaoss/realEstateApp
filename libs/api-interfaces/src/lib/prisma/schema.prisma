@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../libs/api-interfaces/src/lib/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  hash      String
+  name      String?
+  savedsearches SavedSearch[]
+  savedhomes SavedHome[]
+  @@map("users")
+}
+
+model SavedSearch {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  location String
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  @@map("savedsearches")
+}
+
+model SavedHome {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  price Int
+  beds Int
+  bath Int
+  sqft Int
+  address String
+  type String
+  yearBuilt Int
+  heating String
+  cooling String
+  parking String
+  lot Int
+  image String
+  propertyId String
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+  @@map("savedhomes")
+}
