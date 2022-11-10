@@ -2,6 +2,8 @@
 
 # compiled output
 # /dist
+# only ignore apps for heroku push
+/apps
 /tmp
 /out-tsc
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.prod';
+import { environment } from '../../../environments/environment';
 import { Login, UserUI } from '@starter/api-interfaces';
 import { Store } from '@ngrx/store';
 import { selectUser, logoutUser } from '../../state'
