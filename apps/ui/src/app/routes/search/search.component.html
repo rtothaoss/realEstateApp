@@ -29,7 +29,7 @@
       </map-info-window>
     </google-map>
   </div>
-  <div class="w-full md:w-5/12 ml-auto h-96">
+  <div class="w-full md:w-5/12 ml-auto h-full sm:h-96">
     <div *ngIf="loading$ | async; else loadingBlock">
       <div class="grid grid-cols-1 lg:grid-cols-2 grid-flow-row auto-rows-min">
         <div *ngFor="let home of homeData; let i = index">
@@ -51,7 +51,7 @@
         </div>
       </div>
       <mat-paginator
-      class="pb-12 sm:pb-0"
+
         [length]="homes.length"
         [pageSize]="size"
         [pageIndex]="page"
