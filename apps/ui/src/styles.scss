@@ -11,8 +11,9 @@
 html,
 body {
   height: 100%;
+  min-height: -webkit-fill-available;
   margin: 0;
-  overflow:hidden;
+  // overflow:hidden;
 }
 
 .notif {
@@ -38,4 +39,9 @@ body {
 .pac-container {
   margin-left: 24px;
 }
+
+
+// @media screen and (max-width: 767px) {
+//     body {height: -webkit-fill-available;}
+// }
 

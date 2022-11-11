@@ -20,7 +20,8 @@
     "db:dev:rm": "docker compose -f tools/scripts/docker-compose.yml rm dev-db -sfv",
     "db:dev:up": "docker compose -f tools/scripts/docker-compose.yml up dev-db -d",
     "db:dev": "npx pnpm run db:dev:rm && npx pnpm run db:dev:up && sleep 1 && npx prisma generate && npx pnpm run prisma:dev:deploy",
-    "nest": "npx nx run api:serve"
+    "nest": "npx nx run api:serve",
+    "mobiledev": "ng serve --host 192.168.1.133"
   },
   "private": true,
   "dependencies": {
