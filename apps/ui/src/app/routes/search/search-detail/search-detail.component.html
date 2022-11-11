@@ -11,12 +11,12 @@
   </div>
   <div class="w-full lg:w-1/2 pl-2 pr-2 sm:pr-0 sm:pl-4 overflow-y-scroll pt-2">
 
-    <div class="flex justify-start sm:justify-end border-b-2 pr-4 sm:pr-0">
-      <mat-icon class="visible lg:invisible mr-[60%] md:mr-[80%] lg:mr-[75%] cursor-pointer text-2xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
+    <div class="flex justify-start sm:justify-end border-b-2 sm:pr-0 h-10">
+      <mat-icon class="visible lg:invisible mr-[60%] md:mr-[80%] lg:mr-[75%] cursor-pointer text-4xl" (click)="closeDialog()">keyboard_arrow_left</mat-icon>
       <!-- <mat-icon class="invisible sm:visible text-xl">save_alt</mat-icon> -->
-      <p (click)="onSaveOrDelete()" class="cursor-pointer text-lg hover:underline mr-4">{{!saved ? 'Save' : 'Saved'}}</p>
+      <p (click)="onSaveOrDelete()" class="cursor-pointer text-xl hover:underline m-auto pr-4">{{!saved ? 'Save' : 'Saved'}}</p>
       <!-- <mat-icon class="invisible sm:visible text-xl">share</mat-icon> -->
-      <p (click)="onShare()" class="cursor-pointer text-lg hover:underline pr-2">Share</p>
+      <p (click)="onShare()" class="cursor-pointer text-xl hover:underline pr-2 m-auto">Share</p>
     </div>
     <!-- image carousel goes here in the future -->
     <!-- image carousel goes here in the future -->
@@ -149,7 +149,7 @@
         <p class="pb-4 text-base font-bold">${{ data.mortgageInfo.hoa_fees | number }}/month</p>
       </div>
     </div>
-    <div class="border-2 border-t-0 px-4 pb-4 mb-4">
+    <div class="border-2 border-t-0 px-4 pb-4 mb-12 sm:mb-4 ">
       <p class="pt-4 text-2xl font-bold">Schools Nearby</p>
       <div *ngFor="let school of data.schools | slice:0:3; let i = index" class="flex">
        <p>{{school.education_levels[0] | titlecase }}:</p><p class="font-bold pl-1">{{school.name}}</p>
