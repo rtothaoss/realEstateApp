@@ -13,25 +13,24 @@ Run `npx prisma studio` to open the visual editor for your database.
 ## Testing
 Run `npm run test` to execute unit tests via [Jest](https://jestjs.io/)
 
+## Documenation:
+[Nx](https://nx.dev/getting-started/intro)<br />
+[Nest](https://docs.nestjs.com/)<br />
+[Prisma](https://www.prisma.io/docs/)<br />
+[Angular](https://angular.io/docs)<br />
+[Google Maps](https://developers.google.com/maps/documentation)<br />
+[US Real Estate API](https://rapidapi.com/datascraper/api/us-real-estate/)<br />
 
 ### What you will need to run this app
 
-[Google API Key](https://developers.google.com/maps/documentation/embed/get-api-key)
-[Real Estate API Key](https://rapidapi.com/datascraper/api/us-real-estate/pricing)
+[Google API Key](https://developers.google.com/maps/documentation/embed/get-api-key) <br />
+[Real Estate API Key](https://rapidapi.com/datascraper/api/us-real-estate/pricing) <br/>
 *These will go into your environments in Angular*
 
-Databse URL that works with Prisma 
-ex. DATABASE_URL="postgresql://postgres:123@localhost:5434/asdf?schema=public"
-Your own secret JWT phrase 
+Databse URL that works with Prisma <br />
+ex. DATABASE_URL="postgresql://postgres:123@localhost:5434/asdf?schema=public" <br />
+Your own secret JWT phrase <br />
 *These will go into your .env*
-
-## Documenation:
-Nx (https://nx.dev/getting-started/intro)
-Nest (https://docs.nestjs.com/)
-Prisma (https://www.prisma.io/docs/)
-Angular (https://angular.io/docs)
-Google Maps (https://developers.google.com/maps/documentation)
-US Real Estate API (https://rapidapi.com/datascraper/api/us-real-estate/)
 
 ## Future Updates
 * Getting rid of the relying solely on google autocomplete to figure out where the user wants to search. 
