@@ -32,7 +32,7 @@ JWT_SECRET phrase <br />
 *These will go into your .env*
 
 ## Future Updates
-* Getting rid of the relying solely on google autocomplete to figure out where the user wants to search. 
+* Getting rid of the relying solely on google autocomplete to figure out where the user wants to search. <br />
 *At the moment you have to click on the dropdown to search places and cannot simply enter in your own place to search. This was done to avoid typos and other errors screwing up the search.*
 * Adding a filter to search results
 * Extending the search to more than just 16 results
