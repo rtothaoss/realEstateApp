@@ -2,6 +2,8 @@
 
 This real estate app allows users to search cities for homes. Users can create an account and save homes. Users searches are automatically saved to their account for future reference. Maybe in the future those saved searches will allow for email notifications of homes for sale in those areas. The app was built using an Nx monorepo setup. Nest was used for the backend along with Prisma for database integration. Angular was used for the frontend. Google maps and Real Estate scraper were used to get information and display it. 
 
+Check out the app [here](https://real-estate-appv1.herokuapp.com/)
+
 ## Development server
 Run `npm run nest` to start up backend API then run `npm run start:dev` to start up the frontend.
 
