@@ -27,9 +27,8 @@ Run `npm run test` to execute unit tests via [Jest](https://jestjs.io/)
 [Real Estate API Key](https://rapidapi.com/datascraper/api/us-real-estate/pricing) <br/>
 *These will go into your environments in Angular*
 
-Databse URL that works with Prisma <br />
-ex. DATABASE_URL="postgresql://postgres:123@localhost:5434/asdf?schema=public" <br />
-Your own secret JWT phrase <br />
+DATABASE_URL that works with prisma <br />
+JWT_SECRET phrase <br />
 *These will go into your .env*
 
 ## Future Updates
