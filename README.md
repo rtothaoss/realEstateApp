@@ -25,15 +25,15 @@ Run `npm run test` to execute unit tests via [Jest](https://jestjs.io/)
 
 [Google API Key](https://developers.google.com/maps/documentation/embed/get-api-key) <br />
 [Real Estate API Key](https://rapidapi.com/datascraper/api/us-real-estate/pricing) <br/>
-*These will go into your environments in Angular*
+<sub>These will go into your environments in Angular</sub>
 
 DATABASE_URL that works with prisma <br />
 JWT_SECRET phrase <br />
-*These will go into your .env*
+<sub>These will go into your .env</sub>
 
 ## Future Updates
 * Getting rid of the relying solely on google autocomplete to figure out where the user wants to search. <br />
-*At the moment you have to click on the dropdown to search places and cannot simply enter in your own place to search. This was done to avoid typos and other errors screwing up the search.*
+<sub>At the moment you have to click on the dropdown to search places and cannot simply enter in your own place to search. This was done to avoid typos and other errors screwing up the search.<sub>
 * Adding a filter to search results
 * Extending the search to more than just 16 results
 * Adding a search bar in the header on mobile view
