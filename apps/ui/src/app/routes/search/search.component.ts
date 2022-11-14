@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   homeData!: HomeData[];
   page = 0;
   size = 8;
-  infoContent!: HomeData;
+  infoContent: HomeData | undefined;
   
 
   zoom = 12;

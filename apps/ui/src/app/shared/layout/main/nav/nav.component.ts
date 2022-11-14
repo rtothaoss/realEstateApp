@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -9,6 +9,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginModalComponent } from '../../../../routes/search/login-modal/login-modal.component';
+import { MatSidenavContainer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'starter-nav',
@@ -21,7 +22,7 @@ export class NavComponent {
     map((result) => result.matches),
     shareReplay()
   );
-
+  @ViewChild(MatSidenavContainer) MatSidenavContainer!: MatSidenavContainer;
   triggerOrigin!: CdkOverlayOrigin;
 
   user$ = this.store.select(selectUser);
@@ -39,9 +40,12 @@ export class NavComponent {
     this.store.dispatch(logoutUser());
     this.authService.clearLogoutTimer();
     this.store.dispatch(showMsg({ msg: { message: 'You have been logged out!' } }));
+    this.MatSidenavContainer.close();
     if(this.router.url !== '/') {
       this.router.navigate(['/'])
     }
+
+    
     
   }
 
@@ -56,5 +60,8 @@ export class NavComponent {
     loginDialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
+
+    this.MatSidenavContainer.close();
+    
   }
 }
