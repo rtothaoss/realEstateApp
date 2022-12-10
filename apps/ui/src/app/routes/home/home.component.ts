@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   getPlaceAutocomplete() {
     const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
     autocomplete.setComponentRestrictions({ country: ['us'] });
-    autocomplete.setTypes(['(cities)']);
+    autocomplete.setTypes(['locality', 'postal_code']);
 
     google.maps.event.addListener(autocomplete, 'place_changed', () => {
       this.place = autocomplete.getPlace();
